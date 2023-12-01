@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: ./
-      target: builder
+      target: deps
     volumes:
       - .:/app
     command: npm run dev
