@@ -8,7 +8,7 @@ module.exports = {
     },
   ],
   parserOptions: {
-    project: './tsconfig.json',
+    project: './pexo/tsconfig.json',
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
