@@ -14,6 +14,39 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@auth/core@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.npmjs.org/@auth/core/-/core-0.21.0.tgz"
+  integrity sha512-jUWYs8gjy2GvtP9dd/4S9KcwZ660Cm/IkybiAq96/2Ooku9SKk5SUG+UTEwkyLuaQ38ZgfwggfpDOgzsXEcufA==
+  dependencies:
+    "@panva/hkdf" "^1.1.1"
+    "@types/cookie" "0.6.0"
+    cookie "0.6.0"
+    jose "^5.1.3"
+    oauth4webapi "^2.4.0"
+    preact "10.11.3"
+    preact-render-to-string "5.2.3"
+
+"@auth/core@0.24.0":
+  version "0.24.0"
+  resolved "https://registry.npmjs.org/@auth/core/-/core-0.24.0.tgz"
+  integrity sha512-wwTyapljg4ydyvtQRXSeOaj6nBVSvPkVoXws6i+/vPfINxz4lo9UuLifPLqW7iO72/f4Ttaez0g3XA42VtKQ8A==
+  dependencies:
+    "@panva/hkdf" "^1.1.1"
+    "@types/cookie" "0.6.0"
+    cookie "0.6.0"
+    jose "^5.1.3"
+    oauth4webapi "^2.4.0"
+    preact "10.11.3"
+    preact-render-to-string "5.2.3"
+
+"@auth/prisma-adapter@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@auth/prisma-adapter/-/prisma-adapter-1.1.0.tgz"
+  integrity sha512-FSHnAmdrrW7b87pKjtnSCOgEthNK9ZAdZJDfncuG3YpXr4whiDfFhqg4UXgmnn/nEXuCIAY6wL3eZIa044vIOQ==
+  dependencies:
+    "@auth/core" "0.24.0"
+
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
   dependencies:
@@ -1164,6 +1197,14 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
+"@mantine/form@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.npmjs.org/@mantine/form/-/form-7.5.0.tgz"
+  integrity sha512-Bp2ZYwt+oYXNUm7ySPwst5C9S44YvrdsiFXjUzjX1QaoznAWern1W0dtyF7vJ3KWOoY9+7XXx+Ou4pHTOIq/hQ==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    klona "^2.0.6"
+
 "@mantine/hooks@7.2.2":
   version "7.2.2"
 
@@ -1214,6 +1255,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@panva/hkdf@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@panva/hkdf/-/hkdf-1.1.1.tgz"
+  integrity sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
 
@@ -1233,7 +1279,7 @@
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.23"
 
-"@prisma/client@^5.8.1":
+"@prisma/client@^5.8.1", "@prisma/client@>=2.26.0 || >=3 || >=4 || >=5":
   version "5.8.1"
   resolved "https://registry.npmjs.org/@prisma/client/-/client-5.8.1.tgz"
   integrity sha512-xQtMPfbIwLlbm0VVIVQY2yqQVOxPwRQhvIp7Z3m2900g1bu/zRHKhYZJQWELqmjl6d8YwBy0K2NvMqh47v1ubw==
@@ -2232,6 +2278,13 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/bcrypt@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/@types/bcrypt/-/bcrypt-5.0.2.tgz"
+  integrity sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/body-parser@*":
   version "1.19.5"
   dependencies:
@@ -2242,6 +2295,11 @@
   version "3.4.38"
   dependencies:
     "@types/node" "*"
+
+"@types/cookie@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/@types/cookie/-/cookie-0.6.0.tgz"
+  integrity sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==
 
 "@types/cross-spawn@^6.0.2":
   version "6.0.6"
@@ -3574,6 +3632,11 @@ cookie-signature@1.0.6:
 
 cookie@0.5.0:
   version "0.5.0"
+
+cookie@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/cookie/-/cookie-0.6.0.tgz"
+  integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
 
 core-js-compat@^3.31.0, core-js-compat@^3.33.1:
   version "3.33.3"
@@ -5709,6 +5772,11 @@ jest@*, jest@^29.0.0, jest@^29.7.0, "jest@>= 28":
 jiti@^1.18.2:
   version "1.21.0"
 
+jose@^5.1.3:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/jose/-/jose-5.2.0.tgz"
+  integrity sha512-oW3PCnvyrcm1HMvGTzqjxxfnEs9EoFOFWi2HsEGhlFVOXxTE3K9GKWVMFoFw06yPUqwpvEWic1BmtUZBI/tIjw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
 
@@ -5832,7 +5900,7 @@ kind-of@^6.0.2, kind-of@^6.0.3:
 kleur@^3.0.3:
   version "3.0.3"
 
-klona@^2.0.4:
+klona@^2.0.4, klona@^2.0.6:
   version "2.0.6"
 
 known-css-properties@^0.29.0:
@@ -5944,6 +6012,8 @@ lru-cache@^5.1.1:
 
 lru-cache@^6.0.0:
   version "6.0.0"
+  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-6.0.0.tgz"
+  integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
 
@@ -6177,7 +6247,14 @@ negotiator@0.6.3:
 neo-async@^2.5.0, neo-async@^2.6.2:
   version "2.6.2"
 
-"next@^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", next@14.0.1:
+next-auth@^5.0.0-beta.5:
+  version "5.0.0-beta.5"
+  resolved "https://registry.npmjs.org/next-auth/-/next-auth-5.0.0-beta.5.tgz"
+  integrity sha512-tEYIPhm/i0byW4xf9Ldlsnh7ckBQfNvMjOA3B3eXQX9taAQWb8earravSn1fjk4fKfKvaOApFJkks0VeI7Vy/A==
+  dependencies:
+    "@auth/core" "0.21.0"
+
+next@^14, "next@^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", next@14.0.1:
   version "14.0.1"
   dependencies:
     "@next/env" "14.0.1"
@@ -6263,6 +6340,11 @@ node-polyfill-webpack-plugin@^2.0.1:
 node-releases@^2.0.13:
   version "2.0.13"
 
+nodemailer@^6.6.5, nodemailer@^6.8.0, nodemailer@^6.9.8:
+  version "6.9.8"
+  resolved "https://registry.npmjs.org/nodemailer/-/nodemailer-6.9.8.tgz"
+  integrity sha512-cfrYUk16e67Ks051i4CntM9kshRYei1/o/Gi8K1d+R34OIs21xdFnW7Pt7EucmVKA0LKtqUGNcjMZ7ehjl49mQ==
+
 normalize-package-data@^2.5.0:
   version "2.5.0"
   dependencies:
@@ -6294,6 +6376,11 @@ nth-check@^2.0.1:
 
 nwsapi@^2.2.2:
   version "2.2.7"
+
+oauth4webapi@^2.4.0:
+  version "2.8.1"
+  resolved "https://registry.npmjs.org/oauth4webapi/-/oauth4webapi-2.8.1.tgz"
+  integrity sha512-Jm1Z6eUumtevQWxMllSw+4diHOcFyxuc3KAXoyh4fbpHndbXRbviyrLoCn8htEdHYZM/MIOVbeWjDk86BxVF+A==
 
 object-assign@^4.1.1:
   version "4.1.1"
@@ -6690,6 +6777,18 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+preact-render-to-string@5.2.3:
+  version "5.2.3"
+  resolved "https://registry.npmjs.org/preact-render-to-string/-/preact-render-to-string-5.2.3.tgz"
+  integrity sha512-aPDxUn5o3GhWdtJtW0svRC2SS/l8D9MAgo2+AWml+BhDImb27ALf04Q2d+AHqUUOc6RdSXFIBVa2gxzgMKgtZA==
+  dependencies:
+    pretty-format "^3.8.0"
+
+preact@>=10, preact@10.11.3:
+  version "10.11.3"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.11.3.tgz"
+  integrity sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==
+
 prebuild-install@^7.1.1:
   version "7.1.1"
   dependencies:
@@ -6741,6 +6840,11 @@ pretty-format@^29.7.0:
     "@jest/schemas" "^29.6.3"
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
+
+pretty-format@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-3.8.0.tgz"
+  integrity sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==
 
 pretty-hrtime@^1.0.3:
   version "1.0.3"
@@ -7072,6 +7176,8 @@ readable-stream@^3.5.0:
 
 readable-stream@^3.6.0:
   version "3.6.2"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz"
+  integrity sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
@@ -7361,6 +7467,8 @@ semver@^7.3.4:
 
 semver@^7.3.5:
   version "7.5.4"
+  resolved "https://registry.npmjs.org/semver/-/semver-7.5.4.tgz"
+  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
   dependencies:
     lru-cache "^6.0.0"
 
@@ -8607,6 +8715,8 @@ yallist@^3.0.2:
 
 yallist@^4.0.0:
   version "4.0.0"
+  resolved "https://registry.npmjs.org/yallist/-/yallist-4.0.0.tgz"
+  integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
 yaml@^1.10.0:
   version "1.10.2"
@@ -8642,3 +8752,8 @@ yocto-queue@^0.1.0:
 
 yocto-queue@^1.0.0:
   version "1.0.0"
+
+zod@^3.22.4:
+  version "3.22.4"
+  resolved "https://registry.npmjs.org/zod/-/zod-3.22.4.tgz"
+  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==

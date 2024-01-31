@@ -29,6 +29,7 @@ import {
   IconCoin,
   IconChevronDown,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 import classes from './Header.module.css';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
@@ -150,8 +151,9 @@ export function Header() {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Link key="signin" href="/login">
+              <Button> Log In</Button>
+            </Link>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
