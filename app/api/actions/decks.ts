@@ -20,6 +20,19 @@ export async function fetchDecks() {
   }
 }
 
+export async function fetchDeckById(id: string) {
+  try {
+    const deck = await prisma.deck.findUnique({
+      where: {
+        id,
+      },
+    });
+    return deck;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function createDeck() {
   const session = await auth();
   try {

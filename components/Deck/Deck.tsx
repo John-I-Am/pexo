@@ -1,6 +1,7 @@
 'use client';
 
-import { Text, Card, RingProgress, Group, useMantineTheme, Button } from '@mantine/core';
+import { Text, Card, RingProgress, Group, useMantineTheme, Button, NavLink } from '@mantine/core';
+import Link from 'next/link';
 import { deleteDeck } from '@/app/api/actions/decks';
 import classes from './Deck.module.css';
 
@@ -59,9 +60,14 @@ export function Deck({ title, id }: any) {
           />
         </div>
       </div>
-      <Button color="red" fullWidth mt="md" radius="md" onClick={() => deleteDeck(id)}>
-        Delete
-      </Button>
+      <Group wrap="nowrap">
+        <Button color="red" fullWidth mt="md" radius="md" onClick={() => deleteDeck(id)}>
+          Delete
+        </Button>
+        <Button component={Link} href={`/dashboard/decks/${id}`} fullWidth mt="md" radius="md">
+          Edit
+        </Button>
+      </Group>
     </Card>
   );
 }
