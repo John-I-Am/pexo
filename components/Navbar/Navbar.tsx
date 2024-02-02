@@ -2,7 +2,6 @@
 
 import {
   IconGauge,
-  IconNotes,
   IconCalendarStats,
   IconPresentationAnalytics,
   IconFileAnalytics,
@@ -11,6 +10,7 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconCactus,
+  IconCards,
 } from '@tabler/icons-react';
 import {
   Group,
@@ -32,17 +32,15 @@ import classes from './Navbar.module.css';
 import { unauthenticate } from '@/app/api/actions';
 
 const navItems = [
-  { label: 'Dashboard', icon: IconGauge, link: '/dashboard/decks' },
+  { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
   {
-    label: 'Discover',
-    icon: IconNotes,
+    label: 'Decks',
+    icon: IconCards,
     initiallyOpened: true,
-    link: '/',
+    link: '/dashboard/decks',
     links: [
-      { label: 'Popular', link: '/' },
-      { label: 'Science', link: '/' },
-      { label: 'Language', link: '/' },
-      { label: 'Trending', link: '/' },
+      { label: 'Your Decks', link: '/dashboard/decks' },
+      { label: 'Discover', link: '/dashboard/decks' },
     ],
   },
   {
@@ -95,7 +93,7 @@ export function Navbar({ user }: { user: string }) {
               className={classes.sublink}
               component={Link}
               key={item2.label}
-              href="/"
+              href={item2.link}
               label={item2.label}
             />
           ))}

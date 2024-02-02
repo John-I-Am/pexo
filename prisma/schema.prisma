@@ -19,7 +19,15 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   emailVerified DateTime?
+  decks         Deck[]
   sessions      Session[]
+}
+
+model Deck {
+  id            String    @id @default(cuid())
+  author        User      @relation(fields: [authorId], references: [id])
+  authorId      String
+  title         String    
 }
 
 model VerificationToken {

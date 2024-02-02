@@ -12,10 +12,16 @@ export const authConfig = {
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
-      } if (isLoggedIn) {
+      }
+      if (isLoggedIn) {
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
       return true;
+    },
+    async session({ session, token }: any) {
+      // eslint-disable-next-line no-param-reassign
+      session.user.id = token.sub;
+      return session;
     },
   },
   providers: [],

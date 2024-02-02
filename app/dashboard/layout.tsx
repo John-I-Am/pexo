@@ -7,7 +7,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   return (
     <Group wrap="nowrap">
       <Navbar user={session?.user?.email || ' '} />
-      <div>{children}</div>
+      {children}
     </Group>
   );
 }

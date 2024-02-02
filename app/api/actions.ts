@@ -3,13 +3,10 @@
 'use server';
 
 import { AuthError } from 'next-auth';
-import { redirect } from 'next/navigation';
-import { signIn, signOut } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
+import prisma from './prisma';
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: any,
-) {
+export async function authenticate(prevState: string | undefined, formData: any) {
   try {
     await signIn('email', formData);
   } catch (error) {
@@ -28,7 +25,6 @@ export async function authenticate(
 export async function unauthenticate() {
   try {
     await signOut();
-    redirect('http://localhost:3000/login');
   } catch (error) {
     console.log(error);
   }
