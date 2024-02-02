@@ -26,6 +26,9 @@ export async function fetchDeckById(id: string) {
       where: {
         id,
       },
+      include: {
+        cards: true,
+      },
     });
     return deck;
   } catch (error) {

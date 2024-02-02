@@ -27,7 +27,16 @@ model Deck {
   id            String    @id @default(cuid())
   author        User      @relation(fields: [authorId], references: [id])
   authorId      String
-  title         String    
+  title         String
+  cards         Card[]    
+}
+
+model Card {
+  id            String    @id @default(cuid())
+  deck          Deck      @relation(fields: [deckId], references: [id])
+  deckId        String
+  front         String   
+  back          String 
 }
 
 model VerificationToken {

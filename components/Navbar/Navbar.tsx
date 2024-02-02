@@ -137,7 +137,7 @@ export function Navbar({ user }: { user: string }) {
                 onClick={() => {
                   unauthenticate();
                 }}
-                href="https://www.pexo.onrender.com" // Next-auth auth.signOut() function buggy and doesn't redirect properly. This is a hack.
+                href="/" // Next-auth auth.signOut() function buggy and doesn't redirect properly. This is a hack.
                 component="a"
                 variant="light"
                 aria-label="Logout"

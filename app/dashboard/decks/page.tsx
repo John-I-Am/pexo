@@ -2,6 +2,7 @@ import { Group, Stack, ScrollArea } from '@mantine/core';
 import { Deck } from '@/components/Deck/Deck';
 import { fetchDecks } from '@/app/api/actions/decks';
 import { DeckEditor } from '@/components/DeckEditor/DeckEditor';
+import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader';
 
 export default async function Page({
   searchParams,
@@ -17,7 +18,10 @@ export default async function Page({
 
   return (
     <Stack justify="flex-start" h="100vh">
-      <DeckEditor />
+      <DashboardHeader>
+        <DeckEditor />
+      </DashboardHeader>
+
       <ScrollArea w="100%">
         <Group>{decksToShow?.map((d) => <Deck title={d.title} id={d.id} />)}</Group>
       </ScrollArea>
