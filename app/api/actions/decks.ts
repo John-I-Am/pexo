@@ -41,8 +41,25 @@ export async function createDeck() {
   try {
     await prisma.deck.create({
       data: {
-        title: 'untitled',
+        title: 'untitledununtitledtitled',
         authorId: session?.user?.id as string,
+      },
+    });
+
+    revalidatePath('/dashboard/decks');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateDeck(id: string, title: string) {
+  try {
+    await prisma.deck.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
       },
     });
 
