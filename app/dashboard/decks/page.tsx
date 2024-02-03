@@ -23,7 +23,7 @@ export default async function Page({
       </DashboardHeader>
 
       <ScrollArea w="100%">
-        <Group>{decksToShow?.map((d) => <Deck title={d.title} id={d.id} />)}</Group>
+        <Group grow>{decksToShow?.map((d) => <Deck title={d.title} id={d.id} />)}</Group>
       </ScrollArea>
     </Stack>
   );

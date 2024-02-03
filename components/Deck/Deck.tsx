@@ -1,72 +1,57 @@
 'use client';
 
-import { Text, Card, RingProgress, Group, useMantineTheme, Button, NavLink } from '@mantine/core';
 import Link from 'next/link';
+
+import { Card, Text, Progress, Badge, Group, ActionIcon } from '@mantine/core';
+import { IconTrash, IconEdit } from '@tabler/icons-react';
 import { deleteDeck } from '@/app/api/actions/decks';
 import classes from './Deck.module.css';
 
-const stats = [
-  { value: 447, label: 'Remaining' },
-  { value: 76, label: 'In progress' },
-];
-
-export function Deck({ title, id }: any) {
-  const theme = useMantineTheme();
-  const completed = 1887;
-  const total = 2334;
-  const items = stats.map((stat) => (
-    <div key={stat.label}>
-      <Text className={classes.label}>{stat.value}</Text>
-      <Text size="xs" c="dimmed">
-        {stat.label}
-      </Text>
-    </div>
-  ));
-
+export function Deck({ id, title }: any) {
   return (
-    <Card withBorder p="xl" radius="md" className={classes.card}>
-      <div className={classes.inner}>
-        <div>
-          <Text fz="xl" className={classes.label}>
-            {title}
-          </Text>
-          <div>
-            <Text className={classes.lead} mt={30}>
-              1887
-            </Text>
-            <Text fz="xs" c="dimmed">
-              Completed
-            </Text>
-          </div>
-          <Group mt="lg">{items}</Group>
-        </div>
+    <Card withBorder padding="lg" radius="md" className={classes.card}>
+      <Group wrap="nowrap" className={classes.tags} gap="sm">
+        <Badge className={classes.tag}>Tag</Badge>
+        <Badge className={classes.tag}>Tag</Badge>
+      </Group>
 
-        <div className={classes.ring}>
-          <RingProgress
-            roundCaps
-            thickness={6}
-            size={150}
-            sections={[{ value: (completed / total) * 100, color: theme.primaryColor }]}
-            label={
-              <div>
-                <Text ta="center" fz="lg" className={classes.label}>
-                  {((completed / total) * 100).toFixed(0)}%
-                </Text>
-                <Text ta="center" fz="xs" c="dimmed">
-                  Completed
-                </Text>
-              </div>
-            }
-          />
-        </div>
-      </div>
-      <Group wrap="nowrap">
-        <Button color="red" fullWidth mt="md" radius="md" onClick={() => deleteDeck(id)}>
-          Delete
-        </Button>
-        <Button component={Link} href={`/dashboard/decks/${id}`} fullWidth mt="md" radius="md">
-          Edit
-        </Button>
+      <Text fz="lg" fw={500} mt="md">
+        {title}
+      </Text>
+      <Text fz="sm" c="dimmed" mt={5}>
+        This is my deck description
+      </Text>
+
+      <Text c="dimmed" fz="sm" mt="md">
+        Cards Mastered:{' '}
+        <Text span fw={500} c="bright">
+          23/36
+        </Text>
+      </Text>
+
+      <Progress value={(23 / 36) * 100} mt={5} />
+
+      <Group justify="space-between" mt="md">
+        <ActionIcon
+          component={Link}
+          href={`/dashboard/decks/${id}`}
+          variant="light"
+          size="lg"
+          radius="md"
+        >
+          <IconEdit size="1.1rem" />
+        </ActionIcon>
+
+        <ActionIcon
+          variant="filled"
+          size="lg"
+          radius="md"
+          color="red"
+          aria-label="Delete"
+          onClick={() => deleteDeck(id)}
+        >
+          <IconTrash size="1.1rem" />
+        </ActionIcon>
       </Group>
     </Card>
   );
