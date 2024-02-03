@@ -30,6 +30,7 @@ import cx from 'clsx';
 
 import classes from './Navbar.module.css';
 import { unauthenticate } from '@/app/api/actions';
+import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 const navItems = [
   { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
@@ -77,24 +78,24 @@ export function Navbar({ user }: { user: string }) {
         key={item.label}
         href={item.link}
         active={pathname === item.link}
-        label={compact ? '' : item.label}
+        label={item.label}
         leftSection={
           <ThemeIcon variant="light" size={30}>
             <item.icon stroke={1.5} />
           </ThemeIcon>
         }
-        childrenOffset={30}
+        childrenOffset={60}
         variant="light"
       >
         {item.links &&
-          compact === false &&
-          item.links.map((item2: any) => (
+          !compact &&
+          item.links.map((nav: any) => (
             <NavLink
               className={classes.sublink}
               component={Link}
-              key={item2.label}
-              href={item2.link}
-              label={item2.label}
+              key={nav.label}
+              href={nav.link}
+              label={nav.label}
             />
           ))}
       </NavLink>
@@ -120,7 +121,7 @@ export function Navbar({ user }: { user: string }) {
         </Group>
       </div>
 
-      <ScrollArea className={classes.links}>
+      <ScrollArea scrollbars="y" className={classes.links}>
         <div className={classes.linksInner}>{links}</div>
       </ScrollArea>
 
@@ -131,22 +132,27 @@ export function Navbar({ user }: { user: string }) {
               {user}
             </Text>
           </Tooltip>
+
           <Group justify="space-between">
-            <Tooltip label="Logout">
+            <Tooltip disabled={!compact} label="Logout">
               <ActionIcon
                 onClick={() => {
-                  unauthenticate();
+                  unauthenticate(); // buggy: requires user to double click
                 }}
-                href="/" // Next-auth auth.signOut() function buggy and doesn't redirect properly. This is a hack.
-                component="a"
+                component={Link}
                 variant="light"
-                aria-label="Logout"
+                aria-label="logout"
+                href="/"
               >
                 <IconLogout stroke={1.5} />
               </ActionIcon>
             </Tooltip>
 
-            <Tooltip label={compact ? 'expand' : 'collapse'}>
+            <Tooltip disabled={!compact} label="Toggle Theme">
+              <ColorSchemeToggle />
+            </Tooltip>
+
+            <Tooltip disabled={!compact} label={compact ? 'Expand' : 'Collapse'}>
               <ActionIcon
                 onClick={() => {
                   setCompact(!compact);
