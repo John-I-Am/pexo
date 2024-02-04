@@ -16,9 +16,8 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@table
 import classes from './CardTable.module.css';
 
 interface RowData {
-  name: string;
-  email: string;
-  company: string;
+  front: string;
+  back: string;
 }
 
 interface ThProps {
@@ -96,7 +95,6 @@ export function CardTable({ cards }: any) {
 
   const rows = sortedData.map((row: any) => (
     <Table.Tr key={row.name}>
-      <Table.Td>{row.title}</Table.Td>
       <Table.Td>{row.front}</Table.Td>
       <Table.Td>{row.back}</Table.Td>
     </Table.Tr>
@@ -115,25 +113,18 @@ export function CardTable({ cards }: any) {
         <Table.Tbody>
           <Table.Tr>
             <Th
-              sorted={sortBy === 'name'}
+              sorted={sortBy === 'front'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('name')}
+              onSort={() => setSorting('front')}
             >
-              Name
+              Front
             </Th>
             <Th
-              sorted={sortBy === 'email'}
+              sorted={sortBy === 'back'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('email')}
+              onSort={() => setSorting('back')}
             >
-              Email
-            </Th>
-            <Th
-              sorted={sortBy === 'company'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('company')}
-            >
-              Company
+              Back
             </Th>
           </Table.Tr>
         </Table.Tbody>
@@ -142,7 +133,7 @@ export function CardTable({ cards }: any) {
             rows
           ) : (
             <Table.Tr>
-              <Table.Td colSpan={Object.keys(cards[0]).length}>
+              <Table.Td colSpan={Object.keys(cards).length}>
                 <Text fw={500} ta="center">
                   Nothing found
                 </Text>
