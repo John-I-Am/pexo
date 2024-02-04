@@ -4,8 +4,8 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'Pexo',
+  description: 'Spaced repetition flashcards',
 };
 
 export default function RootLayout({ children }: { children: any }) {
