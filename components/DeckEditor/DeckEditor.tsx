@@ -1,13 +1,15 @@
 'use client';
 
-import { Group, Text, TextInput, Button } from '@mantine/core';
+import { Group, Text, TextInput, Button, Modal } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { hasLength, useForm } from '@mantine/form';
 import { IconSquareRoundedPlus } from '@tabler/icons-react';
 import { CardEditor } from '../CardEditor/CardEditor';
 import { updateDeck } from '@/app/api/actions/decks';
-import { createCard } from '@/app/api/actions/cards';
 
 export function DeckEditor({ id, title, cardsLength }: any) {
+  const [opened, { open, close }] = useDisclosure(false);
+
   const form = useForm({
     initialValues: {
       title,
@@ -18,10 +20,11 @@ export function DeckEditor({ id, title, cardsLength }: any) {
       title: hasLength({ min: 1, max: 12 }, 'Title must be 1-12 characters long'),
     },
   });
+
   return (
     <Group wrap="nowrap">
       <Button
-        onClick={() => createCard(id)}
+        onClick={open}
         leftSection={<IconSquareRoundedPlus size={20} />}
         variant="gradient"
         gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
@@ -40,6 +43,9 @@ export function DeckEditor({ id, title, cardsLength }: any) {
       </form>
 
       <Text>{cardsLength}</Text>
+      <Modal size="md" opened={opened} onClose={close} title="Editor">
+        <CardEditor deckId={id} />
+      </Modal>
     </Group>
   );
 }

@@ -31,13 +31,13 @@ export async function fetchCardById(id: string) {
   }
 }
 
-export async function createCard(deckId: string) {
+export async function createCard(deckId: string, front: string, back: string) {
   try {
     await prisma.card.create({
       data: {
         deckId,
-        front: 'front',
-        back: 'back',
+        front,
+        back,
       },
     });
     revalidatePath('/dashboard/decks/[id]');
