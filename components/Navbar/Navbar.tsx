@@ -29,7 +29,7 @@ import { useState } from 'react';
 import cx from 'clsx';
 
 import classes from './Navbar.module.css';
-import { unauthenticate } from '@/app/api/actions';
+import { unauthenticate } from '@/app/api/actions/users';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 const navItems = [

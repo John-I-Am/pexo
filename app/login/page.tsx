@@ -14,7 +14,7 @@ import {
 
 import { useForm, isEmail } from '@mantine/form';
 import classes from './AuthenticationTitle.module.css';
-import { authenticate } from '@/app/api/actions';
+import { authenticate } from '@/app/api/actions/users';
 
 export default function AuthenticationTitle() {
   const form = useForm({
