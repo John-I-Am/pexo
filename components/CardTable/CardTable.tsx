@@ -31,6 +31,8 @@ import { deleteCard } from '@/app/api/actions/cards';
 interface RowData {
   front: string;
   back: string;
+  level: string;
+  nextReview: string;
 }
 
 interface ThProps {
@@ -113,6 +115,14 @@ export function CardTable({ cards }: any) {
     <Table.Tr key={row.name}>
       <Table.Td>{row.front}</Table.Td>
       <Table.Td>{row.back}</Table.Td>
+      <Table.Td>{row.level}</Table.Td>
+      <Table.Td>
+        {new Date(row.nextReview).getTime() <= new Date().getTime() ? (
+          <Text>Now</Text>
+        ) : (
+          <Text>{new Date(row.nextReview).toLocaleString('en-NZ')}</Text>
+        )}
+      </Table.Td>
       <Table.Td>
         <Group>
           <Tooltip label="Edit">
@@ -161,6 +171,20 @@ export function CardTable({ cards }: any) {
               onSort={() => setSorting('back')}
             >
               Back
+            </Th>
+            <Th
+              sorted={sortBy === 'level'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('level')}
+            >
+              Level
+            </Th>
+            <Th
+              sorted={sortBy === 'front'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('front')}
+            >
+              Next Review Date
             </Th>
           </Table.Tr>
         </Table.Tbody>

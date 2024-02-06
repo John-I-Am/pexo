@@ -36,7 +36,9 @@ model Card {
   deck          Deck      @relation(fields: [deckId], references: [id])
   deckId        String
   front         String   
-  back          String 
+  back          String
+  level         Int       @default(0)
+  nextReview    DateTime  @default(now())
 }
 
 model VerificationToken {
