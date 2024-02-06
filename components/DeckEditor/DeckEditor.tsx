@@ -4,6 +4,7 @@ import { Group, Text, TextInput, Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { hasLength, useForm } from '@mantine/form';
 import { IconSquareRoundedPlus } from '@tabler/icons-react';
+import Link from 'next/link';
 import { CardEditor } from '../CardEditor/CardEditor';
 import { updateDeck } from '@/app/api/actions/decks';
 
@@ -43,6 +44,15 @@ export function DeckEditor({ id, title, cardsLength }: any) {
       </form>
 
       <Text>{cardsLength}</Text>
+      <Button
+        component={Link}
+        href={`/dashboard/decks/${id}/learn`}
+        leftSection={<IconSquareRoundedPlus size={20} />}
+        variant="gradient"
+        gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
+      >
+        Learn
+      </Button>
       <Modal size="md" opened={opened} onClose={close} title="Editor">
         <CardEditor deckId={id} />
       </Modal>
