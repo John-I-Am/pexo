@@ -40,7 +40,21 @@ export async function createCard(deckId: string, front: string, back: string) {
         back,
       },
     });
-    revalidatePath('/dashboard/decks/[id]');
+    revalidatePath('/dashboard/decks/[id]', 'page');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateCard(id: string, updatedCard: any) {
+  try {
+    await prisma.card.update({
+      where: {
+        id,
+      },
+      data: { ...updatedCard },
+    });
+    revalidatePath('/dashboard/decks/[id]', 'page');
   } catch (error) {
     console.log(error);
   }
@@ -53,7 +67,7 @@ export async function deleteCard(id: string) {
         id,
       },
     });
-    revalidatePath('/dashboard/decks/[id]');
+    revalidatePath('/dashboard/decks/[id]', 'page');
   } catch (error) {
     console.log(error);
   }

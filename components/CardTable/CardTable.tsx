@@ -11,9 +11,22 @@ import {
   TextInput,
   rem,
   keys,
+  ActionIcon,
+  Tooltip,
+  Modal,
 } from '@mantine/core';
-import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
+import {
+  IconSelector,
+  IconChevronDown,
+  IconChevronUp,
+  IconSearch,
+  IconEdit,
+  IconTrash,
+} from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
 import classes from './CardTable.module.css';
+import { CardEditor } from '../CardEditor/CardEditor';
+import { deleteCard } from '@/app/api/actions/cards';
 
 interface RowData {
   front: string;
@@ -93,10 +106,33 @@ export function CardTable({ cards }: any) {
     setSortedData(sortData(cards, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
+  const [opened, { open, close }] = useDisclosure(false);
+  const [selectedCard, setSelectedCard] = useState(cards[0]);
+
   const rows = sortedData.map((row: any) => (
     <Table.Tr key={row.name}>
       <Table.Td>{row.front}</Table.Td>
       <Table.Td>{row.back}</Table.Td>
+      <Table.Td>
+        <Group>
+          <Tooltip label="Edit">
+            <ActionIcon
+              variant="light"
+              onClick={() => {
+                setSelectedCard(row);
+                open();
+              }}
+            >
+              <IconEdit stroke={1.5} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip label="Delete">
+            <ActionIcon variant="light" onClick={() => deleteCard(row.id)}>
+              <IconTrash stroke={1.5} />
+            </ActionIcon>
+          </Tooltip>
+        </Group>
+      </Table.Td>
     </Table.Tr>
   ));
 
@@ -142,6 +178,9 @@ export function CardTable({ cards }: any) {
           )}
         </Table.Tbody>
       </Table>
+      <Modal size="md" opened={opened} onClose={close} title="Editor">
+        <CardEditor deckId={selectedCard?.deckId as any} card={selectedCard} />
+      </Modal>
     </ScrollArea>
   );
 }

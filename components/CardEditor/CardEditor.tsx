@@ -2,13 +2,13 @@
 
 import { Button, Stack, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
-import { createCard } from '@/app/api/actions/cards';
+import { createCard, updateCard } from '@/app/api/actions/cards';
 
-export function CardEditor({ deckId }: any) {
+export function CardEditor({ deckId, card }: any) {
   const form = useForm({
     initialValues: {
-      front: '',
-      back: '',
+      front: card?.front || '',
+      back: card?.back || '',
     },
 
     validate: {
@@ -16,9 +16,14 @@ export function CardEditor({ deckId }: any) {
       back: hasLength({ min: 1, max: 150 }, 'Back must be 1-150 characters long'),
     },
   });
+
   return (
     <Stack>
-      <form onSubmit={form.onSubmit((values) => createCard(deckId, values.front, values.back))}>
+      <form
+        onSubmit={form.onSubmit((values) =>
+          card ? updateCard(card.id, values) : createCard(deckId, values.front, values.back)
+        )}
+      >
         <Textarea
           pb="md"
           radius="md"
@@ -36,7 +41,7 @@ export function CardEditor({ deckId }: any) {
           placeholder="Back"
           {...form.getInputProps('back')}
         />
-        <Button type="submit">Create</Button>
+        <Button type="submit">{card ? 'Edit' : 'Create'}</Button>
       </form>
     </Stack>
   );
