@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Table,
   ScrollArea,
@@ -27,6 +27,7 @@ import { useDisclosure } from '@mantine/hooks';
 import classes from './CardTable.module.css';
 import { CardEditor } from '../CardEditor/CardEditor';
 import { deleteCard } from '@/app/api/actions/cards';
+import Link from 'next/link';
 
 interface RowData {
   front: string;
@@ -128,10 +129,8 @@ export function CardTable({ cards }: any) {
           <Tooltip label="Edit">
             <ActionIcon
               variant="light"
-              onClick={() => {
-                setSelectedCard(row);
-                open();
-              }}
+              component={Link}
+              href={`/dashboard/decks/${row.deckId}/card/${row.id}`}
             >
               <IconEdit stroke={1.5} />
             </ActionIcon>

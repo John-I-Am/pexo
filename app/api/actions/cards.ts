@@ -3,6 +3,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import prisma from '../prisma';
 
 export async function fetchCards(deckId: string) {
@@ -40,35 +41,40 @@ export async function createCard(deckId: string, front: string, back: string) {
         back,
       },
     });
-    revalidatePath('/dashboard/decks/[id]', 'page');
+    revalidatePath('/dashboard/decks/[deckId]', 'page');
   } catch (error) {
     console.log(error);
   }
+  redirect(`/dashboard/decks/${deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
 }
 
 export async function updateCard(id: string, updatedCard: any) {
+  let card;
   try {
-    await prisma.card.update({
+    card = await prisma.card.update({
       where: {
         id,
       },
       data: { ...updatedCard },
     });
-    revalidatePath('/dashboard/decks/[id]', 'page');
+    revalidatePath('/dashboard/decks/[deckId]', 'page');
   } catch (error) {
     console.log(error);
   }
+  redirect(`/dashboard/decks/${card?.deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
 }
 
 export async function deleteCard(id: string) {
+  let card;
   try {
-    await prisma.card.delete({
+    card = await prisma.card.delete({
       where: {
         id,
       },
     });
-    revalidatePath('/dashboard/decks/[id]', 'page');
+    revalidatePath('/dashboard/decks/[deckId]', 'page');
   } catch (error) {
     console.log(error);
   }
+  redirect(`/dashboard/decks/${card?.deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
 }

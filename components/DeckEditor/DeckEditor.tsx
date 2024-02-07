@@ -5,11 +5,10 @@ import { useDisclosure } from '@mantine/hooks';
 import { hasLength, useForm } from '@mantine/form';
 import { IconSquareRoundedPlus } from '@tabler/icons-react';
 import Link from 'next/link';
-import { CardEditor } from '../CardEditor/CardEditor';
 import { updateDeck } from '@/app/api/actions/decks';
 
 export function DeckEditor({ id, title, cardsLength }: any) {
-  const [opened, { open, close }] = useDisclosure(false);
+  // const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
     initialValues: {
@@ -25,7 +24,8 @@ export function DeckEditor({ id, title, cardsLength }: any) {
   return (
     <Group wrap="nowrap">
       <Button
-        onClick={open}
+        component={Link}
+        href={`/dashboard/decks/${id}/card`}
         leftSection={<IconSquareRoundedPlus size={20} />}
         variant="gradient"
         gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
@@ -53,9 +53,9 @@ export function DeckEditor({ id, title, cardsLength }: any) {
       >
         Learn
       </Button>
-      <Modal size="md" opened={opened} onClose={close} title="Editor">
+      {/* <Modal size="md" opened={opened} onClose={close} title="Editor">
         <CardEditor deckId={id} />
-      </Modal>
+      </Modal> */}
     </Group>
   );
 }

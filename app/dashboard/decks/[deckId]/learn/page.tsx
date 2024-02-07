@@ -3,8 +3,8 @@ import { DashboardHeaderShell } from '@/components/DashboardHeaderShell/Dashboar
 import { FlashCard } from '@/app/dashboard/FlashCard/FlashCard';
 import { fetchDeckById } from '@/app/api/actions/decks';
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const deck: any = await fetchDeckById(params.id);
+export default async function Page({ params }: { params: { deckId: string } }) {
+  const deck: any = await fetchDeckById(params.deckId);
   const cardsToTest: any = deck.cards;
   return (
     <Stack justify="space-between" align="center" h="100vh" w="100%">

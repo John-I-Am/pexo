@@ -4,8 +4,8 @@ import { fetchDeckById } from '@/app/api/actions/decks';
 import { CardTable } from '@/components/CardTable/CardTable';
 import { DeckEditor } from '@/components/DeckEditor/DeckEditor';
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const deck: any = await fetchDeckById(params.id);
+export default async function Page({ params }: { params: { deckId: string } }) {
+  const deck: any = await fetchDeckById(params.deckId);
   return (
     <Stack justify="flex-start" h="100vh">
       <DashboardHeaderShell>
