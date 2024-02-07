@@ -1,7 +1,8 @@
 import { Stack } from '@mantine/core';
 import { DashboardHeaderShell } from '@/components/DashboardHeaderShell/DashboardHeaderShell';
-import { FlashCard } from '@/app/dashboard/FlashCard/FlashCard';
+import { FlashCard } from '@/components/FlashCard/FlashCard';
 import { fetchDeckById } from '@/app/api/actions/decks';
+import FlashCardController from '@/components/FlashCardController/FlashCardController';
 
 export default async function Page({ params }: { params: { deckId: string } }) {
   const deck: any = await fetchDeckById(params.deckId);
@@ -11,8 +12,15 @@ export default async function Page({ params }: { params: { deckId: string } }) {
       <DashboardHeaderShell>
         <p />
       </DashboardHeaderShell>
-      <FlashCard front={cardsToTest[0].front} back={cardsToTest[0].back} />
-      <p> control goes here</p>
+      {cardsToTest.length === 0 ? (
+        <p>empty</p>
+      ) : (
+        <>
+          {' '}
+          <FlashCard front={cardsToTest[0].front} back={cardsToTest[0].back} />
+          <FlashCardController cardId={cardsToTest[0].id} currentLevel={cardsToTest[0].level} />
+        </>
+      )}
     </Stack>
   );
 }

@@ -48,7 +48,7 @@ export async function createCard(deckId: string, front: string, back: string) {
   redirect(`/dashboard/decks/${deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
 }
 
-export async function updateCard(id: string, updatedCard: any) {
+export async function updateCard(id: string, updatedCard: any, redirectUrl: boolean) {
   let card;
   try {
     card = await prisma.card.update({
@@ -61,7 +61,10 @@ export async function updateCard(id: string, updatedCard: any) {
   } catch (error) {
     console.log(error);
   }
-  redirect(`/dashboard/decks/${card?.deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
+
+  if (redirectUrl) {
+    redirect(`/dashboard/decks/${card?.deckId}`); // DO NOT PLACE IN TRY/CATCH: nextjs internal bug
+  }
 }
 
 export async function deleteCard(id: string) {

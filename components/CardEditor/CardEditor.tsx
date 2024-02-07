@@ -21,7 +21,7 @@ export function CardEditor({ deckId, card }: any) {
     <Stack>
       <form
         onSubmit={form.onSubmit((values) =>
-          card ? updateCard(card.id, values) : createCard(deckId, values.front, values.back)
+          card ? updateCard(card.id, values, true) : createCard(deckId, values.front, values.back)
         )}
       >
         <Textarea
