@@ -6,7 +6,10 @@ import FlashCardController from '@/components/FlashCardController/FlashCardContr
 
 export default async function Page({ params }: { params: { deckId: string } }) {
   const deck: any = await fetchDeckById(params.deckId);
-  const cardsToTest: any = deck.cards;
+  const cardsToTest: any[] = deck.cards.filter(
+    (card: any) => new Date(card.nextReview).getTime() <= new Date().getTime()
+  );
+
   return (
     <Stack justify="space-between" align="center" h="100vh" w="100%">
       <DashboardHeaderShell>

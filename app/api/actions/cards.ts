@@ -49,13 +49,50 @@ export async function createCard(deckId: string, front: string, back: string) {
 }
 
 export async function updateCard(id: string, updatedCard: any, redirectUrl: boolean) {
-  let card;
+  const card: any = await fetchCardById(id);
+
+  const reviewDate: number = card.nextReview.getTime();
+  let interval = 0;
+
+  if (updatedCard.level || updatedCard.level === 0) {
+    // formula for adding time: min * 60000
+    switch (updatedCard.level) {
+      case 0:
+        // 15 minutes
+        interval = 15 * 60000;
+        break;
+      case 1:
+        // 2 hours
+        interval = 120 * 60000;
+        break;
+      case 2:
+        // 8 hours
+        interval = 480 * 60000;
+        break;
+      case 3:
+        // 1 day
+        interval = 1440 * 60000;
+        break;
+      case 4:
+        // 3 days
+        interval = 4320 * 60000;
+        break;
+      case 5:
+        // 1 week
+        interval = 10080 * 60000;
+        break;
+      default:
+        interval = 0;
+        break;
+    }
+  }
+
   try {
-    card = await prisma.card.update({
+    await prisma.card.update({
       where: {
         id,
       },
-      data: { ...updatedCard },
+      data: { ...updatedCard, nextReview: new Date(reviewDate + interval) },
     });
     revalidatePath('/dashboard/decks/[deckId]', 'page');
   } catch (error) {
