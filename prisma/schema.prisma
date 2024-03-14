@@ -24,21 +24,21 @@ model User {
 }
 
 model Deck {
-  id            String    @id @default(cuid())
-  author        User      @relation(fields: [authorId], references: [id])
-  authorId      String
-  title         String
-  cards         Card[]    
+  id       String @id @default(cuid())
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  title    String @default("untitled")
+  cards    Card[]
 }
 
 model Card {
-  id            String    @id @default(cuid())
-  deck          Deck      @relation(fields: [deckId], references: [id])
-  deckId        String
-  front         String   
-  back          String
-  level         Int       @default(0)
-  nextReview    DateTime  @default(now())
+  id         String   @id @default(cuid())
+  deck       Deck     @relation(fields: [deckId], references: [id])
+  deckId     String
+  front      String
+  back       String
+  level      Int      @default(0)
+  nextReview DateTime @default(now())
 }
 
 model VerificationToken {
