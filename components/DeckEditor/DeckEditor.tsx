@@ -1,19 +1,24 @@
 'use client';
 
-import { Group, Text, TextInput, Button, Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Group, Text, TextInput, Button } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { IconSquareRoundedPlus } from '@tabler/icons-react';
 import Link from 'next/link';
+import classes from './DeckEditor.module.css';
 import { updateDeck } from '@/app/api/actions/decks';
 
-export function DeckEditor({ id, title, cardsLength }: any) {
-  // const [opened, { open, close }] = useDisclosure(false);
-
+export function DeckEditor({
+  id,
+  title,
+  cardsLength,
+}: {
+  id: string;
+  title: string;
+  cardsLength: string;
+}) {
   const form = useForm({
     initialValues: {
       title,
-      description: 'this my deck yo',
     },
 
     validate: {
@@ -21,8 +26,15 @@ export function DeckEditor({ id, title, cardsLength }: any) {
     },
   });
 
+  const handleChange = (e: any) => {
+    form.getInputProps('title').onChange(e);
+    // Pretty sure this is not the correct way to call server actions on input change.
+    // Currently, it ignores the last character; doesn't save to server.
+    form.onSubmit((values) => updateDeck(id, values.title))();
+  };
+
   return (
-    <Group wrap="nowrap">
+    <Group wrap="nowrap" justify="space-around" w="100%">
       <Button
         component={Link}
         href={`/dashboard/decks/${id}/card`}
@@ -30,20 +42,25 @@ export function DeckEditor({ id, title, cardsLength }: any) {
         variant="gradient"
         gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
       >
-        Create New Card
+        New Card
       </Button>
       <form onSubmit={form.onSubmit((values) => updateDeck(id, values.title))}>
         <TextInput
+          {...form.getInputProps('title')}
+          classNames={{
+            input: classes.title,
+          }}
+          onChange={handleChange}
+          variant="unstyled"
           aria-label="Title"
           size="md"
           radius="md"
           maxLength={12}
           placeholder="title"
-          {...form.getInputProps('title')}
         />
       </form>
 
-      <Text>{cardsLength}</Text>
+      <Text c="dimmed">{cardsLength} cards</Text>
       <Button
         component={Link}
         href={`/dashboard/decks/${id}/learn`}
@@ -53,9 +70,6 @@ export function DeckEditor({ id, title, cardsLength }: any) {
       >
         Learn
       </Button>
-      {/* <Modal size="md" opened={opened} onClose={close} title="Editor">
-        <CardEditor deckId={id} />
-      </Modal> */}
     </Group>
   );
 }
