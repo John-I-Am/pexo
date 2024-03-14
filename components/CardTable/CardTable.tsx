@@ -43,7 +43,7 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   return (
     <Table.Th className={classes.th}>
       <UnstyledButton onClick={onSort} className={classes.control}>
-        <Group justify="space-between">
+        <Group wrap="nowrap" justify="space-between">
           <Text fw={500} fz="sm">
             {children}
           </Text>
@@ -106,8 +106,8 @@ export function CardTable({ cards }: any) {
 
   const rows = sortedData.map((row: any) => (
     <Table.Tr key={row.name}>
-      <Table.Td>{row.front}</Table.Td>
-      <Table.Td>{row.back}</Table.Td>
+      <Table.Td className={classes.td}>{row.front}</Table.Td>
+      <Table.Td className={classes.td}>{row.back}</Table.Td>
       <Table.Td>{row.level}</Table.Td>
       <Table.Td>
         {new Date(row.nextReview).getTime() <= new Date().getTime() ? (
@@ -171,7 +171,7 @@ export function CardTable({ cards }: any) {
               reversed={reverseSortDirection}
               onSort={() => setSorting('front')}
             >
-              Next Review Date
+              Review Date
             </Th>
           </Table.Tr>
         </Table.Tbody>

@@ -6,7 +6,7 @@ export default async function Page({ params }: { params: { deckId: string; cardI
   const { deckId } = params;
   const card = await fetchCardById(params.cardId);
   return (
-    <Container>
+    <Container w="100%">
       <CardEditor deckId={deckId} card={card} />
     </Container>
   );
