@@ -41,7 +41,7 @@ export async function createDeck() {
   try {
     await prisma.deck.create({
       data: {
-        title: 'untitledununtitledtitled',
+        title: 'untitled',
         authorId: session?.user?.id as string,
       },
     });

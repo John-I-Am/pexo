@@ -1,32 +1,32 @@
 .card {
-  background-color: var(--mantine-color-body);
+  position: relative;
+  overflow: visible;
+  padding: var(--mantine-spacing-xl);
+  padding-top: calc(var(--mantine-spacing-xl) * 1.5 + rem(20px));
   min-width: rem(300px);
   max-width: rem(500px);
+}
+
+.icon {
+  position: absolute;
+  top: rem(-20px);
+  left: calc(50% - rem(30px));
+}
+
+.title {
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
+  line-height: 1;
 }
 
 .tags {
   overflow: scroll;
   height: 40px;
   width: 100%;
+  padding-bottom: rem(20px);
 }
 
 .tag {
   min-width: max-content;
-}
-
-.label {
-  font-family:
-    Greycliff CF,
-    var(--mantine-font-family);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.lead {
-  font-family:
-    Greycliff CF,
-    var(--mantine-font-family);
-  font-weight: 700;
-  font-size: rem(22px);
-  line-height: 1;
 }
