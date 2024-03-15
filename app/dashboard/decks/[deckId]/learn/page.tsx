@@ -19,8 +19,11 @@ export default async function Page({ params }: { params: { deckId: string } }) {
         <p>empty</p>
       ) : (
         <>
-          {' '}
-          <FlashCard front={cardsToTest[0].front} back={cardsToTest[0].back} />
+          <FlashCard
+            front={cardsToTest[0].front}
+            back={cardsToTest[0].back}
+            level={cardsToTest[0].level}
+          />
           <FlashCardController cardId={cardsToTest[0].id} currentLevel={cardsToTest[0].level} />
         </>
       )}
