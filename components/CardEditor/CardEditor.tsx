@@ -1,9 +1,10 @@
 'use client';
 
-import { Button, Stack, Textarea } from '@mantine/core';
+import { Button, Group, Stack, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
-import { IconEdit, IconSquareRoundedPlus } from '@tabler/icons-react';
-import { createCard, updateCard } from '@/app/api/actions/cards';
+import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
+import Link from 'next/link';
+import { createCard, deleteCard, updateCard } from '@/app/api/actions/cards';
 
 export function CardEditor({ deckId, card }: any) {
   const form = useForm({
@@ -50,9 +51,21 @@ export function CardEditor({ deckId, card }: any) {
         />
 
         {card ? (
-          <Button leftSection={<IconEdit stroke={1.5} />} type="submit">
-            Edit
-          </Button>
+          <Group wrap="nowrap" justify="space-between">
+            <Button leftSection={<IconEdit stroke={1.5} />} type="submit">
+              Edit
+            </Button>
+            <Button
+              leftSection={<IconTrash stroke={1.5} />}
+              variant="outline"
+              color="red"
+              onClick={() => deleteCard(card.id)}
+              component={Link}
+              href={`/dashboard/decks/${deckId}`}
+            >
+              Delete
+            </Button>
+          </Group>
         ) : (
           <Button leftSection={<IconSquareRoundedPlus stroke={1.5} />} type="submit">
             Create

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Table,
   ScrollArea,
@@ -13,6 +13,7 @@ import {
   keys,
   Tooltip,
   Button,
+  ActionIcon,
 } from '@mantine/core';
 import {
   IconSelector,
@@ -20,9 +21,11 @@ import {
   IconChevronUp,
   IconSearch,
   IconEdit,
+  IconTrash,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import classes from './CardTable.module.css';
+import { deleteCard } from '@/app/api/actions/cards';
 
 interface RowData {
   front: string;
@@ -104,6 +107,11 @@ export function CardTable({ cards }: any) {
     setSortedData(sortData(cards, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
+  // nextJs cache revalidation doesn't work on dynamic routes, so this is a workaround
+  useEffect(() => {
+    setSortedData(cards);
+  }, [cards]);
+
   const rows = sortedData.map((row: any) => (
     <Table.Tr key={row.name}>
       <Table.Td className={classes.td}>{row.front}</Table.Td>
@@ -117,7 +125,7 @@ export function CardTable({ cards }: any) {
         )}
       </Table.Td>
       <Table.Td>
-        <Group>
+        <Group wrap="nowrap">
           <Tooltip label="Edit">
             <Button
               variant="light"
@@ -127,6 +135,18 @@ export function CardTable({ cards }: any) {
             >
               Edit
             </Button>
+          </Tooltip>
+          <Tooltip label="Delete">
+            <ActionIcon
+              variant="filled"
+              color="red"
+              radius="md"
+              size="lg"
+              aria-label="delete-card"
+              onClick={() => deleteCard(row.id)}
+            >
+              <IconTrash size="1.1rem" />
+            </ActionIcon>
           </Tooltip>
         </Group>
       </Table.Td>
