@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { deckId: string } }) {
   );
 
   return (
-    <Stack justify="space-between" align="center" h="100vh" w="100%">
+    <Stack py="lg" justify="space-between" align="center" h="100vh" w="100%">
       <DashboardHeaderShell>
         <p />
       </DashboardHeaderShell>
@@ -52,6 +52,7 @@ export default async function Page({ params }: { params: { deckId: string } }) {
       ) : (
         <>
           <FlashCard
+            id={cardsToTest[0].id}
             front={cardsToTest[0].front}
             back={cardsToTest[0].back}
             level={cardsToTest[0].level}
