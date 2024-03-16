@@ -2,6 +2,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { theme } from '../theme';
 
@@ -23,8 +24,10 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme}>
-          {children}
-          <Notifications />
+          <ModalsProvider modalProps={{ withCloseButton: false }}>
+            {children}
+            <Notifications />
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>

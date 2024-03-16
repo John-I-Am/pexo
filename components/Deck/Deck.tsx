@@ -12,46 +12,36 @@ import {
   rem,
   Paper,
   Button,
-  Modal,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { modals } from '@mantine/modals';
 import { IconTrash, IconEdit, IconBook } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { deleteDeck } from '@/app/api/actions/decks';
 import classes from './Deck.module.css';
 
 export function Deck({ id, title }: { id: string; title: string }) {
-  const [opened, { open, close }] = useDisclosure(false);
   const handleDelete = () => {
     deleteDeck(id);
-    close();
     notifications.show({
       title: 'Deck Deleted',
       message: `Deck ${title} has been deleted`,
     });
   };
 
+  const openModal = () =>
+    modals.openConfirmModal({
+      title: `Delete ${title}`,
+      children: (
+        <Text ta="center" size="sm">
+          This action is irreversible! Please confirm.
+        </Text>
+      ),
+      labels: { confirm: 'Confirm', cancel: 'Cancel' },
+      onConfirm: handleDelete,
+    });
+
   return (
     <Paper radius="md" withBorder className={classes.card} mt={20}>
-      <Modal
-        classNames={{
-          title: classes.modal,
-        }}
-        opened={opened}
-        onClose={close}
-        withCloseButton={false}
-        title={`Delete ${title}`}
-      >
-        <Text ta="center" fz="sm" c="red">
-          Are you sure you want to delete this deck? This action is irreversible
-        </Text>
-        <Group justify="space-between" mt="lg" wrap="nowrap">
-          <Button onClick={() => close()}>Cancel</Button>
-          <Button variant="outline" color="red" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Group>
-      </Modal>
       <ThemeIcon className={classes.icon} size={60} radius={60}>
         <IconBook style={{ width: rem(32), height: rem(32) }} stroke={1.5} />
       </ThemeIcon>
@@ -95,7 +85,7 @@ export function Deck({ id, title }: { id: string; title: string }) {
           radius="md"
           color="red"
           aria-label="Delete"
-          onClick={open}
+          onClick={openModal}
         >
           <IconTrash size="1.1rem" />
         </ActionIcon>

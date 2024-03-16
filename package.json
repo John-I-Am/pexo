@@ -23,6 +23,7 @@
     "@mantine/core": "^7.6.2",
     "@mantine/form": "^7.6.2",
     "@mantine/hooks": "7.6.2",
+    "@mantine/modals": "^7.6.2",
     "@mantine/notifications": "^7.6.2",
     "@next/bundle-analyzer": "^14.0.1",
     "@prisma/client": "^5.8.1",
