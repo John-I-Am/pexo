@@ -25,7 +25,7 @@ model User {
 
 model Deck {
   id       String @id @default(cuid())
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
   title    String @default("untitled")
   cards    Card[]
@@ -33,7 +33,7 @@ model Deck {
 
 model Card {
   id         String   @id @default(cuid())
-  deck       Deck     @relation(fields: [deckId], references: [id])
+  deck       Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
   deckId     String
   front      String
   back       String
