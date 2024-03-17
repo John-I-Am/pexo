@@ -1,10 +1,11 @@
 'use client';
 
-import { Button, Group, Stack, Textarea } from '@mantine/core';
+import { Button, Group, Stack, TextInput, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
 import { createCard, deleteCard, updateCard } from '@/app/api/actions/cards';
+import { fetchWord } from '@/app/api/actions/dictionary';
 
 export function CardEditor({ deckId, card }: any) {
   const form = useForm({
@@ -19,8 +20,46 @@ export function CardEditor({ deckId, card }: any) {
     },
   });
 
+  const formWord = useForm({
+    initialValues: {
+      word: '',
+    },
+
+    validate: {
+      word: hasLength({ min: 1, max: 150 }, 'word must be 1-20 characters long'),
+    },
+  });
+
+  const handleDefine = async (word: string) => {
+    const definition = await fetchWord(word);
+    if (definition.error) {
+      formWord.setFieldError('word', 'Word not found');
+    } else {
+      form.setFieldValue('front', word);
+      form.setFieldValue('back', definition.definition);
+    }
+  };
+
   return (
     <Stack>
+      <form onSubmit={formWord.onSubmit((values) => handleDefine(values.word))}>
+        <TextInput
+          {...formWord.getInputProps('word')}
+          label="Autofill: Vocabulary"
+          description="Use this to help you create a vocabulary flashcard with definitions"
+          placeholder="word"
+        />
+        <Button
+          leftSection={<IconSquareRoundedPlus stroke={1.5} />}
+          size="xs"
+          variant="light"
+          mt="sm"
+          type="submit"
+        >
+          Fill
+        </Button>
+      </form>
+
       <form
         onSubmit={form.onSubmit((values) =>
           card ? updateCard(card.id, values, true) : createCard(deckId, values.front, values.back)
