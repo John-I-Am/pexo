@@ -10,7 +10,6 @@ import {
   Center,
   TextInput,
   rem,
-  keys,
   Tooltip,
   Button,
   ActionIcon,
@@ -61,8 +60,10 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
 
 function filterData(data: RowData[], search: string) {
   const query = search.toLowerCase().trim();
-  return data.filter((item) =>
-    keys(data[0]).some((key) => item[key].toLowerCase().includes(query))
+  //does not filters by level, and date
+  const fieldsToSearch = ['front', 'back'];
+  return data.filter((item: any) =>
+    fieldsToSearch.some((key) => item[key].toLowerCase().includes(query))
   );
 }
 
@@ -77,9 +78,19 @@ function sortData(
   }
 
   return filterData(
-    [...data].sort((a, b) => {
+    [...data].sort((a: any, b: any) => {
       if (payload.reversed) {
+        // Seperate check needed for level since its of type int
+        if (sortBy === 'level') {
+          return b.level - a.level;
+        }
+
         return b[sortBy].localeCompare(a[sortBy]);
+      }
+
+      // Seperate check needed for level since its of type int
+      if (sortBy === 'level') {
+        return a.level - b.level;
       }
 
       return a[sortBy].localeCompare(b[sortBy]);
@@ -109,7 +120,7 @@ export function CardTable({ cards }: any) {
 
   // nextJs cache revalidation doesn't work on dynamic routes, so this is a workaround
   useEffect(() => {
-    setSortedData(cards);
+    setSortedData(sortData(cards, { sortBy, reversed: reverseSortDirection, search }));
   }, [cards]);
 
   const rows = sortedData.map((row: any) => (
