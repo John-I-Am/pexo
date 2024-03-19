@@ -7,7 +7,7 @@ import { DeckEditor } from '@/components/DeckEditor/DeckEditor';
 export default async function Page({ params }: { params: { deckId: string } }) {
   const deck: any = await fetchDeckById(params.deckId);
   return (
-    <Stack justify="flex-start" h="100vh">
+    <Stack justify="flex-start" h="100vh" style={{ overflow: 'scroll' }}>
       <DashboardHeaderShell>
         <DeckEditor id={deck.id} title={deck.title} cardsLength={deck.cards.length} />
       </DashboardHeaderShell>

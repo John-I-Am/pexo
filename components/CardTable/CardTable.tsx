@@ -40,6 +40,28 @@ interface ThProps {
   onSort(): void;
 }
 
+const formateDate = (date: any) => {
+  const currentDate: any = new Date();
+  const differenceInMilliseconds: any = date - currentDate;
+  const differenceInMinutes = differenceInMilliseconds / (1000 * 60);
+
+  let formattedTime;
+
+  if (differenceInMinutes < 60) {
+    // Less than 1 hour away, display in minutes
+    formattedTime = `${Math.ceil(differenceInMinutes)} minutes`;
+  } else if (differenceInMinutes < 1440) {
+    // Less than 24 hours away, display in hours
+    formattedTime = `${Math.ceil(differenceInMinutes / 60)} hours`;
+  } else {
+    // More than or equal to 24 hours away, display in days
+    const differenceInDays = Math.ceil(differenceInMinutes / 1440);
+    formattedTime = `${differenceInDays} days`;
+  }
+
+  return formattedTime;
+};
+
 function Th({ children, reversed, sorted, onSort }: ThProps) {
   const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
   return (
@@ -84,6 +106,10 @@ function sortData(
         if (sortBy === 'level') {
           return b.level - a.level;
         }
+        // Seperate check needed for level since its of type date
+        if (sortBy === 'nextReview') {
+          return new Date(b.nextReview) - new Date(a.nextReview);
+        }
 
         return b[sortBy].localeCompare(a[sortBy]);
       }
@@ -91,6 +117,10 @@ function sortData(
       // Seperate check needed for level since its of type int
       if (sortBy === 'level') {
         return a.level - b.level;
+      }
+      // Seperate check needed for level since its of type date
+      if (sortBy === 'nextReview') {
+        return new Date(a.nextReview) - new Date(b.nextReview);
       }
 
       return a[sortBy].localeCompare(b[sortBy]);
@@ -132,7 +162,7 @@ export function CardTable({ cards }: any) {
         {new Date(row.nextReview).getTime() <= new Date().getTime() ? (
           <Text>Now</Text>
         ) : (
-          <Text>{new Date(row.nextReview).toLocaleString('en-NZ')}</Text>
+          <Text>{formateDate(new Date(row.nextReview))}</Text>
         )}
       </Table.Td>
       <Table.Td>
@@ -198,11 +228,11 @@ export function CardTable({ cards }: any) {
               Level
             </Th>
             <Th
-              sorted={sortBy === 'front'}
+              sorted={sortBy === 'nextReview'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('front')}
+              onSort={() => setSorting('nextReview')}
             >
-              Review Date
+              Review In
             </Th>
           </Table.Tr>
         </Table.Tbody>
