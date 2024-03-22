@@ -28,8 +28,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import cx from 'clsx';
 
+import { signOut } from 'next-auth/react';
 import classes from './Navbar.module.css';
-import { unauthenticate } from '@/app/api/actions/users';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 const navItems = [
@@ -137,12 +137,10 @@ export function Navbar({ user }: { user: string }) {
             <Tooltip disabled={!compact} label="Logout">
               <ActionIcon
                 onClick={() => {
-                  unauthenticate(); // buggy: requires user to double click
+                  signOut();
                 }}
-                component={Link}
                 variant="light"
                 aria-label="logout"
-                href="/"
               >
                 <IconLogout stroke={1.5} />
               </ActionIcon>
