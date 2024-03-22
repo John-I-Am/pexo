@@ -50,8 +50,6 @@ export async function createCard(deckId: string, front: string, back: string) {
 
 export async function updateCard(id: string, updatedCard: any, redirectUrl: boolean) {
   const card: any = await fetchCardById(id);
-
-  const reviewDate: number = card.nextReview.getTime();
   let interval = 0;
 
   if (updatedCard.level || updatedCard.level === 0) {
@@ -92,7 +90,7 @@ export async function updateCard(id: string, updatedCard: any, redirectUrl: bool
       where: {
         id,
       },
-      data: { ...updatedCard, nextReview: new Date(reviewDate + interval) },
+      data: { ...updatedCard, nextReview: new Date(new Date().getTime() + interval) },
     });
     revalidatePath('/dashboard/decks/[deckId]', 'page');
   } catch (error) {
