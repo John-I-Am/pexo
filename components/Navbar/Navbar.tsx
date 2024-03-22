@@ -11,6 +11,7 @@ import {
   IconChevronRight,
   IconCactus,
   IconCards,
+  IconSettings,
 } from '@tabler/icons-react';
 import {
   Group,
@@ -21,6 +22,7 @@ import {
   Stack,
   NavLink,
   ThemeIcon,
+  Box,
 } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -33,7 +35,7 @@ import classes from './Navbar.module.css';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 const navItems = [
-  { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
+  // { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
   {
     label: 'Decks',
     icon: IconCards,
@@ -44,35 +46,35 @@ const navItems = [
       { label: 'Discover', link: '/dashboard/decks' },
     ],
   },
-  {
-    label: 'Releases',
-    icon: IconCalendarStats,
-    link: '/',
-    links: [
-      { label: 'Upcoming releases', link: '/' },
-      { label: 'Previous releases', link: '/' },
-      { label: 'Releases schedule', link: '/' },
-    ],
-  },
-  { label: 'Analytics', icon: IconPresentationAnalytics, link: '/' },
-  { label: 'Learn', icon: IconFileAnalytics, link: '/' },
-  {
-    label: 'Settings',
-    icon: IconAdjustments,
-    link: '/',
-    links: [
-      { label: 'Enable 2FA', link: '/' },
-      { label: 'Change password', link: '/' },
-      { label: 'Recovery codes', link: '/' },
-    ],
-  },
+  // {
+  //   label: 'Releases',
+  //   icon: IconCalendarStats,
+  //   link: '/',
+  //   links: [
+  //     { label: 'Upcoming releases', link: '/' },
+  //     { label: 'Previous releases', link: '/' },
+  //     { label: 'Releases schedule', link: '/' },
+  //   ],
+  // },
+  // { label: 'Analytics', icon: IconPresentationAnalytics, link: '/' },
+  // { label: 'Learn', icon: IconFileAnalytics, link: '/' },
+  // {
+  //   label: 'Settings',
+  //   icon: IconAdjustments,
+  //   link: '/',
+  //   links: [
+  //     { label: 'Enable 2FA', link: '/' },
+  //     { label: 'Change password', link: '/' },
+  //     { label: 'Recovery codes', link: '/' },
+  //   ],
+  // },
 ];
 
 export function Navbar({ user }: { user: string }) {
   const pathname = usePathname();
   const [compact, setCompact] = useState<boolean>(false);
   const links = navItems.map((item: any) => (
-    <Tooltip disabled={!compact} label={item.label}>
+    <Tooltip key={item.label} disabled={!compact} label={item.label}>
       <NavLink
         component={Link}
         key={item.label}
@@ -134,7 +136,7 @@ export function Navbar({ user }: { user: string }) {
           </Tooltip>
 
           <Group justify="space-between">
-            <Tooltip disabled={!compact} label="Logout">
+            <Tooltip label="Logout">
               <ActionIcon
                 onClick={() => {
                   signOut();
@@ -146,11 +148,13 @@ export function Navbar({ user }: { user: string }) {
               </ActionIcon>
             </Tooltip>
 
-            <Tooltip disabled={!compact} label="Toggle Theme">
-              <ColorSchemeToggle />
+            <Tooltip label="Toggle Theme">
+              <Box>
+                <ColorSchemeToggle />
+              </Box>
             </Tooltip>
 
-            <Tooltip disabled={!compact} label={compact ? 'Expand' : 'Collapse'}>
+            <Tooltip label={compact ? 'Expand' : 'Collapse'}>
               <ActionIcon
                 onClick={() => {
                   setCompact(!compact);
