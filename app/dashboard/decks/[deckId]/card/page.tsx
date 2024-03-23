@@ -1,3 +1,5 @@
+'use client';
+
 import { Container } from '@mantine/core';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
 

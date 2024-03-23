@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { Title, Text, Anchor } from '@mantine/core';
 import classes from './Welcome.module.css';
 

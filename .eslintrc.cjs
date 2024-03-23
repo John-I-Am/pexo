@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
+    '@next/next/no-document-import-in-page': 'off', // causes error with build script
   },
 };

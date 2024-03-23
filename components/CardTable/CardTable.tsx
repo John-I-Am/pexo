@@ -108,7 +108,7 @@ function sortData(
         }
         // Seperate check needed for level since its of type date
         if (sortBy === 'nextReview') {
-          return new Date(b.nextReview) - new Date(a.nextReview);
+          return new Date(b.nextReview).getTime() - new Date(a.nextReview).getTime();
         }
 
         return b[sortBy].localeCompare(a[sortBy]);
@@ -120,7 +120,7 @@ function sortData(
       }
       // Seperate check needed for level since its of type date
       if (sortBy === 'nextReview') {
-        return new Date(a.nextReview) - new Date(b.nextReview);
+        return new Date(a.nextReview).getTime() - new Date(b.nextReview).getTime();
       }
 
       return a[sortBy].localeCompare(b[sortBy]);

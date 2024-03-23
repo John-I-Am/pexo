@@ -3,12 +3,10 @@ services:
   app:
     build:
       context: ./
-      target: deps
+      target: dev
     volumes:
       - .:/app
     command: npm run dev
     ports:
       - "3000:3000"
       - "5555:5555" #expose port for prisma studio
-    environment:
-      NODE_ENV: development

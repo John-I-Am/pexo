@@ -14,7 +14,7 @@ export default async function Page({
   const decks = await fetchDecks();
   const query = searchParams?.query || '';
 
-  const decksToShow = query === '' ? decks : decks?.filter((deck) => deck.title === query);
+  const decksToShow = query === '' ? decks : decks?.filter((deck: any) => deck.title === query);
 
   return (
     <Stack justify="flex-start" h="100vh">
@@ -23,7 +23,7 @@ export default async function Page({
       </DashboardHeaderShell>
 
       <ScrollArea w="100%">
-        <Group grow>{decksToShow?.map((d) => <Deck title={d.title} id={d.id} />)}</Group>
+        <Group grow>{decksToShow?.map((d: any) => <Deck title={d.title} id={d.id} />)}</Group>
       </ScrollArea>
     </Stack>
   );
