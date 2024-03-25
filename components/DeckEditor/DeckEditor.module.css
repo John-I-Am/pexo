@@ -2,3 +2,13 @@
   font-size: x-large;
   font-weight: 700;
 }
+
+.tags {
+  width: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.tag {
+  min-width: fit-content;
+}

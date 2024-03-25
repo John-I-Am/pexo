@@ -1,9 +1,9 @@
-import { Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
 
 export function DashboardHeaderShell({ children }: { children: React.ReactNode }) {
   return (
-    <Group wrap="nowrap" h="80px" pt="sm">
+    <Stack justify="space-around" h="100px">
       {children}
-    </Group>
+    </Stack>
   );
 }

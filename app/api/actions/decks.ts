@@ -52,15 +52,16 @@ export async function createDeck() {
   }
 }
 
-export async function updateDeck(id: string, title: string) {
+export async function updateDeck(
+  id: string,
+  data: { title: string | undefined; tags: string[] | undefined }
+) {
   try {
     await prisma.deck.update({
       where: {
         id,
       },
-      data: {
-        title,
-      },
+      data,
     });
 
     revalidatePath('/dashboard/decks');

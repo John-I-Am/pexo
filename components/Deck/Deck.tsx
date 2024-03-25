@@ -19,7 +19,7 @@ import { notifications } from '@mantine/notifications';
 import { deleteDeck } from '@/app/api/actions/decks';
 import classes from './Deck.module.css';
 
-export function Deck({ id, title }: { id: string; title: string }) {
+export function Deck({ id, title, tags }: { id: string; title: string; tags: string[] }) {
   const handleDelete = () => {
     deleteDeck(id);
     notifications.show({
@@ -46,11 +46,12 @@ export function Deck({ id, title }: { id: string; title: string }) {
         <IconBook style={{ width: rem(32), height: rem(32) }} stroke={1.5} />
       </ThemeIcon>
 
-      <Group wrap="nowrap" className={classes.tags} gap="sm">
-        <Badge className={classes.tag}>Tag</Badge>
-        <Badge className={classes.tag}>Tag</Badge>
-        <Badge className={classes.tag}>Tag</Badge>
-        <Badge className={classes.tag}>Tag</Badge>
+      <Group className={classes.tags} wrap="nowrap">
+        {tags.map((tag: string) => (
+          <Badge key={tag} variant="light" className={classes.tag}>
+            {tag}
+          </Badge>
+        ))}
       </Group>
 
       <Text ta="center" fw={700} className={classes.title}>

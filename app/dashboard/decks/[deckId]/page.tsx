@@ -9,7 +9,12 @@ export default async function Page({ params }: { params: { deckId: string } }) {
   return (
     <Stack justify="flex-start" h="100vh" style={{ overflow: 'scroll' }}>
       <DashboardHeaderShell>
-        <DeckEditor id={deck.id} title={deck.title} cardsLength={deck.cards.length} />
+        <DeckEditor
+          id={deck.id}
+          title={deck.title}
+          tags={deck.tags}
+          cardsLength={deck.cards.length}
+        />
       </DashboardHeaderShell>
       <CardTable cards={deck.cards} />
     </Stack>

@@ -24,11 +24,12 @@ model User {
 }
 
 model Deck {
-  id       String @id @default(cuid())
-  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id       String   @id @default(cuid())
+  author   User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
-  title    String @default("untitled")
+  title    String   @default("untitled")
   cards    Card[]
+  tags     String[]
 }
 
 model Card {
