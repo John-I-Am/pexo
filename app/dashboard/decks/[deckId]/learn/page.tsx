@@ -1,4 +1,4 @@
-import { Text, Stack, Button, ThemeIcon, Container } from '@mantine/core';
+import { Text, Stack, Button, ThemeIcon, Container, Progress } from '@mantine/core';
 import Link from 'next/link';
 import { IconChevronLeft, IconMoodSmileBeam } from '@tabler/icons-react';
 import { DashboardHeaderShell } from '@/components/DashboardHeaderShell/DashboardHeaderShell';
@@ -45,7 +45,10 @@ export default async function Page({ params }: { params: { deckId: string } }) {
   return (
     <Stack py="lg" justify="space-between" align="center" h="100vh" w="100%">
       <DashboardHeaderShell>
-        <p />
+        <Progress value={((deck.cards.length - cardsToTest.length) / deck.cards.length) * 100} />
+        <Text fs="sm" c="dimmed">
+          {`${deck.cards.length - cardsToTest.length} / ${deck.cards.length}`}
+        </Text>
       </DashboardHeaderShell>
       {cardsToTest.length === 0 ? (
         <EmptyDeck id={params.deckId} />
