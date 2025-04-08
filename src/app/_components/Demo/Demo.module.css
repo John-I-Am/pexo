@@ -1,0 +1,16 @@
+.root {
+  background:  light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-9));
+}
+
+.panel {
+  padding: var(--mantine-spacing-xl);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 4);
+}
+
+.title {
+  position: absolute;
+  left: var(--mantine-spacing-xl);
+  bottom: 10;
+  font-weight: 600;
+  font-size: var(--mantine-font-size-xl);
+}

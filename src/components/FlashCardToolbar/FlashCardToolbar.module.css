@@ -1,0 +1,4 @@
+.container {
+  border-radius: var(--mantine-radius-lg);
+  background:  light-dark(white, var(--mantine-color-dark-6));
+}

@@ -1,0 +1,23 @@
+'use client';
+
+import { Stack, Progress, Text } from '@mantine/core';
+import { Card } from '@prisma/client';
+import { useCardsDue } from '@/src/app/hooks';
+
+import classes from './ProgressBar.module.css';
+
+export function ProgressBar({ cards = [] }: { cards: Card[] }) {
+  const cardDue: Card[] = useCardsDue(cards);
+
+  return (
+    <Stack>
+      <Progress
+        value={((cards.length - cardDue.length) / cards.length) * 100}
+        className={classes.wrapper}
+      />
+      <Text size="sm" c="dimmed" ta="center">
+        {`${cards.length - cardDue.length} of ${cards.length} cards completed`}
+      </Text>
+    </Stack>
+  );
+}

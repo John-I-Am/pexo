@@ -1,0 +1,40 @@
+.title {
+  font-size: large;
+  font-weight: 700;
+  text-align: center;
+  border: none; 
+}
+
+.form-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  .span {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.tags {
+  padding-left: var(--mantine-spacing-sm);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.tag {
+  background-color: light-dark(var(--mantine-color-blue-light),#263341);
+  color: light-dark(var(--mantine-color-blue-5), var(--mantine-color-blue-3));
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.filler {
+  @media (max-width: $mantine-breakpoint-xs) {
+    display: none;
+  }
+}

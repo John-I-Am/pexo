@@ -1,0 +1,6 @@
+.container {
+  padding: var(--mantine-spacing-xl);
+  margin: var(--mantine-spacing-xl);
+  border-radius: var(--mantine-radius-lg);
+  background-color: var(--mantine-primary-color-8);
+}

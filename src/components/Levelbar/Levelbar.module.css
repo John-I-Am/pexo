@@ -1,0 +1,21 @@
+.wrapper {
+  padding: var(--mantine-spacing-md);
+  border-radius: var(--mantine-radius-md);
+
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  p:last-of-type {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+  }
+
+  @mixin hover {
+    background-color: lightblue;
+    transform: scale(1.05);
+
+    p:last-of-type {
+      opacity: 1;
+    }
+  }
+}
+ 

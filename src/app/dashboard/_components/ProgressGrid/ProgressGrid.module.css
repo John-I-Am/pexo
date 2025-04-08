@@ -1,0 +1,9 @@
+.decks {
+  background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-9));
+}
+
+.button {
+  @mixin hover {
+    opacity: .7;
+  }
+}

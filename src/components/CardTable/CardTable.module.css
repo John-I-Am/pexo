@@ -1,0 +1,25 @@
+.th {
+  padding: 0;
+}
+
+.td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.control {
+  width: 100%;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  border-radius: var(--mantine-spacing-sm);
+
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+}
+
+.icon {
+  width: rem(21px);
+  height: rem(21px);
+  border-radius: rem(21px);
+}

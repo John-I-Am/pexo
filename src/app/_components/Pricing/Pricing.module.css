@@ -1,0 +1,9 @@
+.container {
+  padding: var(--mantine-spacing-xl);
+  border-radius: var(--mantine-radius-md);
+  background: var(--mantine-color-blue-9)
+}
+
+.item {
+  color: white;
+}

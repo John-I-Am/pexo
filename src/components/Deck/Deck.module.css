@@ -1,0 +1,19 @@
+.card {
+  height: rem(210px);
+}
+
+.title {
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
+  line-height: 1;
+}
+
+.tags {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.tag {
+  min-width: fit-content;
+}

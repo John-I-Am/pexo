@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SessionLog {
+  id     String   @id @default(cuid())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  day    DateTime // should track days only; one entry per day
+  goal   Int      @default(50)
+}
+
+model User {
+  id            String           @id @default(cuid())
+  email         String           @unique
+  emailVerified DateTime?
+  decks         Deck[]
+  preferences   UserPreferences?
+  sessions      Session[]
+  sessionLogs   SessionLog[]
+}
+
+model UserPreferences {
+  id     String @id @default(cuid())
+  user   User?  @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model Deck {
+  id       String   @id @default(cuid())
+  author   User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+  title    String   @default("untitled")
+  cards    Card[]
+  tags     String[]
+}
+
+model Card {
+  id            String     @id @default(cuid())
+  deck          Deck       @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId        String
+  front         String
+  back          String
+  audioUrl      String
+  level         Int        @default(1)
+  done          Boolean    @default(false)
+  reviewedDates DateTime[]
+  nextReview    DateTime   @default(now())
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

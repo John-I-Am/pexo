@@ -1,0 +1,26 @@
+.level {
+  width: 1rem;
+  height: .25rem;
+  border-radius: var(--mantine-radius-sm);
+  background:  light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-9));
+}
+
+.level-1 {
+  background:  var(--mantine-color-blue-1) !important;
+}
+
+.level-2 {
+  background:  var(--mantine-color-blue-3) !important;
+}
+
+.level-3 {
+  background:  var(--mantine-color-blue-5) !important;
+}
+
+.level-4 {
+  background:  var(--mantine-color-blue-7) !important;
+}
+
+.level-5 {
+  background:  var(--mantine-color-blue-9) !important;
+}

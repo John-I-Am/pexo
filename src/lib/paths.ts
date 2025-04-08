@@ -1,0 +1,11 @@
+export const homePath = () => '/';
+export const loginPath = () => '/login';
+
+export const dashboardPath = () => '/dashboard';
+
+export const decksPath = () => '/dashboard/decks';
+export const deckPath = (deckId: string) => `/dashboard/decks/${deckId}`;
+
+export const newCardPath = (deckId: string) => `/dashboard/decks/${deckId}/card`;
+export const existingCardPath = (deckId: string, cardId: string) =>
+  `/dashboard/decks/${deckId}/card/${cardId}`;
