@@ -7,7 +7,7 @@ import { useCardsDue } from '@/src/app/hooks';
 import { ProgressBar } from '@/src/components/ProgressBar/ProgressBar';
 import classes from './page.module.css';
 import { getDeckById } from '@/src/app/api/database/decks/queries';
-import { DeckWithCards } from '@/src/prisma/types';
+import { DeckWithCards } from '@/src/lib/prisma/types';
 
 function EmptyDeck({ id }: { id: string }) {
   return (

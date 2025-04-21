@@ -2,7 +2,7 @@ import { Stack } from '@mantine/core';
 import { CardTable } from '@/src/components/CardTable/CardTable';
 import { DeckEditor } from '@/src/components/DeckEditor/DeckEditor';
 import { getDeckById } from '@/src/app/api/database/decks/queries';
-import { DeckWithCards } from '@/src/prisma/types';
+import { DeckWithCards } from '@/src/lib/prisma/types';
 
 type existingDeckPageProps = {
   params: Promise<{
