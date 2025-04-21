@@ -1,35 +1,33 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { SessionLog } from '@prisma/client';
 import prisma from '../../prisma';
-import { getCurrentDaySessionLog } from './queries';
 
-export const createSessionLog = async (userId: string) => {
-  const currentDay = new Date(new Date().setUTCHours(0, 0, 0, 0));
+export const upsertSessionLog = async (userId: string, goal: number | undefined) => {
+  const todayMidnightUTC = new Date(new Date().setUTCHours(0, 0, 0, 0));
+
+  console.log('upsertsessionLog called');
+
   try {
-    const sessionLogs: SessionLog | null = await getCurrentDaySessionLog(userId);
-
-    if (!sessionLogs) {
-      await prisma.sessionLog.create({ data: { userId, day: currentDay } });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const updateSessionLog = async (id: string, goal: number) => {
-  try {
-    await prisma.sessionLog.update({
+    await prisma.sessionLog.upsert({
       where: {
-        id,
+        userId_date: {
+          userId,
+          date: todayMidnightUTC,
+        },
       },
-      data: { goal },
+      update: {
+        ...(goal !== undefined && { goal }),
+      },
+      create: {
+        userId,
+        date: todayMidnightUTC,
+      },
     });
 
     revalidatePath('/dashboard', 'page');
   } catch (error) {
-    console.log(error);
+    console.error('Failed to upsert session log:', error);
     throw error;
   }
 };

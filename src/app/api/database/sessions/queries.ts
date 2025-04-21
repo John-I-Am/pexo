@@ -11,19 +11,20 @@ export const getSessionLogs = async (userId: string) => {
   return sessionLogs;
 };
 
-export const getCurrentDaySessionLog = async (userId: string): Promise<SessionLog | null> => {
-  const currentDay = new Date(new Date().setUTCHours(0, 0, 0, 0));
+export const getSessionLog = async (userId: string): Promise<SessionLog | null> => {
+  const todayMidnightUTC = new Date(new Date().setUTCHours(0, 0, 0, 0));
+
   try {
-    const currentDaySessionLog = await prisma.sessionLog.findFirst({
+    const sessionLog = await prisma.sessionLog.findFirst({
       where: {
         userId,
-        day: {
-          equals: currentDay,
+        date: {
+          equals: todayMidnightUTC,
         },
       },
     });
 
-    return currentDaySessionLog;
+    return sessionLog;
   } catch (error) {
     console.log(error);
     throw error;
