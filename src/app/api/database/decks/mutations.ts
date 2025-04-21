@@ -2,11 +2,15 @@
 
 import { revalidatePath } from 'next/cache';
 import { Deck } from '@prisma/client';
-import { auth } from '@/src/auth';
+import { auth } from '@/src/lib/betterAuth/auth';
+import { headers } from 'next/headers';
 import prisma from '../../prisma';
 
 export const createDeck = async (): Promise<Deck> => {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   try {
     const result = await prisma.deck.create({
       data: {

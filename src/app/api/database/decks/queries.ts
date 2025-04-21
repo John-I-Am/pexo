@@ -1,11 +1,15 @@
 import { Deck } from '@prisma/client';
-import { auth } from '@/src/auth';
+import { auth } from '@/src/lib/betterAuth/auth';
+import { headers } from 'next/headers';
 import prisma from '../../prisma';
-import { DeckWithCards } from '@/src/prisma/types';
+import { DeckWithCards } from '@/src/lib/prisma/types';
 import { notFound } from 'next/navigation';
 
 export const getDecks = async (): Promise<Deck[]> => {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   try {
     const data = await prisma.deck.findMany({
       where: {

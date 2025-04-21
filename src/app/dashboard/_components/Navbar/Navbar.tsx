@@ -24,13 +24,14 @@ import {
 } from '@mantine/core';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { authClient } from '@/src/lib/betterAuth/authClient';
 
 import cx from 'clsx';
 import classes from './Navbar.module.css';
 import { ColorSchemeToggle } from '@/src/components/ColorSchemeToggle/ColorSchemeToggle';
+import { loginPath } from '@/src/lib/paths';
 
 interface NavItem {
   label: string;
@@ -54,6 +55,7 @@ const navItems: NavItem[] = [
 ];
 
 export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) {
+  const router = useRouter();
   const pathname: string = usePathname();
   const { hovered, ref } = useHover();
   const [compact, setCompact] = useState<boolean>(true);
@@ -146,7 +148,13 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
           leftSection={<IconDoorExit />}
           variant="filled"
           onClick={async () => {
-            await signOut();
+            await authClient.signOut({
+              fetchOptions: {
+                onSuccess: () => {
+                  router.push(loginPath());
+                },
+              },
+            });
           }}
         />
       </Stack>

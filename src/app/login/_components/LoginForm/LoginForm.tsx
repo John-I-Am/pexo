@@ -15,8 +15,9 @@ import {
 } from '@mantine/core';
 import classes from './LoginForm.module.css';
 import { isEmail, useForm } from '@mantine/form';
-import { authenticate } from '@/src/app/api/auth/authenticate';
-import { homePath } from '@/src/lib/paths';
+import { authClient } from '@/src/lib/betterAuth/authClient';
+import { dashboardPath, homePath } from '@/src/lib/paths';
+import { notifications } from '@mantine/notifications';
 
 export function LoginForm() {
   const form = useForm({
@@ -30,6 +31,25 @@ export function LoginForm() {
     },
   });
 
+  const handleLogin = async ({ email }: { email: string }) => {
+    const { data, error } = await authClient.signIn.magicLink({
+      email,
+      callbackURL: dashboardPath(),
+    });
+
+    if (data?.status) {
+      notifications.show({
+        message: 'Magic link sent! Check your email.',
+        autoClose: false,
+      });
+    } else {
+      notifications.show({
+        message: 'Something has gone wrong!',
+        autoClose: false,
+      });
+    }
+  };
+
   return (
     <Container size={460} my={30}>
       <Title className={classes.title} ta="center">
@@ -41,7 +61,7 @@ export function LoginForm() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
-        <form onSubmit={form.onSubmit((values) => authenticate(undefined, values))}>
+        <form onSubmit={form.onSubmit((values) => handleLogin(values))}>
           <TextInput
             mb="xl"
             label="Your email"
