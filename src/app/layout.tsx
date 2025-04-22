@@ -6,6 +6,8 @@ import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { theme } from '../theme';
 import { IconPicker } from './dashboard/decks/_components/IconPicker/IconPicker';
+import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
+import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
 
 export const metadata = {
   title: 'Pexo',
@@ -25,13 +27,15 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <ModalsProvider
-            modals={{ iconPicker: IconPicker }}
-            modalProps={{ withCloseButton: false, radius: 'md' }}
-          >
-            {children}
-            <Notifications />
-          </ModalsProvider>
+          <ActiveDeckProvider>
+            <ModalsProvider
+              modals={{ iconPicker: IconPicker, selectorModal: SelectorModal }}
+              modalProps={{ radius: 'md' }}
+            >
+              {children}
+              <Notifications />
+            </ModalsProvider>
+          </ActiveDeckProvider>
         </MantineProvider>
       </body>
     </html>
