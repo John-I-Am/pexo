@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import prisma from '../../prisma';
 
 export const upsertSessionLog = async (userId: string, goal: number | undefined) => {
@@ -21,6 +22,8 @@ export const upsertSessionLog = async (userId: string, goal: number | undefined)
         date: todayMidnightUTC,
       },
     });
+
+    revalidatePath('/dashboard');
   } catch (error) {
     console.error('Failed to upsert session log:', error);
     throw error;

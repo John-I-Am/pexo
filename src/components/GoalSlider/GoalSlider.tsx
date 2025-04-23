@@ -1,18 +1,12 @@
 import { Stack, Title, Text, Slider, Box } from '@mantine/core';
 import { useState } from 'react';
-import { updateSessionLog } from '@/src/app/api/database/sessions/mutations';
+import { upsertSessionLog } from '@/src/app/api/database/sessions/mutations';
 
-export function GoalSlider({
-  initialGoal,
-  sessionLogId,
-}: {
-  initialGoal: number;
-  sessionLogId: string;
-}) {
+export function GoalSlider({ initialGoal, userId }: { initialGoal: number; userId: string }) {
   const [value, setValue] = useState(initialGoal);
 
   const handleOnChangeEnd = async (e: any) => {
-    await updateSessionLog(sessionLogId, e);
+    await upsertSessionLog(userId, e);
   };
 
   return (
