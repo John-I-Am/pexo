@@ -6,15 +6,16 @@ import DeckSelector from './_components/DeckSelector/DeckSelector';
 import { auth } from '@/src/lib/betterAuth/auth';
 import { headers } from 'next/headers';
 import { getDecks } from '../api/database/decks/queries';
+import { getSessionLogs } from '../api/database/sessions/queries';
 
 export default async function Page() {
-  const session = await auth.api.getSession({
+  const session = (await auth.api.getSession({
     headers: await headers(),
-  });
+  })) as any;
+
   const decks = await getDecks();
-  // const cards = await getCardsByUserId(session?.user?.id as any);
-  // const sessionLog: any = await getCurrentDaySessionLog(session?.user?.id as any);
-  // const sessionLogs: any = await getSessionLogs(session?.user?.id as any);
+  const sessionLogs = await getSessionLogs(session?.user?.id);
+  const cards = await getCardsByUserId(session?.user?.id as any);
 
   return (
     <main>
@@ -28,17 +29,10 @@ export default async function Page() {
         <GridCol span={{ base: 12, xl: 6 }}>
           <ProgressDisplay decks={decks} />
         </GridCol>
+        <GridCol span={{ base: 12, xl: 6 }}>
+          <GoalsGrid sessionLogs={sessionLogs} cards={cards} />
+        </GridCol>
       </Grid>
-      <Stack>
-        {/* <ProgressGrid cards={cards} />
-        <GoalsGrid
-          cards={cards}
-          goal={sessionLog?.goal}
-          userId={session?.user?.id}
-          sessionLog={sessionLog}
-          sessionLogs={sessionLogs}
-        /> */}
-      </Stack>
     </main>
   );
 }

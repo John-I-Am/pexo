@@ -8,6 +8,7 @@ import { modals } from '@mantine/modals';
 import classes from './GoalsGrid.module.css';
 import { useDaysReviewed } from '@/src/app/hooks';
 import { GoalSlider } from '../../../../components/GoalSlider/GoalSlider';
+import { Card, SessionLog } from '@prisma/client';
 
 function Week({
   startOfWeek,
@@ -95,14 +96,16 @@ function Week({
   );
 }
 
-export function GoalsGrid({ cards, goal, sessionLogs, sessionLog }: any) {
+export function GoalsGrid({ sessionLogs, cards }: { sessionLogs: SessionLog[]; cards: Card[] }) {
+  const todayMidnightUTC = new Date(new Date().setUTCHours(0, 0, 0, 0));
+  const currentSessionLog: SessionLog = sessionLogs.find(
+    (sessionLog: SessionLog) => new Date(sessionLog.date).getTime() === todayMidnightUTC.getTime()
+  );
+
   const currentDate = new Date();
   const currentDay = currentDate.getDay();
   const diff = currentDay === 0 ? -6 : 1 - currentDay; // If today is Sunday (0), go back 6 days, otherwise go back to Monday.
   const lastMonday = new Date(currentDate.setDate(currentDate.getDate() + diff));
-
-  const lastLastMonday = new Date(currentDate);
-  lastLastMonday.setDate(currentDate.getDate() + diff * 2);
 
   const cardsReviewedToday = cards.filter((card: any) =>
     card.reviewedDates.some((reviewedDate: Date) => {
@@ -115,7 +118,7 @@ export function GoalsGrid({ cards, goal, sessionLogs, sessionLog }: any) {
   );
 
   return (
-    <Paper>
+    <Paper pb={'xl'}>
       <Stack>
         <Group justify="space-between" wrap="nowrap">
           <Title order={2}>Today's goals</Title>
@@ -123,7 +126,9 @@ export function GoalsGrid({ cards, goal, sessionLogs, sessionLog }: any) {
             variant="subtle"
             onClick={() => {
               modals.open({
-                children: <GoalSlider initialGoal={goal} sessionLogId={sessionLog.id} />,
+                children: (
+                  <GoalSlider initialGoal={currentSessionLog.goal} userId={sessionLogs[0].userId} />
+                ),
               });
             }}
           >
@@ -132,13 +137,9 @@ export function GoalsGrid({ cards, goal, sessionLogs, sessionLog }: any) {
         </Group>
 
         <Text mt="-10px" fz="sm" c="dimmed">
-          {`${cardsReviewedToday.length} / ${goal}`}
+          {`${cardsReviewedToday.length} / ${currentSessionLog.goal}`}
         </Text>
         <Group wrap="nowrap" justify="space-between">
-          <Box w="100%" className={classes.weeks}>
-            <Week cards={cards} startOfWeek={lastLastMonday} sessionLogs={sessionLogs} />
-          </Box>
-
           <Week cards={cards} startOfWeek={lastMonday} sessionLogs={sessionLogs} />
         </Group>
       </Stack>
