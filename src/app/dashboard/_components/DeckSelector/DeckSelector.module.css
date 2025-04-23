@@ -18,3 +18,14 @@
     opacity: 0.5;
   }
 }
+
+.modal-title {
+  font-size: larger;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* manuaully removes gap from modal top */
+.modal-header {
+  top: -16; 
+}
