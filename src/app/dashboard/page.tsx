@@ -1,5 +1,5 @@
 import { Grid, GridCol, Stack } from '@mantine/core';
-import { ProgressGrid } from '@/src/app/dashboard/_components/ProgressGrid/ProgressGrid';
+import { ProgressDisplay } from '@/src/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { GoalsGrid } from '@/src/app/dashboard/_components/GoalsGrid/GoalsGrid';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import DeckSelector from './_components/DeckSelector/DeckSelector';
@@ -18,9 +18,15 @@ export default async function Page() {
 
   return (
     <main>
-      <Grid>
+      <Grid
+        type="container"
+        breakpoints={{ xs: '100px', sm: '200px', md: '500px', lg: '800px', xl: '1000px' }}
+      >
         <GridCol span={12}>
           <DeckSelector decks={decks} />
+        </GridCol>
+        <GridCol span={{ base: 12, xl: 6 }}>
+          <ProgressDisplay decks={decks} />
         </GridCol>
       </Grid>
       <Stack>

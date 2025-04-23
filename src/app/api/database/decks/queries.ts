@@ -15,6 +15,9 @@ export const getDecks = async (): Promise<Deck[]> => {
       where: {
         authorId: session?.user?.id,
       },
+      include: {
+        cards: true,
+      },
     });
     return data;
   } catch (error) {
