@@ -12,6 +12,8 @@ import { upsertSessionLog } from '../sessions/mutations';
 import { headers } from 'next/headers';
 import { auth } from '@/src/lib/betterAuth/auth';
 
+import dayjs from '@/src/lib/dayjs';
+
 export const upsertCard = async (
   deckId: string,
   id: string | undefined,
@@ -64,7 +66,10 @@ export const updateCardLevel = async (id: string, level: number, isCorrect: bool
       where: { id },
       data: {
         level: newLevel,
-        nextReview: new Date(Date.now() + interval),
+        nextReview: dayjs.utc().add(interval, 'milliseconds').toDate(),
+        reviewedDates: {
+          push: dayjs.utc().format(),
+        },
       },
     });
 
