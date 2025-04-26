@@ -2,13 +2,7 @@
   display: none;
 }
 
-.week {
-  padding: 100px;
-  margin: 100px;
-  color: red;
-}
-
-.test {
+.month {
   width: 100%;
 }
 
@@ -23,4 +17,21 @@
 .current-day {
   background: var(--mantine-color-gray-1);
   border-radius: 4px;
+}
+
+.reviewed {
+  background-color: var(--mantine-color-blue-2);
+  border: none;
+
+  span {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    width: 10px;
+    height: 1px;
+    border: 1px solid var(--mantine-color-blue-4);
+    border-radius: 4px;
+    transform: rotate(-45deg); 
+    transform-origin: top right;
+  }
 }

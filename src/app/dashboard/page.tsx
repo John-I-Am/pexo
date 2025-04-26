@@ -15,6 +15,7 @@ export default async function Page() {
   })) as any;
 
   const decks = await getDecks(session?.userId);
+  const cards = await getCardsByUserId(session.user.id);
   const sessionLogs = await getSessionLogs(session?.user?.id);
 
   return (
@@ -30,7 +31,7 @@ export default async function Page() {
           <ProgressDisplay decks={decks} />
         </GridCol>
         <GridCol span={{ base: 12, xl: 6 }}>
-          <GoalDisplay />
+          <GoalDisplay cards={cards} />
         </GridCol>
         {/* <GridCol span={{ base: 12, xl: 6 }}>
           <GoalsGrid sessionLogs={sessionLogs} cards={cards} />

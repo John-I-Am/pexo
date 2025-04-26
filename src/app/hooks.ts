@@ -1,4 +1,5 @@
 import { Card } from '@prisma/client';
+import dayjs from '@/src/lib/dayjs';
 
 export const useCardsDue = (cards: Card[]): Card[] => {
   const cardsDue: Card[] = cards.filter(
@@ -9,17 +10,14 @@ export const useCardsDue = (cards: Card[]): Card[] => {
 };
 
 // Returns an array containing all the dates on which a card has been reviewed
-export const useDaysReviewed = (cards: Card[]): Date[] => {
+export const useDaysReviewed = (cards: Card[]): string[] => {
   const set = new Set<string>();
 
   cards.forEach((card: Card) => {
     card.reviewedDates.forEach((date: Date) => {
-      // Convert date to a string in 'YYYY-MM-DD' format to ensure uniqueness by day
-      const dateString: string = new Date(date).toISOString().split('T')[0];
-      set.add(dateString);
+      if (dayjs(date).isToday()) set.add(dayjs().format('YYYY-MM-DD'));
     });
   });
 
-  // Convert the set of date strings back to Date objects
-  return Array.from(set).map((dateString) => new Date(dateString));
+  return Array.from(set);
 };

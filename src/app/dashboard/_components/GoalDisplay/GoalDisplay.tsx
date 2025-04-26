@@ -6,30 +6,41 @@ import dayjs from '@/src/lib/dayjs';
 
 import classes from './GoalDisplay.module.css';
 import cx from 'clsx';
-import { Deck } from '@prisma/client';
+import { Card, Deck } from '@prisma/client';
 import { DeckWithCards } from '@/src/lib/prisma/types';
 import { GoalSlider } from '@/src/components/GoalSlider/GoalSlider';
+import { useDaysReviewed } from '@/src/app/hooks';
 
-const dayRenderer: DatePickerProps['renderDay'] = (date) => {
-  return (
-    <Stack align="center">
-      <div className={classes.day}></div>
-      <Text
-        fz="xs"
-        px="6px"
-        py="2px"
-        className={dayjs(date).isSame(dayjs(), 'day') ? classes['current-day'] : ''}
-      >
-        {dayjs(date).format('ddd')}
-      </Text>
-    </Stack>
-  );
-};
-
-export const GoalDisplay = () => {
+export const GoalDisplay = ({ cards }: { cards: Card[] }) => {
   const today = dayjs();
   const startOfWeek = today.startOf('isoWeek');
   const endOfWeek = today.endOf('isoWeek');
+
+  const daysReviewed: string[] = useDaysReviewed(cards);
+
+  const dayRenderer: DatePickerProps['renderDay'] = (date) => {
+    return (
+      <Stack align="center">
+        <div
+          className={cx(classes.day, {
+            [classes['reviewed']]: daysReviewed.includes(dayjs(date).format('YYYY-MM-DD')),
+          })}
+        >
+          <span></span>
+        </div>
+        <Text
+          fz="xs"
+          px="6px"
+          py="2px"
+          className={cx({
+            [classes['current-day']]: dayjs(date).isSame(dayjs(), 'day'),
+          })}
+        >
+          {dayjs(date).format('ddd')}
+        </Text>
+      </Stack>
+    );
+  };
 
   return (
     <Paper>
@@ -44,7 +55,7 @@ export const GoalDisplay = () => {
         </Text>
       </Stack>
       <DatePicker
-        classNames={{ calendarHeader: classes.header, month: classes.test }}
+        classNames={{ calendarHeader: classes.header, month: classes.month }}
         hideWeekdays
         renderDay={dayRenderer}
         getDayProps={(date) => {
@@ -54,7 +65,6 @@ export const GoalDisplay = () => {
 
           return {
             hidden: !isCurrentWeek,
-            // Add additional props like styles or event handlers here
           };
         }}
       />
