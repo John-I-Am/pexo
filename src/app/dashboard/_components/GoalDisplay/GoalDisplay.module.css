@@ -1,0 +1,26 @@
+.header {
+  display: none;
+}
+
+.week {
+  padding: 100px;
+  margin: 100px;
+  color: red;
+}
+
+.test {
+  width: 100%;
+}
+
+.day {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--mantine-color-gray-2);;
+  position: relative;
+}
+
+.current-day {
+  background: var(--mantine-color-gray-1);
+  border-radius: 4px;
+}

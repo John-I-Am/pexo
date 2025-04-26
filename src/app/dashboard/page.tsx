@@ -1,4 +1,4 @@
-import { Grid, GridCol, Stack } from '@mantine/core';
+import { Button, Grid, GridCol, Stack } from '@mantine/core';
 import { ProgressDisplay } from '@/src/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { GoalsGrid } from '@/src/app/dashboard/_components/GoalsGrid/GoalsGrid';
 import { getCardsByUserId } from '../api/database/cards/queries';
@@ -7,15 +7,15 @@ import { auth } from '@/src/lib/betterAuth/auth';
 import { headers } from 'next/headers';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLogs } from '../api/database/sessions/queries';
+import { GoalDisplay } from './_components/GoalDisplay/GoalDisplay';
 
 export default async function Page() {
   const session = (await auth.api.getSession({
     headers: await headers(),
   })) as any;
 
-  const decks = await getDecks();
+  const decks = await getDecks(session?.userId);
   const sessionLogs = await getSessionLogs(session?.user?.id);
-  const cards = await getCardsByUserId(session?.user?.id as any);
 
   return (
     <main>
@@ -30,8 +30,11 @@ export default async function Page() {
           <ProgressDisplay decks={decks} />
         </GridCol>
         <GridCol span={{ base: 12, xl: 6 }}>
-          <GoalsGrid sessionLogs={sessionLogs} cards={cards} />
+          <GoalDisplay />
         </GridCol>
+        {/* <GridCol span={{ base: 12, xl: 6 }}>
+          <GoalsGrid sessionLogs={sessionLogs} cards={cards} />
+        </GridCol> */}
       </Grid>
     </main>
   );
