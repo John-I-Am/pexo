@@ -1,5 +1,5 @@
 import { Card } from '@prisma/client';
-import dayjs from '@/src/lib/dayjs';
+import dayjs from '@/lib/dayjs';
 
 export const useCardsDue = (cards: Card[]): Card[] => {
   const cardsDue: Card[] = cards.filter(

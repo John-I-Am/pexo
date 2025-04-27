@@ -26,12 +26,12 @@ import {
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { authClient } from '@/src/lib/betterAuth/authClient';
+import { authClient } from '@/lib/betterAuth/authClient';
 
 import cx from 'clsx';
 import classes from './Navbar.module.css';
-import { ColorSchemeToggle } from '@/src/components/ColorSchemeToggle/ColorSchemeToggle';
-import { loginPath } from '@/src/lib/paths';
+import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
+import { loginPath } from '@/lib/paths';
 
 interface NavItem {
   label: string;

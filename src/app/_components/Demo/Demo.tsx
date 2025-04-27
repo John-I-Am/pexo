@@ -1,6 +1,6 @@
 'use client';
 
-import { FlashCard } from '@/src/components/FlashCard/FlashCard';
+import { FlashCard } from '@/components/FlashCard/FlashCard';
 import { Tabs, Title } from '@mantine/core';
 
 import classes from './Demo.module.css';

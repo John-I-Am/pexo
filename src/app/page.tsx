@@ -1,5 +1,5 @@
-import { FeaturesGrid } from '@/src/app/_components/FeaturesGrid/FeaturesGrid';
-import { Faq } from '@/src/app/_components/Faq/Faq';
+import { FeaturesGrid } from '@/app/_components/FeaturesGrid/FeaturesGrid';
+import { Faq } from '@/app/_components/Faq/Faq';
 import { Header } from './_components/Header/Header';
 import { StatsBanner } from './_components/StatsBanner/StatsBanner';
 import { HeroHeader } from './_components/HeroHeader/HeroHeader';

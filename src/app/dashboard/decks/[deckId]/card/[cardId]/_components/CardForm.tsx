@@ -4,8 +4,8 @@ import { Button, Group, Paper, Stack, TextInput, Textarea } from '@mantine/core'
 import { isNotEmpty, useForm } from '@mantine/form';
 import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
-import { getWord } from '@/src/app/api/database/dictionary/queries';
-import { deleteCard, upsertCard } from '@/src/app/api/database/cards/mutations';
+import { getWord } from '@/app/api/database/dictionary/queries';
+import { deleteCard, upsertCard } from '@/app/api/database/cards/mutations';
 import { Card } from '@prisma/client';
 
 type CardFormProps = {

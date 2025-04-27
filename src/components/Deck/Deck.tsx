@@ -20,8 +20,8 @@ import { useRouter } from 'next/navigation';
 import classes from './Deck.module.css';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { CardTable } from '../CardTable/CardTable';
-import { upsertCard } from '@/src/app/api/database/cards/mutations';
-import { createDeck, deleteDeck } from '@/src/app/api/database/decks/mutations';
+import { upsertCard } from '@/app/api/database/cards/mutations';
+import { createDeck, deleteDeck } from '@/app/api/database/decks/mutations';
 
 export function Deck({
   id,

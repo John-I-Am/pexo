@@ -3,12 +3,12 @@
 import { Button, Group, Title } from '@mantine/core';
 import { ContextModalProps } from '@mantine/modals';
 
-import { Searchbar } from '@/src/components/Searchbar/Searchbar';
+import { Searchbar } from '@/components/Searchbar/Searchbar';
 import { Deck } from '@prisma/client';
 import { IconCircleCheck, IconIconsFilled, IconPigFilled } from '@tabler/icons-react';
-import { createDeck } from '@/src/app/api/database/decks/mutations';
+import { createDeck } from '@/app/api/database/decks/mutations';
 import { useRouter } from 'next/dist/client/components/navigation';
-import { ActiveDeckContext } from '@/src/app/contexts/ActiveDeckProvider';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { useContext } from 'react';
 
 export const SelectorModal = ({

@@ -1,5 +1,5 @@
 import { Stack } from '@mantine/core';
-import { getCardById } from '@/src/app/api/database/cards/queries';
+import { getCardById } from '@/app/api/database/cards/queries';
 import { CardForm } from './_components/CardForm';
 
 type existingCardPageProps = {

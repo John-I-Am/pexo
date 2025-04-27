@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { Deck } from '@prisma/client';
-import { auth } from '@/src/lib/betterAuth/auth';
+import { auth } from '@/lib/betterAuth/auth';
 import { headers } from 'next/headers';
 import prisma from '../../prisma';
 

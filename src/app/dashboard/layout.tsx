@@ -1,7 +1,7 @@
 import { Group } from '@mantine/core';
 
 import { headers } from 'next/headers';
-import { auth } from '@/src/lib/betterAuth/auth';
+import { auth } from '@/lib/betterAuth/auth';
 
 import classes from './layout.module.css';
 import { Navbar } from './_components/Navbar/Navbar';

@@ -1,13 +1,13 @@
 import { Text, Stack, Button, ThemeIcon, Container, Box } from '@mantine/core';
 import Link from 'next/link';
 import { IconChevronLeft, IconMoodSmileBeam } from '@tabler/icons-react';
-import { FlashCard } from '@/src/components/FlashCard/FlashCard';
-import FlashCardToolbar from '@/src/components/FlashCardToolbar/FlashCardToolbar';
-import { useCardsDue } from '@/src/app/hooks';
-import { ProgressBar } from '@/src/components/ProgressBar/ProgressBar';
+import { FlashCard } from '@/components/FlashCard/FlashCard';
+import FlashCardToolbar from '@/components/FlashCardToolbar/FlashCardToolbar';
+import { useCardsDue } from '@/app/hooks';
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import classes from './page.module.css';
-import { getDeckById } from '@/src/app/api/database/decks/queries';
-import { DeckWithCards } from '@/src/lib/prisma/types';
+import { getDeckById } from '@/app/api/database/decks/queries';
+import { DeckWithCards } from '@/lib/prisma/types';
 
 function EmptyDeck({ id }: { id: string }) {
   return (

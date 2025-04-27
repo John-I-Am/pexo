@@ -6,13 +6,13 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Card } from '@prisma/client';
 import prisma from '../../prisma';
-import { deckPath } from '@/src/lib/paths';
+import { deckPath } from '@/lib/paths';
 import { setCookieByKey } from '../../cookies';
 import { upsertSessionLog } from '../sessions/mutations';
 import { headers } from 'next/headers';
-import { auth } from '@/src/lib/betterAuth/auth';
+import { auth } from '@/lib/betterAuth/auth';
 
-import dayjs from '@/src/lib/dayjs';
+import dayjs from '@/lib/dayjs';
 
 export const upsertCard = async (
   deckId: string,

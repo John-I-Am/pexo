@@ -2,7 +2,7 @@ import { Button, Container, Group, Text, Title } from '@mantine/core';
 import { NotFoundBg } from './NotFoundBg';
 import classes from './NotFound.module.css';
 import Link from 'next/link';
-import { decksPath } from '@/src/lib/paths';
+import { decksPath } from '@/lib/paths';
 
 export function NotFoundMessage() {
   return (

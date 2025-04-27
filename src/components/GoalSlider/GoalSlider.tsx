@@ -2,7 +2,7 @@
 
 import { Stack, Title, Text, Slider, Box } from '@mantine/core';
 import { useState } from 'react';
-import { upsertSessionLog } from '@/src/app/api/database/sessions/mutations';
+import { upsertSessionLog } from '@/app/api/database/sessions/mutations';
 import { ContextModalProps } from '@mantine/modals';
 
 export function GoalSlider({

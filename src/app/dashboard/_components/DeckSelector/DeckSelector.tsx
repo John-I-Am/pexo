@@ -6,7 +6,7 @@ import { IconChevronRight, IconPhoto } from '@tabler/icons-react';
 import classes from './DeckSelector.module.css';
 import { Deck } from '@prisma/client';
 import { useContext } from 'react';
-import { ActiveDeckContext } from '@/src/app/contexts/ActiveDeckProvider';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 
 type DeckSelectorProp = {
   decks: Deck[];

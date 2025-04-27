@@ -15,8 +15,8 @@ import {
 } from '@mantine/core';
 import classes from './LoginForm.module.css';
 import { isEmail, useForm } from '@mantine/form';
-import { authClient } from '@/src/lib/betterAuth/authClient';
-import { dashboardPath, homePath } from '@/src/lib/paths';
+import { authClient } from '@/lib/betterAuth/authClient';
+import { dashboardPath, homePath } from '@/lib/paths';
 import { notifications } from '@mantine/notifications';
 
 export function LoginForm() {

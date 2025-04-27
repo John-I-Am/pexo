@@ -2,13 +2,13 @@
 
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { DatePicker, DatePickerProps } from '@mantine/dates';
-import dayjs from '@/src/lib/dayjs';
+import dayjs from '@/lib/dayjs';
 
 import classes from './GoalDisplay.module.css';
 import cx from 'clsx';
 import { Card, SessionLog } from '@prisma/client';
 import { modals } from '@mantine/modals';
-import { useCardsReviewedToday, useDaysReviewed } from '@/src/app/hooks';
+import { useCardsReviewedToday, useDaysReviewed } from '@/app/hooks';
 
 type GoalDisplayProps = {
   cards: Card[];

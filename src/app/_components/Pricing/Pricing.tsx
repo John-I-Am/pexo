@@ -4,7 +4,7 @@ import { Stack, Title, Tabs, Group, Text, List, ThemeIcon, Button } from '@manti
 import { IconCheck } from '@tabler/icons-react';
 
 import classes from './Pricing.module.css';
-import { loginPath } from '@/src/lib/paths';
+import { loginPath } from '@/lib/paths';
 import Link from 'next/link';
 
 const data = [

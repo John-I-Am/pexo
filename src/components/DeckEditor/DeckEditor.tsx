@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './DeckEditor.module.css';
-import { updateDeck } from '@/src/app/api/database/decks/mutations';
+import { updateDeck } from '@/app/api/database/decks/mutations';
 
 export function DeckEditor({
   id,

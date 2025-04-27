@@ -4,7 +4,7 @@ import { ActionIcon, Group } from '@mantine/core';
 import { IconCheck, IconSpeakerphone, IconX } from '@tabler/icons-react';
 import { useState } from 'react';
 import classes from './FlashCardToolbar.module.css';
-import { updateCardLevel } from '@/src/app/api/database/cards/mutations';
+import { updateCardLevel } from '@/app/api/database/cards/mutations';
 
 export default function FlashCardController({
   cardId,

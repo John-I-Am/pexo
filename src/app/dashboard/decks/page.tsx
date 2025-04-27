@@ -1,7 +1,7 @@
 import { Stack, ScrollArea } from '@mantine/core';
 import { Deck } from '@prisma/client';
-import { DeckList } from '@/src/components/DeckList/DeckList';
-import { getDecks } from '@/src/app/api/database/decks/queries';
+import { DeckList } from '@/components/DeckList/DeckList';
+import { getDecks } from '@/app/api/database/decks/queries';
 
 export default async function Page() {
   const decks: Deck[] = await getDecks();

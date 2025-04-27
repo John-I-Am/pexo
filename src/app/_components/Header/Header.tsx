@@ -1,6 +1,6 @@
-import { ColorSchemeToggle } from '@/src/components/ColorSchemeToggle/ColorSchemeToggle';
-import { Logo } from '@/src/components/Logo/Logo';
-import { loginPath } from '@/src/lib/paths';
+import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
+import { Logo } from '@/components/Logo/Logo';
+import { loginPath } from '@/lib/paths';
 import { Button, Group, Text } from '@mantine/core';
 import Link from 'next/link';
 

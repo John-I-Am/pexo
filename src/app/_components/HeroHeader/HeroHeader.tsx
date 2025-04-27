@@ -1,7 +1,7 @@
 import { Title, Text, Button, Container, Stack } from '@mantine/core';
 import Link from 'next/link';
 import classes from './HeroHeader.module.css';
-import { loginPath } from '@/src/lib/paths';
+import { loginPath } from '@/lib/paths';
 
 export function HeroHeader() {
   return (

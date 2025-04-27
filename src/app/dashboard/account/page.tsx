@@ -1,5 +1,5 @@
 import { Stack, Title } from '@mantine/core';
-import { FormName } from '@/src/components/FormName/FormName';
+import { FormName } from '@/components/FormName/FormName';
 
 export default function Page() {
   return (

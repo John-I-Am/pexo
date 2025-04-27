@@ -2,7 +2,7 @@
 
 import { Stack, Progress, Text } from '@mantine/core';
 import { Card } from '@prisma/client';
-import { useCardsDue } from '@/src/app/hooks';
+import { useCardsDue } from '@/app/hooks';
 
 import classes from './ProgressBar.module.css';
 

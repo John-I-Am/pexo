@@ -1,8 +1,8 @@
 import { Grid, GridCol } from '@mantine/core';
-import { ProgressDisplay } from '@/src/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
+import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import DeckSelector from './_components/DeckSelector/DeckSelector';
-import { auth } from '@/src/lib/betterAuth/auth';
+import { auth } from '@/lib/betterAuth/auth';
 import { headers } from 'next/headers';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLogs } from '../api/database/sessions/queries';

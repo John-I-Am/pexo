@@ -3,7 +3,7 @@
 import { Anchor, Container, Group } from '@mantine/core';
 
 import classes from './Footer.module.css';
-import { Logo } from '@/src/components/Logo/Logo';
+import { Logo } from '@/components/Logo/Logo';
 
 const links = [
   { link: '#', label: 'Contact' },

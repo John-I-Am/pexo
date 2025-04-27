@@ -5,8 +5,8 @@ import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar';
 import classes from './ProgressDisplay.module.css';
 
 import { useContext } from 'react';
-import { ActiveDeckContext } from '@/src/app/contexts/ActiveDeckProvider';
-import { DeckWithCards } from '@/src/lib/prisma/types';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
+import { DeckWithCards } from '@/lib/prisma/types';
 
 export const ProgressDisplay = ({ decks }: { decks: DeckWithCards[] }) => {
   const { activeDeckId, setActiveDeck }: any = useContext(ActiveDeckContext);

@@ -1,6 +1,6 @@
 import { Stack } from '@mantine/core';
 import { alphabetCards } from './data';
-import { DeckList } from '@/src/components/DeckList/DeckList';
+import { DeckList } from '@/components/DeckList/DeckList';
 
 export default function Page() {
   return (

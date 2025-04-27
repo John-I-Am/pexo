@@ -20,7 +20,7 @@ import { notifications } from '@mantine/notifications';
 import Link from 'next/link';
 import classes from './DeckList.module.css';
 import { Deck } from '../Deck/Deck';
-import { createDeck } from '@/src/app/api/database/decks/mutations';
+import { createDeck } from '@/app/api/database/decks/mutations';
 
 interface SortableField {
   title: string;

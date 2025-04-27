@@ -28,7 +28,7 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import classes from './CardTable.module.css';
-import { deleteCard } from '@/src/app/api/database/cards/mutations';
+import { deleteCard } from '@/app/api/database/cards/mutations';
 
 interface RowData {
   front: string;
