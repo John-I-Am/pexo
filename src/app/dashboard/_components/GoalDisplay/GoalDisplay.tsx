@@ -6,17 +6,23 @@ import dayjs from '@/src/lib/dayjs';
 
 import classes from './GoalDisplay.module.css';
 import cx from 'clsx';
-import { Card, Deck } from '@prisma/client';
+import { Card, Deck, SessionLog } from '@prisma/client';
 import { DeckWithCards } from '@/src/lib/prisma/types';
 import { GoalSlider } from '@/src/components/GoalSlider/GoalSlider';
-import { useDaysReviewed } from '@/src/app/hooks';
+import { useCardsReviewedToday, useDaysReviewed } from '@/src/app/hooks';
 
-export const GoalDisplay = ({ cards }: { cards: Card[] }) => {
+type GoalDisplayProps = {
+  cards: Card[];
+  sessionLog: SessionLog;
+};
+
+export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
   const today = dayjs();
   const startOfWeek = today.startOf('isoWeek');
   const endOfWeek = today.endOf('isoWeek');
 
   const daysReviewed: string[] = useDaysReviewed(cards);
+  const cardsReviewedToday: Card[] = useCardsReviewedToday(cards);
 
   const dayRenderer: DatePickerProps['renderDay'] = (date) => {
     return (
@@ -51,7 +57,7 @@ export const GoalDisplay = ({ cards }: { cards: Card[] }) => {
         </Group>
 
         <Text mt="-10px" fz="sm" c="dimmed">
-          {`0 / 50`}
+          {`${cardsReviewedToday.length} / ${sessionLog.goal}`}
         </Text>
       </Stack>
       <DatePicker

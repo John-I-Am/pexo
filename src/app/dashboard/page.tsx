@@ -31,7 +31,7 @@ export default async function Page() {
           <ProgressDisplay decks={decks} />
         </GridCol>
         <GridCol span={{ base: 12, xl: 6 }}>
-          <GoalDisplay cards={cards} />
+          <GoalDisplay cards={cards} sessionLog={sessionLogs[sessionLogs.length - 1]} />
         </GridCol>
         {/* <GridCol span={{ base: 12, xl: 6 }}>
           <GoalsGrid sessionLogs={sessionLogs} cards={cards} />

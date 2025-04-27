@@ -21,3 +21,12 @@ export const useDaysReviewed = (cards: Card[]): string[] => {
 
   return Array.from(set);
 };
+
+export const useCardsReviewedToday = (cards: Card[]): Card[] => {
+  const cardsReviewedToday = cards.filter((card: Card) => {
+    const lastReviewedDate = card.reviewedDates[card.reviewedDates.length - 1];
+    return dayjs(lastReviewedDate).isToday();
+  });
+
+  return cardsReviewedToday;
+};
