@@ -2,7 +2,6 @@
 
 import {
   Button,
-  DEFAULT_THEME,
   Paper,
   Skeleton,
   TextInput,
@@ -17,10 +16,10 @@ export const theme = createTheme({
   /* Put your mantine theme override here */
   fontFamily: notoSans.style.fontFamily,
   headings: {
-    fontFamily: `${notoSans.style.fontFamily}, ${DEFAULT_THEME.fontFamily}`,
-    fontWeight: '400',
+    fontFamily: notoSans.style.fontFamily,
+    fontWeight: '500',
     sizes: {
-      h1: { fontSize: rem(24) },
+      h1: { fontSize: rem(22) },
       h2: { fontSize: rem(20) },
       h3: { fontSize: rem(18) },
     },
