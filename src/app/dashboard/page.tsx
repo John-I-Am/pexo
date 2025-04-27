@@ -1,6 +1,5 @@
-import { Button, Grid, GridCol, Stack } from '@mantine/core';
+import { Grid, GridCol } from '@mantine/core';
 import { ProgressDisplay } from '@/src/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
-import { GoalsGrid } from '@/src/app/dashboard/_components/GoalsGrid/GoalsGrid';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import DeckSelector from './_components/DeckSelector/DeckSelector';
 import { auth } from '@/src/lib/betterAuth/auth';
@@ -33,9 +32,6 @@ export default async function Page() {
         <GridCol span={{ base: 12, xl: 6 }}>
           <GoalDisplay cards={cards} sessionLog={sessionLogs[sessionLogs.length - 1]} />
         </GridCol>
-        {/* <GridCol span={{ base: 12, xl: 6 }}>
-          <GoalsGrid sessionLogs={sessionLogs} cards={cards} />
-        </GridCol> */}
       </Grid>
     </main>
   );
