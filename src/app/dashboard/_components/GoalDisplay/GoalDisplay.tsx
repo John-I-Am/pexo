@@ -1,14 +1,11 @@
 'use client';
 
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
-import { DatePicker, DatePickerProps } from '@mantine/dates';
-import dayjs from '@/lib/dayjs';
-
-import classes from './GoalDisplay.module.css';
-import cx from 'clsx';
 import { Card, SessionLog } from '@prisma/client';
 import { modals } from '@mantine/modals';
-import { useCardsReviewedToday, useDaysReviewed } from '@/app/hooks';
+import { useCardsReviewedToday } from '@/app/hooks';
+import { Calendar } from '@/components/Calendar/Calendar';
+import dayjs from '@/lib/dayjs';
 
 type GoalDisplayProps = {
   cards: Card[];
@@ -16,36 +13,7 @@ type GoalDisplayProps = {
 };
 
 export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
-  const today = dayjs();
-  const startOfWeek = today.startOf('isoWeek');
-  const endOfWeek = today.endOf('isoWeek');
-
-  const daysReviewed: string[] = useDaysReviewed(cards);
   const cardsReviewedToday: Card[] = useCardsReviewedToday(cards);
-
-  const dayRenderer: DatePickerProps['renderDay'] = (date) => {
-    return (
-      <Stack align="center">
-        <div
-          className={cx(classes.day, {
-            [classes['reviewed']]: daysReviewed.includes(dayjs(date).format('YYYY-MM-DD')),
-          })}
-        >
-          <span></span>
-        </div>
-        <Text
-          fz="xs"
-          px="6px"
-          py="2px"
-          className={cx({
-            [classes['current-day']]: dayjs(date).isSame(dayjs(), 'day'),
-          })}
-        >
-          {dayjs(date).format('ddd')}
-        </Text>
-      </Stack>
-    );
-  };
 
   return (
     <Paper>
@@ -69,20 +37,7 @@ export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
           {`${cardsReviewedToday.length} / ${sessionLog.goal} cards`}
         </Text>
       </Stack>
-      <DatePicker
-        classNames={{ calendarHeader: classes.header, month: classes.month }}
-        hideWeekdays
-        renderDay={dayRenderer}
-        getDayProps={(date) => {
-          const isCurrentWeek =
-            dayjs(date).isSameOrAfter(startOfWeek, 'isoWeek' as any) &&
-            dayjs(date).isSameOrBefore(endOfWeek, 'isoWeek' as any);
-
-          return {
-            hidden: !isCurrentWeek,
-          };
-        }}
-      />
+      <Calendar cards={cards} startOfWeek={dayjs().startOf('isoWeek').toDate()} />
     </Paper>
   );
 };
