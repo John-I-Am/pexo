@@ -2,12 +2,12 @@
 
 import { Stack, Progress, Text } from '@mantine/core';
 import { Card } from '@prisma/client';
-import { useCardsDue } from '@/app/hooks';
+import { filterCardsDue } from '@/utils/cards';
 
 import classes from './ProgressBar.module.css';
 
 export function ProgressBar({ cards = [] }: { cards: Card[] }) {
-  const cardDue: Card[] = useCardsDue(cards);
+  const cardDue: Card[] = filterCardsDue(cards);
 
   return (
     <Stack>

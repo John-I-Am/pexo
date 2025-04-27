@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { IconChevronLeft, IconMoodSmileBeam } from '@tabler/icons-react';
 import { FlashCard } from '@/components/FlashCard/FlashCard';
 import FlashCardToolbar from '@/components/FlashCardToolbar/FlashCardToolbar';
-import { useCardsDue } from '@/app/hooks';
+import { filterCardsDue } from '@/utils/cards';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import classes from './page.module.css';
 import { getDeckById } from '@/app/api/database/decks/queries';
@@ -42,7 +42,7 @@ function EmptyDeck({ id }: { id: string }) {
 export default async function Page(props: { params: Promise<{ deckId: string }> }) {
   const params = await props.params;
   const deck: DeckWithCards = await getDeckById(params.deckId);
-  const cardsToTest = useCardsDue(deck.cards ?? []);
+  const cardsToTest = filterCardsDue(deck.cards ?? []);
 
   return (
     <Stack align="center">

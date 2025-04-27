@@ -6,14 +6,14 @@ import classes from './Calendar.module.css';
 import dayjs from '@/lib/dayjs';
 import cx from 'clsx';
 import { Card } from '@prisma/client';
-import { cardsReviewedOnDate } from '@/utils/cards';
+import { filterCardsReviewedOnDate } from '@/utils/cards';
 import { OpUnitType } from 'dayjs';
 
 type CalendarProps = { cards: Card[]; month?: Date; startOfWeek?: Date };
 
 export const Calendar = ({ cards, month, startOfWeek }: CalendarProps) => {
   const dayRenderer: DatePickerProps['renderDay'] = (date: Date) => {
-    const cardsReviewedToday: Card[] = cardsReviewedOnDate(cards, date);
+    const cardsReviewedToday: Card[] = filterCardsReviewedOnDate(cards, date);
 
     return (
       <Stack align="center" className={classes['day-wrapper']}>

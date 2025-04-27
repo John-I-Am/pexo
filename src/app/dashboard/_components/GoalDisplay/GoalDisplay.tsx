@@ -3,9 +3,9 @@
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { Card, SessionLog } from '@prisma/client';
 import { modals } from '@mantine/modals';
-import { useCardsReviewedToday } from '@/app/hooks';
 import { Calendar } from '@/components/Calendar/Calendar';
 import dayjs from '@/lib/dayjs';
+import { filterCardsReviewedOnDate } from '@/utils/cards';
 
 type GoalDisplayProps = {
   cards: Card[];
@@ -13,7 +13,7 @@ type GoalDisplayProps = {
 };
 
 export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
-  const cardsReviewedToday: Card[] = useCardsReviewedToday(cards);
+  const cardsReviewedToday: Card[] = filterCardsReviewedOnDate(cards, dayjs().toDate());
 
   return (
     <Paper>
