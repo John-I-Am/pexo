@@ -8,6 +8,7 @@ import { theme } from '../theme';
 import { IconPicker } from './dashboard/decks/_components/IconPicker/IconPicker';
 import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
 import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
+import { GoalSlider } from '../components/GoalSlider/GoalSlider';
 
 export const metadata = {
   title: 'Pexo',
@@ -29,7 +30,11 @@ export default function RootLayout({ children }: { children: any }) {
         <MantineProvider theme={theme}>
           <ActiveDeckProvider>
             <ModalsProvider
-              modals={{ iconPicker: IconPicker, selectorModal: SelectorModal }}
+              modals={{
+                iconPicker: IconPicker,
+                selectorModal: SelectorModal,
+                goalSliderModal: GoalSlider,
+              }}
               modalProps={{ radius: 'md' }}
             >
               {children}

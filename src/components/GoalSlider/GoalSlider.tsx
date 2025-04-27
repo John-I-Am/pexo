@@ -1,8 +1,14 @@
+'use client';
+
 import { Stack, Title, Text, Slider, Box } from '@mantine/core';
 import { useState } from 'react';
 import { upsertSessionLog } from '@/src/app/api/database/sessions/mutations';
+import { ContextModalProps } from '@mantine/modals';
 
-export function GoalSlider({ initialGoal, userId }: { initialGoal: number; userId: string }) {
+export function GoalSlider({
+  context,
+  innerProps: { initialGoal, userId },
+}: ContextModalProps<{ initialGoal: number; userId: string }>) {
   const [value, setValue] = useState(initialGoal);
 
   const handleOnChangeEnd = async (e: any) => {

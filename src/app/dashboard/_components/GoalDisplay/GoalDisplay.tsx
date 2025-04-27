@@ -6,9 +6,8 @@ import dayjs from '@/src/lib/dayjs';
 
 import classes from './GoalDisplay.module.css';
 import cx from 'clsx';
-import { Card, Deck, SessionLog } from '@prisma/client';
-import { DeckWithCards } from '@/src/lib/prisma/types';
-import { GoalSlider } from '@/src/components/GoalSlider/GoalSlider';
+import { Card, SessionLog } from '@prisma/client';
+import { modals } from '@mantine/modals';
 import { useCardsReviewedToday, useDaysReviewed } from '@/src/app/hooks';
 
 type GoalDisplayProps = {
@@ -53,11 +52,21 @@ export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
       <Stack>
         <Group justify="space-between" wrap="nowrap">
           <Title order={2}>Today's goals</Title>
-          <Button variant="subtle">Change goal</Button>
+          <Button
+            variant="subtle"
+            onClick={() =>
+              modals.openContextModal({
+                modal: 'goalSliderModal',
+                innerProps: { initialGoal: 50, userId: sessionLog.userId },
+              })
+            }
+          >
+            Change goal
+          </Button>
         </Group>
 
         <Text mt="-10px" fz="sm" c="dimmed">
-          {`${cardsReviewedToday.length} / ${sessionLog.goal}`}
+          {`${cardsReviewedToday.length} / ${sessionLog.goal} cards`}
         </Text>
       </Stack>
       <DatePicker
