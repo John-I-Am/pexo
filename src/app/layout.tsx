@@ -1,14 +1,15 @@
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+
 import React from 'react';
-import { MantineProvider, ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider, rem } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
-import { theme } from '../theme';
-import { IconPicker } from './dashboard/decks/_components/IconPicker/IconPicker';
-import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
-import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
 import { GoalSlider } from '../components/GoalSlider/GoalSlider';
+import { theme } from '../theme';
+import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
+import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
+import { IconPicker } from './dashboard/decks/_components/IconPicker/IconPicker';
 
 export const metadata = {
   title: 'Pexo',
@@ -35,7 +36,23 @@ export default function RootLayout({ children }: { children: any }) {
                 selectorModal: SelectorModal,
                 goalSliderModal: GoalSlider,
               }}
-              modalProps={{ radius: 'md' }}
+              modalProps={{
+                radius: 'md',
+
+                // This removes issue where content peaks above header on scroll. However, it shifts header on scroll.
+                // No idea how to fix this, does not seem possible to adjust modal root spacing.
+                styles: {
+                  header: {
+                    top: -16,
+                  },
+
+                  // Modal manager's Modals don't have access to theme styling? Have to set it manually.
+                  title: {
+                    fontWeight: 500,
+                    fontSize: rem(20),
+                  },
+                },
+              }}
             >
               {children}
               <Notifications />

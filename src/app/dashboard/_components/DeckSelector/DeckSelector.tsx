@@ -1,18 +1,18 @@
 'use client';
 
+import { useContext } from 'react';
+import { Deck } from '@prisma/client';
+import { IconChevronRight, IconPhoto } from '@tabler/icons-react';
 import { Button, Group, Paper, Stack, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { IconChevronRight, IconPhoto } from '@tabler/icons-react';
-import classes from './DeckSelector.module.css';
-import { Deck } from '@prisma/client';
-import { useContext } from 'react';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
+import classes from './DeckSelector.module.css';
 
-type DeckSelectorProp = {
+type DeckSelectorProps = {
   decks: Deck[];
 };
 
-const DeckSelector = ({ decks }: DeckSelectorProp) => {
+const DeckSelector = ({ decks }: DeckSelectorProps) => {
   const { activeDeckId, setActiveDeckId }: any = useContext(ActiveDeckContext);
   const activeDeck = activeDeckId === null ? null : decks.find((deck) => deck.id === activeDeckId);
 
@@ -26,7 +26,6 @@ const DeckSelector = ({ decks }: DeckSelectorProp) => {
           size="lg"
           onClick={() =>
             modals.openContextModal({
-              classNames: { title: classes['modal-title'], header: classes['modal-header'] },
               modal: 'selectorModal',
               title: 'Deck Selection',
               innerProps: { decks },
