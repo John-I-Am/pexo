@@ -2,18 +2,50 @@
 
 import {
   Button,
-  Paper,
-  Skeleton,
-  TextInput,
-  Textarea,
-  Tooltip,
   createTheme,
+  defaultVariantColorsResolver,
+  Paper,
+  parseThemeColor,
   rem,
+  Skeleton,
+  Textarea,
+  TextInput,
+  Tooltip,
+  VariantColorsResolver,
 } from '@mantine/core';
 import { notoSans } from './fonts/Noto_Sans/NotoSans';
 
+const variantColorResolver: VariantColorsResolver = (input) => {
+  const defaultResolvedColors = defaultVariantColorsResolver(input);
+  const parsedColor = parseThemeColor({
+    color: input.color,
+    theme: input.theme,
+  });
+
+  if (parsedColor.isThemeColor && parsedColor.color === 'indigo') {
+    return {
+      ...defaultResolvedColors,
+      color: 'var(--mantine-color-black)',
+    };
+  }
+
+  return defaultResolvedColors;
+};
+
 export const theme = createTheme({
-  /* Put your mantine theme override here */
+  other: {
+    accentColor: 'indigo.5',
+    accentColorLighter: 'indigo.3',
+    accentColorLightest: 'indigo.1',
+  },
+
+  black: '#2c3143',
+
+  primaryColor: 'dark',
+  primaryShade: { light: 6, dark: 9 },
+
+  variantColorResolver: variantColorResolver,
+
   fontFamily: notoSans.style.fontFamily,
   headings: {
     fontFamily: notoSans.style.fontFamily,
