@@ -27,8 +27,8 @@
   border-radius: var(--mantine-spacing-sm);
 
   @mixin dark {
-    @mixin hover{
-      background-color: var(--mantine-color-gray-9);
+    @mixin hover {
+      opacity: 0.8;
     }
   }
 
@@ -41,6 +41,11 @@
   div {
     padding-left: var(--mantine-spacing-md);
   }
+}
+
+.link-label {
+  font-size: var(--mantine-font-size-md);
+  font-weight: var(--mantine-h2-font-weight);
 }
 
 /* This prevents the navItem from expanding and being cut off when in compact form */
@@ -68,7 +73,7 @@
   border-top-right-radius: var(--mantine-spacing-sm);
   border-bottom-right-radius: var(--mantine-spacing-sm);
 
-  @mixin hover{
+  @mixin hover {
     border-left: 2px solid var(--mantine-color-blue-3);
   }
 }

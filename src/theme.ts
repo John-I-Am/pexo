@@ -34,7 +34,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
 
 export const theme = createTheme({
   other: {
-    accentColor: 'indigo.5',
+    accentColor: 'indigo.4',
     accentColorLighter: 'indigo.3',
     accentColorLightest: 'indigo.1',
   },
@@ -44,7 +44,7 @@ export const theme = createTheme({
   primaryColor: 'dark',
   primaryShade: { light: 6, dark: 9 },
 
-  variantColorResolver: variantColorResolver,
+  variantColorResolver,
 
   fontFamily: notoSans.style.fontFamily,
   headings: {

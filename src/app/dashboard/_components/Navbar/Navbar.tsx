@@ -1,37 +1,36 @@
 'use client';
 
-import {
-  IconCards,
-  IconPin,
-  IconPig,
-  IconPinnedFilled,
-  IconHome,
-  IconDoorExit,
-  IconUser,
-} from '@tabler/icons-react';
-import { useHover } from '@mantine/hooks';
-import {
-  Group,
-  ScrollArea,
-  Text,
-  ActionIcon,
-  Tooltip,
-  Stack,
-  NavLink,
-  ThemeIcon,
-  Box,
-  Title,
-} from '@mantine/core';
-
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { authClient } from '@/lib/betterAuth/authClient';
-
+import {
+  IconCards,
+  IconDoorExit,
+  IconHome,
+  IconPig,
+  IconPin,
+  IconPinnedFilled,
+  IconUser,
+} from '@tabler/icons-react';
 import cx from 'clsx';
-import classes from './Navbar.module.css';
+import {
+  ActionIcon,
+  Box,
+  Group,
+  NavLink,
+  ScrollArea,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+  Tooltip,
+  useMantineTheme,
+} from '@mantine/core';
+import { useHover } from '@mantine/hooks';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
+import { authClient } from '@/lib/betterAuth/authClient';
 import { loginPath } from '@/lib/paths';
+import classes from './Navbar.module.css';
 
 interface NavItem {
   label: string;
@@ -55,6 +54,7 @@ const navItems: NavItem[] = [
 ];
 
 export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) {
+  const theme = useMantineTheme();
   const router = useRouter();
   const pathname: string = usePathname();
   const { hovered, ref } = useHover();
@@ -64,8 +64,10 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
     <NavLink
       classNames={{
         root: classes.link,
+        label: classes['link-label'],
         body: hovered === false && compact === false ? classes['link-compact'] : undefined,
       }}
+      color={theme.other.accentColor}
       component={Link}
       key={item.label}
       href={item.link}
