@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   IconCards,
+  IconChalkboard,
   IconDoorExit,
   IconHome,
   IconPig,
@@ -40,6 +41,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { label: 'Study', icon: IconChalkboard, link: '/dashboard/study' },
   { label: 'Dashboard', icon: IconHome, link: '/dashboard' },
   {
     label: 'Decks',
