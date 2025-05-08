@@ -7,7 +7,7 @@ import { IconChevronLeft, IconMoodSmileBeam } from '@tabler/icons-react';
 import { Box, Button, Container, Stack, Text, ThemeIcon } from '@mantine/core';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { FlashCard as FlashCardCard } from '@/components/FlashCard/FlashCard';
-import FlashCardToolbar from '@/components/FlashCardToolbar/FlashCardToolbar';
+import { FlashCardToolbar } from '@/components/FlashCardToolbar/FlashCardToolbar';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { filterCardsDue } from '@/utils/cards';
 import classes from './Flashcard.module.css';

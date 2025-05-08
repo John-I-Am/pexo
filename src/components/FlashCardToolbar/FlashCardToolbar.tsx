@@ -1,12 +1,12 @@
 'use client';
 
-import { ActionIcon, Group } from '@mantine/core';
-import { IconCheck, IconSpeakerphone, IconX } from '@tabler/icons-react';
 import { useState } from 'react';
-import classes from './FlashCardToolbar.module.css';
+import { IconCheck, IconSpeakerphone, IconX } from '@tabler/icons-react';
+import { ActionIcon, Group } from '@mantine/core';
 import { updateCardLevel } from '@/app/api/database/cards/mutations';
+import classes from './FlashCardToolbar.module.css';
 
-export default function FlashCardController({
+export function FlashCardToolbar({
   cardId,
   currentLevel,
   audioUrl,
