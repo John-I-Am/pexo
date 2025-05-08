@@ -1,7 +1,7 @@
-import { Deck } from '@prisma/client';
-import prisma from '../../prisma';
-import { DeckWithCards } from '@/lib/prisma/types';
 import { notFound } from 'next/navigation';
+import { Deck } from '@prisma/client';
+import { DeckWithCards } from '@/lib/prisma/types';
+import prisma from '../../prisma';
 
 export const getDecks = async (userId: string): Promise<Deck[]> => {
   try {
