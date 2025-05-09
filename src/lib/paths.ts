@@ -2,6 +2,7 @@ export const homePath = () => '/';
 export const loginPath = () => '/login';
 
 export const dashboardPath = () => '/dashboard';
+export const studyPath = () => '/dashboard/study';
 
 export const decksPath = () => '/dashboard/decks';
 export const deckPath = (deckId: string) => `/dashboard/decks/${deckId}`;
