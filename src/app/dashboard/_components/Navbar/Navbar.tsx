@@ -30,7 +30,14 @@ import {
 import { useHover } from '@mantine/hooks';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 import { authClient } from '@/lib/betterAuth/authClient';
-import { loginPath } from '@/lib/paths';
+import {
+  accountPath,
+  dashboardPath,
+  deckExplorePath,
+  decksPath,
+  loginPath,
+  studyPath,
+} from '@/lib/paths';
 import classes from './Navbar.module.css';
 
 interface NavItem {
@@ -41,18 +48,18 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Study', icon: IconChalkboard, link: '/dashboard/study' },
-  { label: 'Dashboard', icon: IconHome, link: '/dashboard' },
+  { label: 'Study', icon: IconChalkboard, link: studyPath() },
+  { label: 'Dashboard', icon: IconHome, link: dashboardPath() },
   {
     label: 'Decks',
     icon: IconCards,
-    link: '/dashboard/decks',
+    link: decksPath(),
     links: [
-      { label: 'My Decks', link: '/dashboard/decks' },
-      { label: 'Explore', link: '/dashboard/decks/explore' },
+      { label: 'My Decks', link: decksPath() },
+      { label: 'Explore', link: deckExplorePath() },
     ],
   },
-  { label: 'Account', icon: IconUser, link: '/dashboard/account' },
+  { label: 'Account', icon: IconUser, link: accountPath() },
 ];
 
 export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) {
