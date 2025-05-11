@@ -1,0 +1,46 @@
+import { expect, vi } from 'vitest';
+import { accountPath, dashboardPath, decksPath, studyPath } from '@/lib/paths';
+import { render, screen } from '@/test-utils';
+import { Navbar } from './Navbar';
+
+vi.mock('next/font/local', () => ({
+  default: vi.fn(() => ({
+    style: {
+      fontFamily: 'mock-font-family',
+    },
+  })),
+}));
+
+vi.mock('next/navigation', async () => {
+  return {
+    usePathname: vi.fn(() => '/dashboard'),
+    useRouter: () => ({
+      push: vi.fn(),
+    }),
+  };
+});
+
+vi.mock('@/lib/betterAuth/authClient', () => ({
+  authClient: { signOut: vi.fn() },
+}));
+
+describe('Navbar', () => {
+  it('renders NavLinks with correct hrefs and active state', () => {
+    render(<Navbar user="user@example.com" isDrawer={false} />);
+
+    const studyLink = screen.getByRole('link', { name: 'Study' });
+    const dashboardLink = screen.getByRole('link', { name: 'Dashboard' });
+    const decksLink = screen.getByRole('link', { name: 'Decks' });
+    const accountLink = screen.getByRole('link', { name: 'Account' });
+
+    expect(studyLink).toHaveAttribute('href', studyPath());
+    expect(dashboardLink).toHaveAttribute('href', dashboardPath());
+    expect(decksLink).toHaveAttribute('href', decksPath());
+    expect(accountLink).toHaveAttribute('href', accountPath());
+  });
+
+  it('renders correct useranme', () => {
+    render(<Navbar user="user@example.com" isDrawer={false} />);
+    expect(screen.getByText('user@example.com')).toBeDefined();
+  });
+});
