@@ -1,26 +1,26 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { Deck as DeckType } from '@prisma/client';
+import { IconPlus, IconSearch, IconSortAZ } from '@tabler/icons-react';
+import { useFormStatus } from 'react-dom';
 import {
   ActionIcon,
   Button,
   Group,
+  rem,
   ScrollArea,
   SimpleGrid,
   Stack,
   TextInput,
   Tooltip,
-  rem,
 } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import { IconPlus, IconSearch, IconSortAZ } from '@tabler/icons-react';
-import { Deck as DeckType } from '@prisma/client';
-import { useFormStatus } from 'react-dom';
-import { usePathname, useRouter } from 'next/navigation';
 import { notifications } from '@mantine/notifications';
-import Link from 'next/link';
-import classes from './DeckList.module.css';
-import { Deck } from '../Deck/Deck';
 import { createDeck } from '@/app/api/database/decks/mutations';
+import { Deck } from '@/app/dashboard/_components/Deck/Deck';
+import classes from './DeckList.module.css';
 
 interface SortableField {
   title: string;
@@ -36,7 +36,7 @@ function FormButton() {
   );
 }
 
-export function DeckList({ decks, editable }: { decks: DeckType[]; editable: boolean }) {
+export function DeckList({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt: boolean }) {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState<any>(decks);
   const [sortBy, setSortBy] = useState<keyof SortableField | null>(null);
@@ -142,10 +142,11 @@ export function DeckList({ decks, editable }: { decks: DeckType[]; editable: boo
             <Deck
               key={d.id}
               title={d.title}
+              description="This is my placeholder text. Description Will go here"
               id={d.id}
               cards={d.cards}
               tags={d.tags}
-              editable={editable}
+              isPrebuilt={isPrebuilt ? isPrebuilt : undefined}
             />
           ))}
         </SimpleGrid>

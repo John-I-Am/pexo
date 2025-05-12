@@ -1,11 +1,12 @@
-import { Grid, GridCol } from '@mantine/core';
-import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
-import { getCardsByUserId } from '../api/database/cards/queries';
-import DeckSelector from './_components/DeckSelector/DeckSelector';
-import { auth } from '@/lib/betterAuth/auth';
 import { headers } from 'next/headers';
+import { Grid, GridCol, ScrollArea } from '@mantine/core';
+import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
+import { DeckList } from '@/components/DeckList/DeckList';
+import { auth } from '@/lib/betterAuth/auth';
+import { getCardsByUserId } from '../api/database/cards/queries';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLogs } from '../api/database/sessions/queries';
+import DeckSelector from './_components/DeckSelector/DeckSelector';
 import { GoalDisplay } from './_components/GoalDisplay/GoalDisplay';
 
 export default async function Page() {
@@ -19,20 +20,25 @@ export default async function Page() {
 
   return (
     <main>
-      <Grid
-        type="container"
-        breakpoints={{ xs: '100px', sm: '200px', md: '500px', lg: '800px', xl: '1000px' }}
-      >
-        <GridCol span={12}>
-          <DeckSelector decks={decks} />
-        </GridCol>
-        <GridCol span={{ base: 12, xl: 6 }}>
-          <ProgressDisplay decks={decks} />
-        </GridCol>
-        <GridCol span={{ base: 12, xl: 6 }}>
-          <GoalDisplay cards={cards} sessionLog={sessionLogs[sessionLogs.length - 1]} />
-        </GridCol>
-      </Grid>
+      <ScrollArea p="md">
+        <Grid
+          type="container"
+          breakpoints={{ xs: '100px', sm: '200px', md: '500px', lg: '800px', xl: '1000px' }}
+        >
+          <GridCol span={12}>
+            <DeckSelector decks={decks} />
+          </GridCol>
+          <GridCol span={{ base: 12, xl: 6 }}>
+            <ProgressDisplay decks={decks} />
+          </GridCol>
+          <GridCol span={{ base: 12, xl: 6 }}>
+            <GoalDisplay cards={cards} sessionLog={sessionLogs[sessionLogs.length - 1]} />
+          </GridCol>
+          <GridCol span={{ base: 12 }}>
+            <DeckList decks={decks} isPrebuilt={false} />
+          </GridCol>
+        </Grid>
+      </ScrollArea>
     </main>
   );
 }

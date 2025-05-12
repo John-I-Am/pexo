@@ -8,6 +8,7 @@ import {
   Paper,
   parseThemeColor,
   rem,
+  ScrollArea,
   Skeleton,
   Textarea,
   TextInput,
@@ -96,6 +97,13 @@ export const theme = createTheme({
     Skeleton: Skeleton.extend({
       defaultProps: {
         radius: 'md',
+      },
+    }),
+    ScrollArea: ScrollArea.extend({
+      defaultProps: {
+        offsetScrollbars: true,
+        type: 'always',
+        h: '100%',
       },
     }),
   },
