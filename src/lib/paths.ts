@@ -12,4 +12,4 @@ export const newCardPath = (deckId: string) => `/dashboard/decks/${deckId}/card`
 export const existingCardPath = (deckId: string, cardId: string) =>
   `/dashboard/decks/${deckId}/card/${cardId}`;
 
-export const accountPath = () => '/dashcoard/account';
+export const accountPath = () => '/dashboard/account';
