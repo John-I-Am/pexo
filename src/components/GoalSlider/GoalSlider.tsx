@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { Stack, Title, Text, Slider, Box } from '@mantine/core';
 import { useState } from 'react';
-import { upsertSessionLog } from '@/app/api/database/sessions/mutations';
+import { Box, Slider, Stack, Text, Title } from '@mantine/core';
 import { ContextModalProps } from '@mantine/modals';
+import { upsertSessionLog } from '@/app/api/database/sessions/mutations';
 
 export function GoalSlider({
   context,

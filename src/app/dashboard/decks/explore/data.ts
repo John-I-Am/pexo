@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 export const alphabetCards: any = {
   cards: [],
   title: 'Alphabet',

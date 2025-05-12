@@ -1,6 +1,5 @@
-import { NotFoundMessage } from '@/components/NotFound/NotFound';
-import { decksPath } from '@/lib/paths';
 import { Container } from '@mantine/core';
+import { NotFoundMessage } from '@/components/NotFound/NotFound';
 
 export default function NotFound() {
   return (

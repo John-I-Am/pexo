@@ -1,14 +1,14 @@
 'use client';
 
-import { Paper, Title, Stack, Group } from '@mantine/core';
+import { useContext } from 'react';
+import { Group, Paper, Stack, Title } from '@mantine/core';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
+import { DeckWithCards } from '@/lib/prisma/types';
 import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar';
 import classes from './ProgressDisplay.module.css';
 
-import { useContext } from 'react';
-import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
-import { DeckWithCards } from '@/lib/prisma/types';
-
 export const ProgressDisplay = ({ decks }: { decks: DeckWithCards[] }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { activeDeckId, setActiveDeck }: any = useContext(ActiveDeckContext);
   const activeDeckCards =
     activeDeckId === null

@@ -1,34 +1,34 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
-  Table,
-  ScrollArea,
-  UnstyledButton,
-  Group,
-  Text,
-  Center,
-  TextInput,
-  rem,
-  Tooltip,
-  Button,
-  ActionIcon,
-  Paper,
-  Stack,
-  Popover,
-} from '@mantine/core';
-import {
-  IconSelector,
   IconChevronDown,
   IconChevronUp,
-  IconSearch,
-  IconEdit,
-  IconTrash,
   IconDots,
+  IconEdit,
+  IconSearch,
+  IconSelector,
+  IconTrash,
 } from '@tabler/icons-react';
-import Link from 'next/link';
-import classes from './CardTable.module.css';
+import {
+  ActionIcon,
+  Button,
+  Center,
+  Group,
+  Paper,
+  Popover,
+  rem,
+  ScrollArea,
+  Stack,
+  Table,
+  Text,
+  TextInput,
+  Tooltip,
+  UnstyledButton,
+} from '@mantine/core';
 import { deleteCard } from '@/app/api/database/cards/mutations';
+import classes from './CardTable.module.css';
 
 interface RowData {
   front: string;
@@ -41,7 +41,7 @@ interface ThProps {
   children: React.ReactNode;
   reversed: boolean;
   sorted: boolean;
-  onSort(): void;
+  onSort: () => void;
 }
 
 const formateDate = (date: any) => {

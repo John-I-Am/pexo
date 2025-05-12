@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Stack, Text, Title, Divider, Group } from '@mantine/core';
+import { Divider, Group, Stack, Text, Title } from '@mantine/core';
 import { LevelStripe } from '../LevelStripe/LevelStripe';
 
 export function InfoLevels() {

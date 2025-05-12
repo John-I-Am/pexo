@@ -13,6 +13,7 @@ type DeckSelectorProps = {
 };
 
 const DeckSelector = ({ decks }: DeckSelectorProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { activeDeckId, setActiveDeckId }: any = useContext(ActiveDeckContext);
   const activeDeck = activeDeckId === null ? null : decks.find((deck) => deck.id === activeDeckId);
 
@@ -35,7 +36,7 @@ const DeckSelector = ({ decks }: DeckSelectorProps) => {
           <Text>Change Deck</Text>
         </Button>
 
-        <Text size={'sm'} fw={500}>
+        <Text size="sm" fw={500}>
           {activeDeckId === null ? '(ALL)' : activeDeck?.title}
         </Text>
 

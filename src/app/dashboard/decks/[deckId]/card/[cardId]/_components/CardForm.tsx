@@ -1,12 +1,12 @@
 'use client';
 
-import { Button, Group, Paper, Stack, TextInput, Textarea } from '@mantine/core';
-import { isNotEmpty, useForm } from '@mantine/form';
-import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
-import { getWord } from '@/app/api/database/dictionary/queries';
-import { deleteCard, upsertCard } from '@/app/api/database/cards/mutations';
 import { Card } from '@prisma/client';
+import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
+import { Button, Group, Paper, Stack, Textarea, TextInput } from '@mantine/core';
+import { isNotEmpty, useForm } from '@mantine/form';
+import { deleteCard, upsertCard } from '@/app/api/database/cards/mutations';
+import { getWord } from '@/app/api/database/dictionary/queries';
 
 type CardFormProps = {
   deckId: string;
@@ -78,7 +78,7 @@ export function CardForm({ deckId, card }: CardFormProps) {
           <Textarea
             mb="md"
             label="Front"
-            description={`This side should display the question or concept you’re testing`}
+            description="This side should display the question or concept you’re testing"
             placeholder="what is 2 + 2?"
             autosize
             minRows={4}

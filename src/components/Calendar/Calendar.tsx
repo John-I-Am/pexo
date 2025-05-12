@@ -1,13 +1,13 @@
 'use client';
 
-import { Calendar as CalendarComponent, DatePickerProps } from '@mantine/dates';
-import { Stack, Text } from '@mantine/core';
-import classes from './Calendar.module.css';
 import dayjs from '@/lib/dayjs';
-import cx from 'clsx';
-import { Card } from '@prisma/client';
-import { filterCardsReviewedOnDate } from '@/utils/cards';
 import { OpUnitType } from 'dayjs';
+import { Card } from '@prisma/client';
+import cx from 'clsx';
+import { Stack, Text } from '@mantine/core';
+import { Calendar as CalendarComponent, DatePickerProps } from '@mantine/dates';
+import { filterCardsReviewedOnDate } from '@/utils/cards';
+import classes from './Calendar.module.css';
 
 type CalendarProps = { cards: Card[]; month?: Date; startOfWeek?: Date };
 
@@ -19,10 +19,10 @@ export const Calendar = ({ cards, month, startOfWeek }: CalendarProps) => {
       <Stack align="center" className={classes['day-wrapper']}>
         <div
           className={cx(classes.day, {
-            [classes['reviewed']]: cardsReviewedToday.length !== 0,
+            [classes.reviewed]: cardsReviewedToday.length !== 0,
           })}
         >
-          <span></span>
+          <span />
         </div>
         <Text
           fz="xs"
@@ -48,7 +48,7 @@ export const Calendar = ({ cards, month, startOfWeek }: CalendarProps) => {
       defaultDate={month}
       hideOutsideDates
       hideWeekdays
-      monthLabelFormat={'MMMM'}
+      monthLabelFormat="MMMM"
       renderDay={dayRenderer}
       getDayProps={
         startOfWeek &&

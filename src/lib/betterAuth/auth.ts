@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
+import { PrismaClient } from '@prisma/client';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { PrismaClient } from '@prisma/client';
 import { magicLink } from 'better-auth/plugins';
-import { transporter } from '../nodemailer/transporter';
-import { mailOptions } from '../nodemailer/transporter';
+import { mailOptions, transporter } from '../nodemailer/transporter';
 
 const prisma = new PrismaClient();
 export const auth = betterAuth({
@@ -12,7 +12,7 @@ export const auth = betterAuth({
   }),
   plugins: [
     magicLink({
-      sendMagicLink: async ({ email, token, url }, request) => {
+      sendMagicLink: async ({ email, token, url }, _request) => {
         const magicLink = `${url}?token=${token}`;
         const payload = mailOptions(email, magicLink);
 

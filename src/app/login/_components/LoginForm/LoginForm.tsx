@@ -13,11 +13,11 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import classes from './LoginForm.module.css';
 import { isEmail, useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { authClient } from '@/lib/betterAuth/authClient';
 import { dashboardPath, homePath } from '@/lib/paths';
-import { notifications } from '@mantine/notifications';
+import classes from './LoginForm.module.css';
 
 export function LoginForm() {
   const form = useForm({
@@ -32,6 +32,7 @@ export function LoginForm() {
   });
 
   const handleLogin = async ({ email }: { email: string }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, error } = await authClient.signIn.magicLink({
       email,
       callbackURL: dashboardPath(),

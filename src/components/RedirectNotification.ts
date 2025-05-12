@@ -1,10 +1,9 @@
 'use client';
 
-import { notifications } from '@mantine/notifications';
-import { deleteCookieByKey, getCookieByKey } from '../app/api/cookies';
-
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { notifications } from '@mantine/notifications';
+import { deleteCookieByKey, getCookieByKey } from '../app/api/cookies';
 
 export const RedirectNotification = () => {
   const pathname = usePathname();
@@ -15,7 +14,7 @@ export const RedirectNotification = () => {
 
       if (message) {
         notifications.show({
-          message: message,
+          message,
         });
         deleteCookieByKey('notification');
       }

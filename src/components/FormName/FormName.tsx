@@ -1,8 +1,8 @@
+/* eslint-disable no-console */
 'use client';
 
-import { TextInput, Title, Paper, Button } from '@mantine/core';
-import { useForm, hasLength } from '@mantine/form';
-import { IconEdit } from '@tabler/icons-react';
+import { Paper, TextInput, Title } from '@mantine/core';
+import { hasLength, useForm } from '@mantine/form';
 import classes from './FormName.module.css';
 
 export function FormName() {
