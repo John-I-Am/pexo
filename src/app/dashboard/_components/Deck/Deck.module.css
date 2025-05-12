@@ -1,0 +1,8 @@
+.tags {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.tag {
+  min-width: fit-content;
+}

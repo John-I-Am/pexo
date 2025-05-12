@@ -4,6 +4,7 @@ import {
   Button,
   createTheme,
   defaultVariantColorsResolver,
+  Group,
   Paper,
   parseThemeColor,
   rem,
@@ -58,6 +59,11 @@ export const theme = createTheme({
   },
 
   components: {
+    Group: Group.extend({
+      defaultProps: {
+        wrap: 'nowrap',
+      },
+    }),
     Button: Button.extend({
       defaultProps: {
         radius: 'md',
