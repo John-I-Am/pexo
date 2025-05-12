@@ -61,7 +61,7 @@ export const FlashCard = ({ decks }: FlashCardProps) => {
   return (
     <Stack align="center">
       <Box w="80%">
-        <ProgressBar cards={cardsToStudy} />
+        <ProgressBar cards={cardsToStudy} showText />
       </Box>
       {cardsToStudy.length === 0 ? (
         <EmptyDeck />

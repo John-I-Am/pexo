@@ -24,7 +24,7 @@ export const ProgressDisplay = ({ decks }: { decks: DeckWithCards[] }) => {
       <Paper className={classes.progress}>
         <Stack>
           <Title order={3}>Active word progress</Title>
-          <ProgressBar cards={activeDeckCards} />
+          <ProgressBar cards={activeDeckCards ?? []} showText />
         </Stack>
       </Paper>
     </Paper>
