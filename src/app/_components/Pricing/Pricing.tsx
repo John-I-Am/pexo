@@ -1,11 +1,10 @@
 'use client';
 
-import { Stack, Title, Tabs, Group, Text, List, ThemeIcon, Button } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
-
-import classes from './Pricing.module.css';
-import { loginPath } from '@/lib/paths';
 import Link from 'next/link';
+import { IconCheck } from '@tabler/icons-react';
+import { Button, Group, List, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import { loginPath } from '@/lib/paths';
+import classes from './Pricing.module.css';
 
 const data = [
   {

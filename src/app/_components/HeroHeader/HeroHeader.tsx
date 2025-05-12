@@ -1,11 +1,11 @@
-import { Title, Text, Button, Container, Stack } from '@mantine/core';
 import Link from 'next/link';
-import classes from './HeroHeader.module.css';
+import { Button, Container, Stack, Text, Title } from '@mantine/core';
 import { loginPath } from '@/lib/paths';
+import classes from './HeroHeader.module.css';
 
 export function HeroHeader() {
   return (
-    <Stack p={'sm'}>
+    <Stack p="sm">
       <Title order={1} className={classes.title}>
         <Text inherit variant="gradient" gradient={{ from: 'blue.4', to: 'blue.9' }}>
           Review. Repeat. <br /> Retain.
