@@ -30,14 +30,7 @@ import {
 import { useHover } from '@mantine/hooks';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 import { authClient } from '@/lib/betterAuth/authClient';
-import {
-  accountPath,
-  dashboardPath,
-  deckExplorePath,
-  decksPath,
-  loginPath,
-  studyPath,
-} from '@/lib/paths';
+import { accountPath, collectionsPath, dashboardPath, loginPath, studyPath } from '@/lib/paths';
 import classes from './Navbar.module.css';
 
 interface NavItem {
@@ -51,13 +44,9 @@ const navItems: NavItem[] = [
   { label: 'Study', icon: IconChalkboard, link: studyPath() },
   { label: 'Dashboard', icon: IconHome, link: dashboardPath() },
   {
-    label: 'Decks',
+    label: 'Collections',
     icon: IconCards,
-    link: decksPath(),
-    links: [
-      { label: 'My Decks', link: decksPath() },
-      { label: 'Explore', link: deckExplorePath() },
-    ],
+    link: collectionsPath(),
   },
   { label: 'Account', icon: IconUser, link: accountPath() },
 ];

@@ -1,5 +1,5 @@
 import { expect, vi } from 'vitest';
-import { accountPath, dashboardPath, decksPath, studyPath } from '@/lib/paths';
+import { accountPath, collectionsPath, dashboardPath, studyPath } from '@/lib/paths';
 import { render, screen } from '@/test-utils';
 import { Navbar } from './Navbar';
 
@@ -30,12 +30,12 @@ describe('Navbar', () => {
 
     const studyLink = screen.getByRole('link', { name: 'Study' });
     const dashboardLink = screen.getByRole('link', { name: 'Dashboard' });
-    const decksLink = screen.getByRole('link', { name: 'Decks' });
+    const collectionsLink = screen.getByRole('link', { name: 'Collections' });
     const accountLink = screen.getByRole('link', { name: 'Account' });
 
     expect(studyLink).toHaveAttribute('href', studyPath());
     expect(dashboardLink).toHaveAttribute('href', dashboardPath());
-    expect(decksLink).toHaveAttribute('href', decksPath());
+    expect(collectionsLink).toHaveAttribute('href', collectionsPath());
     expect(accountLink).toHaveAttribute('href', accountPath());
   });
 

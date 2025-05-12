@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import { Button, Container, Group, Text, Title } from '@mantine/core';
+import { dashboardPath } from '@/lib/paths';
 import { NotFoundBg } from './NotFoundBg';
 import classes from './NotFound.module.css';
-import Link from 'next/link';
-import { decksPath } from '@/lib/paths';
 
 export function NotFoundMessage() {
   return (
@@ -15,7 +15,7 @@ export function NotFoundMessage() {
             Uh Oh! Resource cannot be found.
           </Text>
           <Group justify="center">
-            <Button component={Link} href={decksPath()} size="md">
+            <Button component={Link} href={dashboardPath()} size="md">
               Take me back
             </Button>
           </Group>
