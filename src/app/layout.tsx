@@ -9,7 +9,6 @@ import { GoalSlider } from '../components/GoalSlider/GoalSlider';
 import { theme } from '../theme';
 import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
 import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
-import { IconPicker } from './dashboard/decks/_components/IconPicker/IconPicker';
 
 export const metadata = {
   title: 'Pexo',
@@ -32,7 +31,6 @@ export default function RootLayout({ children }: { children: any }) {
           <ActiveDeckProvider>
             <ModalsProvider
               modals={{
-                iconPicker: IconPicker,
                 selectorModal: SelectorModal,
                 goalSliderModal: GoalSlider,
               }}

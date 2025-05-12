@@ -1,27 +1,26 @@
 'use client';
 
-import Link from 'next/link';
-
-import { Text, Badge, Group, ActionIcon, Paper, Button, Modal } from '@mantine/core';
-import { modals } from '@mantine/modals';
-import {
-  IconTrash,
-  IconEdit,
-  IconPlaceholder,
-  IconHourglassEmpty,
-  IconPlus,
-  IconEye,
-} from '@tabler/icons-react';
-import { notifications } from '@mantine/notifications';
-import { Card } from '@prisma/client';
-import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import classes from './Deck.module.css';
-import { ProgressBar } from '../ProgressBar/ProgressBar';
-import { CardTable } from '../CardTable/CardTable';
+import { Card } from '@prisma/client';
+import {
+  IconEdit,
+  IconEye,
+  IconHourglassEmpty,
+  IconPlaceholder,
+  IconPlus,
+  IconTrash,
+} from '@tabler/icons-react';
+import { ActionIcon, Badge, Button, Group, Modal, Paper, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { modals } from '@mantine/modals';
+import { notifications } from '@mantine/notifications';
 import { upsertCard } from '@/app/api/database/cards/mutations';
 import { createDeck, deleteDeck } from '@/app/api/database/decks/mutations';
+import { CardTable } from '../CardTable/CardTable';
+import { ProgressBar } from '../ProgressBar/ProgressBar';
+import classes from './Deck.module.css';
 
 export function Deck({
   id,
@@ -95,16 +94,7 @@ export function Deck({
   return (
     <Paper radius="md" p="md" className={classes.card}>
       <Group wrap="nowrap" pb="sm">
-        <ActionIcon
-          radius="md"
-          variant="subtle"
-          onClick={() =>
-            modals.openContextModal({
-              modal: 'iconPicker',
-              innerProps: {},
-            })
-          }
-        >
+        <ActionIcon radius="md" variant="subtle">
           <IconPlaceholder stroke={2} />
         </ActionIcon>
         <Group wrap="nowrap" className={classes.tags}>
