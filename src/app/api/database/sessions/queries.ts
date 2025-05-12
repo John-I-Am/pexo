@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { SessionLog } from '@prisma/client';
 import prisma from '../../prisma';
 

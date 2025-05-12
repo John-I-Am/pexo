@@ -1,18 +1,16 @@
-/* eslint-disable consistent-return */
-
+/* eslint-disable no-console */
 'use server';
 
+import dayjs from '@/lib/dayjs';
 import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Card } from '@prisma/client';
-import prisma from '../../prisma';
+import { auth } from '@/lib/betterAuth/auth';
 import { deckPath } from '@/lib/paths';
 import { setCookieByKey } from '../../cookies';
+import prisma from '../../prisma';
 import { upsertSessionLog } from '../sessions/mutations';
-import { headers } from 'next/headers';
-import { auth } from '@/lib/betterAuth/auth';
-
-import dayjs from '@/lib/dayjs';
 
 export const upsertCard = async (
   deckId: string,
@@ -49,7 +47,7 @@ export const updateCardLevel = async (id: string, level: number, isCorrect: bool
     headers: await headers(),
   });
 
-  let newLevel = isCorrect ? (level === 5 ? 5 : level + 1) : level === 1 ? 1 : level - 1;
+  const newLevel = isCorrect ? (level === 5 ? 5 : level + 1) : level === 1 ? 1 : level - 1;
 
   const timeIntervals: any = {
     1: 15 * 60000, // 15 minutes

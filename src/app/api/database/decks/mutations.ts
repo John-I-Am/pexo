@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
 import { Deck } from '@prisma/client';
 import { auth } from '@/lib/betterAuth/auth';
-import { headers } from 'next/headers';
 import prisma from '../../prisma';
 
 export const createDeck = async (): Promise<Deck> => {

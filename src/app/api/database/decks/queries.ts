@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { notFound } from 'next/navigation';
 import { Deck } from '@prisma/client';
 import { DeckWithCards } from '@/lib/prisma/types';
@@ -5,7 +6,7 @@ import prisma from '../../prisma';
 
 export const getDecks = async (userId: string): Promise<Deck[]> => {
   try {
-    const data = await prisma.deck.findMany({
+    const data: Deck[] = await prisma.deck.findMany({
       where: {
         authorId: userId,
       },

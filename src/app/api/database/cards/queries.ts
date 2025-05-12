@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
+import { notFound } from 'next/navigation';
 import { Card } from '@prisma/client';
 import prisma from '../../prisma';
-import { notFound } from 'next/navigation';
 
 export const getCardsByUserId = async (userId: string): Promise<Card[]> => {
   const userWithCards = await prisma.user.findUnique({
