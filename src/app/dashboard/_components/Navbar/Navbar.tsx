@@ -128,7 +128,7 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
         </Group>
       </div>
 
-      <ScrollArea scrollbars="y" className={classes.links}>
+      <ScrollArea type="never" className={classes.links}>
         <div className={classes.linksInner}>{links}</div>
       </ScrollArea>
 

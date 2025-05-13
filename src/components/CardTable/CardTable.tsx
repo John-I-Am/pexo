@@ -211,7 +211,7 @@ export function CardTable({ cards, editable }: any) {
   ));
 
   return (
-    <Paper p="sm" shadow="md" radius="md" h="100%">
+    <Paper p="sm" shadow="md" radius="md" h="70%">
       <ScrollArea h="100%" w="100%">
         <Stack gap={0}>
           <TextInput

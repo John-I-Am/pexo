@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Deck as DeckType } from '@prisma/client';
 import { IconPlus, IconSearch, IconSortAZ } from '@tabler/icons-react';
 import { useFormStatus } from 'react-dom';
@@ -43,7 +42,6 @@ export function DeckList({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleCreate = async () => {
     const result: any = await createDeck();
@@ -105,15 +103,7 @@ export function DeckList({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
 
   return (
     <Stack>
-      <Group wrap="nowrap" className={classes.test}>
-        <Button
-          component={Link}
-          href={`/dashboard/decks/${pathname === '/dashboard/decks' ? '/explore' : '/'}`}
-          variant="light"
-          radius="md"
-        >
-          {pathname === '/dashboard/decks' ? 'Explore' : 'My Decks'}
-        </Button>
+      <Group className={classes.test}>
         <form action={() => handleCreate()}>
           <FormButton />
         </form>
