@@ -1,13 +1,13 @@
 'use client';
 
-import { Group, Text, TextInput, Button, Stack, Loader, Pill, Modal, Paper } from '@mantine/core';
-import { hasLength, useForm } from '@mantine/form';
-import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
+import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
+import { Button, Group, Loader, Modal, Paper, Pill, Stack, Text, TextInput } from '@mantine/core';
+import { hasLength, useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import classes from './DeckEditor.module.css';
 import { updateDeck } from '@/app/api/database/decks/mutations';
+import classes from './DeckEditor.module.css';
 
 export function DeckEditor({
   id,
@@ -154,7 +154,7 @@ export function DeckEditor({
           </Button>
           <Button
             component={Link}
-            href={`/dashboard/decks/${id}/learn`}
+            href="/dashboard/study"
             radius="md"
             leftSection={<IconHourglassEmpty size="1.1rem" />}
           >
