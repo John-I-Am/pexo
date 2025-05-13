@@ -10,6 +10,14 @@ vi.mock('next/font/local', () => ({
   })),
 }));
 
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
+  }),
+}));
+
 describe('Deck component', () => {
   it('renders title, description, and tags', () => {
     render(

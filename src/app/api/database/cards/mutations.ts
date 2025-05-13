@@ -17,8 +17,9 @@ export const upsertCard = async (
   id: string | undefined,
   front: string,
   back: string,
-  audioUrl: string = ''
-): Promise<Card> => {
+  audioUrl: string = '',
+  redirectOnSuccess?: false
+): Promise<Card | void> => {
   try {
     const data = { deckId, front, back, audioUrl };
     await prisma.card.upsert({
@@ -39,7 +40,10 @@ export const upsertCard = async (
   }
 
   revalidatePath(deckPath(deckId));
-  redirect(deckPath(deckId));
+
+  if (redirectOnSuccess !== false) {
+    redirect(deckPath(deckId));
+  }
 };
 
 export const updateCardLevel = async (id: string, level: number, isCorrect: boolean) => {

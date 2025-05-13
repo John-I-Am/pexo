@@ -6,15 +6,12 @@ const Page = () => {
   return (
     <Stack>
       <SimpleGrid cols={{ base: 2, sm: 3, lg: 4 }}>
-        <Deck id="123" title="Animals" description="description1" cards={[]} tags={[]} isPrebuilt />
-        <Deck id="123" title="Animals" description="descriptio4" cards={[]} tags={[]} isPrebuilt />
-        <Deck id="123" title="Animals" description="description3" cards={[]} tags={[]} isPrebuilt />
         <Deck
           id="123"
-          title="Animals"
-          description="description2"
-          cards={[]}
-          tags={['123', 'abc', '234', '32e32e']}
+          title={alphabetCards.title}
+          description={alphabetCards.description}
+          cards={alphabetCards.cards}
+          tags={alphabetCards.tags}
           isPrebuilt
         />
       </SimpleGrid>
