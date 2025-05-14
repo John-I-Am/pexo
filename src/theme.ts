@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  ActionIcon,
   Button,
   createTheme,
   defaultVariantColorsResolver,
@@ -66,6 +67,12 @@ export const theme = createTheme({
       },
     }),
     Button: Button.extend({
+      defaultProps: {
+        radius: 'md',
+        loaderProps: { type: 'dots' },
+      },
+    }),
+    ActionIcon: ActionIcon.extend({
       defaultProps: {
         radius: 'md',
         loaderProps: { type: 'dots' },

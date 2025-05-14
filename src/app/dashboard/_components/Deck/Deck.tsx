@@ -4,9 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card } from '@prisma/client';
-import { IconEye, IconPhoto, IconPlus } from '@tabler/icons-react';
-import { Badge, Box, Button, Group, Paper, Stack, Text, useMantineTheme } from '@mantine/core';
+import { IconEye, IconPhoto, IconPlus, IconTrash } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Badge,
+  Box,
+  Button,
+  Group,
+  Paper,
+  Stack,
+  Text,
+  useMantineTheme,
+} from '@mantine/core';
+import { modals } from '@mantine/modals';
 import { notifications } from '@mantine/notifications';
+import { deleteDeck } from '@/app/api/database/decks/mutations';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { deckPath } from '@/lib/paths';
 import { cloneDeck } from '@/utils/decks';
@@ -26,6 +38,7 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
   const router = useRouter();
 
   const [handleAddPending, setHandleAddPending] = useState(false);
+  const [deletePending, setDeletingPending] = useState(false);
 
   const handleAdd = async () => {
     setHandleAddPending(true);
@@ -37,6 +50,18 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
     const deckId = await cloneDeck(title, description, tags, cards);
     router.push(deckPath(deckId));
     setHandleAddPending(false);
+  };
+
+  const handleDelete = async () => {
+    setDeletingPending(true);
+    const result = await deleteDeck(id);
+    if (result) {
+      setDeletingPending(false);
+      notifications.show({
+        title: 'Deck Deleted',
+        message: `Deck ${title} has been deleted`,
+      });
+    }
   };
 
   return (
@@ -59,14 +84,43 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
           <Text size="sm">{description}</Text>
         </div>
         <Group justify="space-between">
-          <Button
-            component={isPrebuilt ? undefined : Link}
-            href={`/dashboard/decks/${id}`}
-            size="xs"
-            leftSection={<IconEye size="1.1rem" />}
-          >
-            View
-          </Button>
+          <Group>
+            <Button
+              component={isPrebuilt ? undefined : Link}
+              href={`/dashboard/decks/${id}`}
+              size="xs"
+              leftSection={<IconEye size="1.1rem" />}
+            >
+              View
+            </Button>
+
+            {!isPrebuilt && (
+              <ActionIcon
+                onClick={() =>
+                  modals.openConfirmModal({
+                    title: 'Delete Deck?',
+                    centered: true,
+                    children: (
+                      <Text fw={500} size="sm">
+                        Are you sure you want to delete deck{' '}
+                        <span className={classes.text}>{title}</span>? All{' '}
+                        <span className={classes.text}>{cards.length}</span> of its cards will be
+                        deleted. This action can not be done.
+                      </Text>
+                    ),
+                    labels: { confirm: 'Delete deck', cancel: "No don't delete it!" },
+                    confirmProps: { color: 'red' },
+                    onConfirm: () => handleDelete(),
+                  })
+                }
+                color="red"
+                aria-label="Delete"
+                loading={deletePending}
+              >
+                <IconTrash size="1.1rem" />
+              </ActionIcon>
+            )}
+          </Group>
 
           {isPrebuilt && (
             <Button
@@ -80,7 +134,7 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
           )}
 
           {!isPrebuilt && (
-            <Box w="40%" data-testid="progress-bar">
+            <Box w="30%" data-testid="progress-bar">
               <ProgressBar cards={cards} />
             </Box>
           )}

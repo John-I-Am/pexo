@@ -6,3 +6,7 @@
 .tag {
   min-width: fit-content;
 }
+
+.text {
+  font-weight: 700;
+}
