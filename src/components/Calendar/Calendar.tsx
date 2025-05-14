@@ -12,8 +12,8 @@ import classes from './Calendar.module.css';
 type CalendarProps = { cards: Card[]; month?: Date; startOfWeek?: Date };
 
 export const Calendar = ({ cards, month, startOfWeek }: CalendarProps) => {
-  const dayRenderer: DatePickerProps['renderDay'] = (date: Date) => {
-    const cardsReviewedToday: Card[] = filterCardsReviewedOnDate(cards, date);
+  const dayRenderer: DatePickerProps['renderDay'] = (date: string) => {
+    const cardsReviewedToday: Card[] = filterCardsReviewedOnDate(cards, dayjs(date).toDate());
 
     return (
       <Stack align="center" className={classes['day-wrapper']}>
@@ -52,7 +52,7 @@ export const Calendar = ({ cards, month, startOfWeek }: CalendarProps) => {
       renderDay={dayRenderer}
       getDayProps={
         startOfWeek &&
-        ((date: Date) => {
+        ((date: string) => {
           const isCurrentWeek =
             dayjs(date).isSameOrAfter(startOfWeek, 'isoWeek' as OpUnitType) &&
             dayjs(date).isSameOrBefore(
