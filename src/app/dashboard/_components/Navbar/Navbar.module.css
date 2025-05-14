@@ -21,9 +21,14 @@
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
 }
 
+.pin {
+  color: light-dark(black, white);
+}
+
 .link {
   overflow: hidden;
   padding: var(--mantine-spacing-xs);
+  padding-right: var(--mantine-spacing-xl);
   border-radius: var(--mantine-spacing-sm);
 
   @mixin dark {

@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import dayjs from '@/lib/dayjs';
 import { Card, SessionLog } from '@prisma/client';
+import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { Calendar } from '@/components/Calendar/Calendar';
-import dayjs from '@/lib/dayjs';
 import { filterCardsReviewedOnDate } from '@/utils/cards';
 
 type GoalDisplayProps = {
@@ -21,7 +21,6 @@ export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
         <Group justify="space-between" wrap="nowrap">
           <Title order={2}>Today's goals</Title>
           <Button
-            variant="subtle"
             onClick={() =>
               modals.openContextModal({
                 modal: 'goalSliderModal',

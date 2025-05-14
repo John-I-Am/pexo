@@ -111,12 +111,13 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
             <Tooltip label="Toggle View">
               <ActionIcon
                 size="sm"
+                radius="sm"
                 display={isDrawer ? 'none' : ''}
                 variant={compact ? 'filled' : 'outline'}
                 aria-label={compact ? 'pin-nav' : 'unpin-nav'}
                 onClick={() => setCompact(!compact)}
               >
-                {compact ? <IconPinnedFilled /> : <IconPin />}
+                {compact ? <IconPinnedFilled /> : <IconPin className={classes.pin} />}
               </ActionIcon>
             </Tooltip>
             <Tooltip label="Toggle Theme">
