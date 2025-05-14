@@ -19,6 +19,7 @@ import {
 import { modals } from '@mantine/modals';
 import { notifications } from '@mantine/notifications';
 import { deleteDeck } from '@/app/api/database/decks/mutations';
+import { CardTable } from '@/components/CardTable/CardTable';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { deckPath } from '@/lib/paths';
 import { cloneDeck } from '@/utils/decks';
@@ -86,6 +87,15 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
         <Group justify="space-between">
           <Group>
             <Button
+              onClick={
+                isPrebuilt
+                  ? () => {
+                      modals.open({
+                        children: <CardTable cards={cards} />,
+                      });
+                    }
+                  : undefined
+              }
               component={isPrebuilt ? undefined : Link}
               href={`/dashboard/decks/${id}`}
               size="xs"
