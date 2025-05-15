@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -28,6 +28,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 import { authClient } from '@/lib/betterAuth/authClient';
 import { accountPath, collectionsPath, dashboardPath, loginPath, studyPath } from '@/lib/paths';
@@ -57,6 +58,8 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
   const pathname: string = usePathname();
   const { hovered, ref } = useHover();
   const [compact, setCompact] = useState<boolean>(true);
+
+  const { setActiveDeckId }: any = useContext(ActiveDeckContext);
 
   const links = navItems.map((item: any) => (
     <NavLink
@@ -153,6 +156,7 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
               fetchOptions: {
                 onSuccess: () => {
                   router.push(loginPath());
+                  setActiveDeckId(null);
                 },
               },
             });

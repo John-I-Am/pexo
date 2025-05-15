@@ -29,8 +29,6 @@ export const getSessionLog = async (
       },
     });
 
-    console.log('this is my unique!!!', sessionLog);
-
     return sessionLog;
   } catch (error) {
     console.log(error);

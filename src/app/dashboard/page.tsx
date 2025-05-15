@@ -16,7 +16,7 @@ export default async function Page() {
     headers: await headers(),
   })) as any;
 
-  const decks = await getDecks(session?.userId);
+  const decks = await getDecks(session?.user.id);
   const cards = await getCardsByUserId(session.user.id);
   const sessionLog = await getSessionLog(session?.user?.id, dayjs().startOf('day').toDate());
 
