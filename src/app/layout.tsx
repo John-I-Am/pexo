@@ -8,7 +8,6 @@ import { Notifications } from '@mantine/notifications';
 import { GoalSlider } from '../components/GoalSlider/GoalSlider';
 import { theme } from '../theme';
 import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
-import { SelectorModal } from './dashboard/_components/SelectorModal/SelectorModal';
 
 export const metadata = {
   title: 'Pexo',
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: { children: any }) {
           <ActiveDeckProvider>
             <ModalsProvider
               modals={{
-                selectorModal: SelectorModal,
                 goalSliderModal: GoalSlider,
               }}
               modalProps={{
