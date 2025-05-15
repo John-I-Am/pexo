@@ -47,16 +47,9 @@ type FlashCardProps = {
 };
 
 export const FlashCard = ({ decks }: FlashCardProps) => {
-  const { activeDeckId }: any = useContext(ActiveDeckContext);
-  let activeDeck: any = [];
-
-  if (activeDeckId === null) {
-    activeDeck = decks.flatMap((deck: Deck) => deck.cards);
-  } else {
-    activeDeck = decks.find((deck: Deck) => deck.id === activeDeckId);
-  }
-
-  const cardsToStudy = filterCardsDue(activeDeck);
+  const { activeDeckIds }: any = useContext(ActiveDeckContext);
+  const activeDecks = decks.filter((deck) => activeDeckIds.includes(deck.id));
+  const cardsToStudy = filterCardsDue(activeDecks.flatMap((deck) => deck.cards));
 
   return (
     <Stack align="center">

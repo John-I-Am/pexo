@@ -1,19 +1,19 @@
 'use client';
 
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
 type ActiveDeckContextType = {
-  activeDeckId: string | null;
-  setActiveDeckId: (id: string | null) => void;
+  activeDeckIds: string[];
+  setActiveDeckIds: (ids: string[]) => void;
 };
 
 export const ActiveDeckContext = createContext<ActiveDeckContextType | null>(null);
 
 export const ActiveDeckProvider = ({ children }: { children: ReactNode }) => {
-  const [activeDeckId, setActiveDeckId] = useState<string | null>(null);
+  const [activeDeckIds, setActiveDeckIds] = useState<string[]>([]);
 
   return (
-    <ActiveDeckContext.Provider value={{ activeDeckId, setActiveDeckId }}>
+    <ActiveDeckContext.Provider value={{ activeDeckIds, setActiveDeckIds }}>
       {children}
     </ActiveDeckContext.Provider>
   );

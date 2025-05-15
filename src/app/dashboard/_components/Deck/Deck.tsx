@@ -1,10 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card } from '@prisma/client';
-import { IconEye, IconPhoto, IconPlus, IconTrash } from '@tabler/icons-react';
+import {
+  IconEye,
+  IconPhoto,
+  IconPin,
+  IconPinnedFilled,
+  IconPlus,
+  IconTrash,
+} from '@tabler/icons-react';
 import {
   ActionIcon,
   Badge,
@@ -19,6 +26,7 @@ import {
 import { modals } from '@mantine/modals';
 import { notifications } from '@mantine/notifications';
 import { deleteDeck } from '@/app/api/database/decks/mutations';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { CardTable } from '@/components/CardTable/CardTable';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { deckPath } from '@/lib/paths';
@@ -37,6 +45,8 @@ type DeckProps = {
 export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckProps) => {
   const theme = useMantineTheme();
   const router = useRouter();
+
+  const { activeDeckIds, setActiveDeckIds }: any = useContext(ActiveDeckContext);
 
   const [handleAddPending, setHandleAddPending] = useState(false);
   const [deletePending, setDeletingPending] = useState(false);
@@ -68,7 +78,7 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
   return (
     <Paper>
       <Stack gap="lg">
-        <Group>
+        <Group justify="space-between">
           <IconPhoto size="32" />
           <Group className={classes.tags}>
             {tags.map((tag: string) => (
@@ -77,6 +87,25 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
               </Badge>
             ))}
           </Group>
+          {!isPrebuilt && (
+            <ActionIcon
+              size="sm"
+              radius="sm"
+              variant={activeDeckIds.includes(id) ? 'filled' : 'outline'}
+              aria-label={activeDeckIds.includes(id) ? 'pin-deck' : 'unpin-deck'}
+              onClick={() =>
+                activeDeckIds.includes(id)
+                  ? setActiveDeckIds(activeDeckIds.filter((deckId: string) => deckId !== id))
+                  : setActiveDeckIds([...activeDeckIds, id])
+              }
+            >
+              {activeDeckIds.includes(id) ? (
+                <IconPinnedFilled />
+              ) : (
+                <IconPin className={classes.pin} />
+              )}
+            </ActionIcon>
+          )}
         </Group>
         <div>
           <Text size="lg" fw={500}>

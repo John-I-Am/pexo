@@ -10,3 +10,7 @@
 .text {
   font-weight: 700;
 }
+
+.pin {
+  color: light-dark(black, white);
+}

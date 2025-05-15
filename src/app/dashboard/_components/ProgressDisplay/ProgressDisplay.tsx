@@ -8,12 +8,9 @@ import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar';
 import classes from './ProgressDisplay.module.css';
 
 export const ProgressDisplay = ({ decks }: { decks: DeckWithCards[] }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { activeDeckId, setActiveDeck }: any = useContext(ActiveDeckContext);
-  const activeDeckCards =
-    activeDeckId === null
-      ? decks.flatMap((deck) => deck.cards)
-      : decks.find((deck) => deck.id === activeDeckId)?.cards;
+  const { activeDeckIds }: any = useContext(ActiveDeckContext);
+  const activeDecks = decks.filter((deck) => activeDeckIds.includes(deck.id));
+  const activeDeckCards = activeDecks.flatMap((deck) => deck.cards);
 
   return (
     <Paper>
