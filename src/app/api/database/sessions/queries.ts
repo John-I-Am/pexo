@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import dayjs from '@/lib/dayjs';
 import { SessionLog } from '@prisma/client';
 import prisma from '../../prisma';
 
@@ -12,18 +13,23 @@ export const getSessionLogs = async (userId: string) => {
   return sessionLogs;
 };
 
-export const getSessionLog = async (userId: string): Promise<SessionLog | null> => {
-  const todayMidnightUTC = new Date(new Date().setUTCHours(0, 0, 0, 0));
+export const getSessionLog = async (
+  userId: string,
+  localDate: Date
+): Promise<SessionLog | null> => {
+  const localDateToUTC = dayjs(localDate).utc().toDate();
 
   try {
-    const sessionLog = await prisma.sessionLog.findFirst({
+    const sessionLog = await prisma.sessionLog.findUnique({
       where: {
-        userId,
-        date: {
-          equals: todayMidnightUTC,
+        userId_date: {
+          userId,
+          date: localDateToUTC,
         },
       },
     });
+
+    console.log('this is my unique!!!', sessionLog);
 
     return sessionLog;
   } catch (error) {

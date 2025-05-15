@@ -1,11 +1,13 @@
+import dayjs from '@/lib/dayjs';
 import { headers } from 'next/headers';
+import { SessionLog } from '@prisma/client';
 import { Grid, GridCol, ScrollArea } from '@mantine/core';
 import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { DeckList } from '@/components/DeckList/DeckList';
 import { auth } from '@/lib/betterAuth/auth';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import { getDecks } from '../api/database/decks/queries';
-import { getSessionLogs } from '../api/database/sessions/queries';
+import { getSessionLog } from '../api/database/sessions/queries';
 import DeckSelector from './_components/DeckSelector/DeckSelector';
 import { GoalDisplay } from './_components/GoalDisplay/GoalDisplay';
 
@@ -16,7 +18,7 @@ export default async function Page() {
 
   const decks = await getDecks(session?.userId);
   const cards = await getCardsByUserId(session.user.id);
-  const sessionLogs = await getSessionLogs(session?.user?.id);
+  const sessionLog = await getSessionLog(session?.user?.id, dayjs().startOf('day').toDate());
 
   return (
     <main>
@@ -32,7 +34,7 @@ export default async function Page() {
             <ProgressDisplay decks={decks} />
           </GridCol>
           <GridCol span={{ base: 12, xl: 6 }}>
-            <GoalDisplay cards={cards} sessionLog={sessionLogs[sessionLogs.length - 1]} />
+            <GoalDisplay cards={cards} sessionLog={sessionLog as SessionLog} />
           </GridCol>
           <GridCol span={{ base: 12 }}>
             <DeckList decks={decks} isPrebuilt={false} />

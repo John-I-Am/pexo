@@ -33,7 +33,7 @@ export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
         </Group>
 
         <Text mt="-10px" fz="sm" c="dimmed">
-          {`${cardsReviewedToday.length} / ${sessionLog.goal} cards`}
+          {`${cardsReviewedToday.length} / ${sessionLog?.goal ?? 50} cards`}
         </Text>
       </Stack>
       <Calendar cards={cards} startOfWeek={dayjs().startOf('isoWeek').toDate()} />
