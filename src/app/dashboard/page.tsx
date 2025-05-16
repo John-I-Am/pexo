@@ -8,8 +8,8 @@ import { auth } from '@/lib/betterAuth/auth';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLog } from '../api/database/sessions/queries';
-import DeckSelector from './_components/DeckSelector/DeckSelector';
 import { GoalDisplay } from './_components/GoalDisplay/GoalDisplay';
+import { OverviewDisplay } from './_components/OverviewDisplay/OverviewDisplay';
 
 export default async function Page() {
   const session = (await auth.api.getSession({
@@ -28,7 +28,7 @@ export default async function Page() {
           breakpoints={{ xs: '100px', sm: '200px', md: '500px', lg: '800px', xl: '1000px' }}
         >
           <GridCol span={12}>
-            <DeckSelector decks={decks} />
+            <OverviewDisplay decks={decks} goal={50} />
           </GridCol>
           <GridCol span={{ base: 12, xl: 6 }}>
             <ProgressDisplay decks={decks} />
