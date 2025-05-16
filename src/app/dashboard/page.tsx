@@ -28,7 +28,7 @@ export default async function Page() {
           breakpoints={{ xs: '100px', sm: '200px', md: '500px', lg: '800px', xl: '1000px' }}
         >
           <GridCol span={12}>
-            <OverviewDisplay decks={decks} goal={50} />
+            <OverviewDisplay decks={decks} goal={sessionLog?.goal ?? 50} />
           </GridCol>
           <GridCol span={{ base: 12, xl: 6 }}>
             <ProgressDisplay decks={decks} />

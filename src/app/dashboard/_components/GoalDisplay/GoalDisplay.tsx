@@ -24,7 +24,7 @@ export const GoalDisplay = ({ cards, sessionLog }: GoalDisplayProps) => {
             onClick={() =>
               modals.openContextModal({
                 modal: 'goalSliderModal',
-                innerProps: { initialGoal: 50, userId: sessionLog.userId },
+                innerProps: { initialGoal: sessionLog.goal, userId: sessionLog.userId },
               })
             }
           >

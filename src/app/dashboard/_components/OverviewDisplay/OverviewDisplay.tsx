@@ -1,5 +1,6 @@
 'use client';
 
+import dayjs from '@/lib/dayjs';
 import { useContext } from 'react';
 import Link from 'next/link';
 import { Deck } from '@prisma/client';
@@ -16,9 +17,10 @@ import {
   IconSquareNumber8Filled,
   IconSquareNumber9Filled,
 } from '@tabler/icons-react';
-import { Button, Group, Paper, Text, Title } from '@mantine/core';
+import { Button, Group, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { studyPath } from '@/lib/paths';
+import { filterCardsReviewedOnDate } from '@/utils/cards';
 import classes from './OverviewDisplay.module.css';
 
 const digitIcons: any = {
@@ -41,7 +43,12 @@ type OverviewDisplayProps = {
 
 export const OverviewDisplay = ({ decks, goal }: OverviewDisplayProps) => {
   const { activeDeckIds }: any = useContext(ActiveDeckContext);
+  const theme = useMantineTheme();
   const digits: string[] = goal.toString().split('');
+  const cardsReviewed = filterCardsReviewedOnDate(
+    decks.flatMap((deck) => deck.cards),
+    dayjs().startOf('day').toDate()
+  );
 
   return (
     <Paper>
@@ -70,10 +77,11 @@ export const OverviewDisplay = ({ decks, goal }: OverviewDisplayProps) => {
         <div>
           <Text fw={500}>Today's goal</Text>
           <Text size="sm" pt="xs">
-            Complete 50 cards
+            Complete {goal} cards
           </Text>
           <Text size="sm">
-            You have done 0 cards today. Complete 10 cards in order to achieve your goal.
+            You have done {cardsReviewed.length} cards today. Complete {goal} cards in order to
+            achieve your goal.
           </Text>
         </div>
       </Group>

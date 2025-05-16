@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
+import dayjs from '@/lib/dayjs';
 import { useState } from 'react';
 import { Box, Slider, Stack, Text, Title } from '@mantine/core';
 import { ContextModalProps } from '@mantine/modals';
@@ -13,7 +14,7 @@ export function GoalSlider({
   const [value, setValue] = useState(initialGoal);
 
   const handleOnChangeEnd = async (e: any) => {
-    await upsertSessionLog(userId, e);
+    await upsertSessionLog(userId, dayjs().startOf('day').toDate(), e);
   };
 
   return (
