@@ -18,5 +18,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: [`${dashboardPath()}/:path*`, loginPath()],
+  matcher: ['/dashboard/:path*', '/login'],
 };
