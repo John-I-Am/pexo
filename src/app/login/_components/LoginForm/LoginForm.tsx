@@ -32,7 +32,6 @@ export function LoginForm() {
   });
 
   const handleLogin = async ({ email }: { email: string }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, error } = await authClient.signIn.magicLink({
       email,
       callbackURL: dashboardPath(),
@@ -44,6 +43,7 @@ export function LoginForm() {
         autoClose: false,
       });
     } else {
+      console.log(error);
       notifications.show({
         message: 'Something has gone wrong!',
         autoClose: false,
