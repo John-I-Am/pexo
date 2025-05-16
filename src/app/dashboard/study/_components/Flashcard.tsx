@@ -2,13 +2,13 @@
 
 import { useContext } from 'react';
 import Link from 'next/link';
-import { Deck } from '@prisma/client';
 import { IconChevronLeft, IconMoodSmileBeam } from '@tabler/icons-react';
 import { Box, Button, Container, Stack, Text, ThemeIcon } from '@mantine/core';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { FlashCard as FlashCardCard } from '@/components/FlashCard/FlashCard';
 import { FlashCardToolbar } from '@/components/FlashCardToolbar/FlashCardToolbar';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
+import { DeckWithCards } from '@/lib/prisma/types';
 import { filterCardsDue } from '@/utils/cards';
 import classes from './Flashcard.module.css';
 
@@ -43,13 +43,13 @@ function EmptyDeck() {
 }
 
 type FlashCardProps = {
-  decks: Deck[];
+  decks: DeckWithCards[];
 };
 
 export const FlashCard = ({ decks }: FlashCardProps) => {
   const { activeDeckIds }: any = useContext(ActiveDeckContext);
   const activeDecks = decks.filter((deck) => activeDeckIds.includes(deck.id));
-  const cardsToStudy = filterCardsDue(activeDecks.flatMap((deck) => deck.cards));
+  const cardsToStudy = filterCardsDue(activeDecks.flatMap((deck: DeckWithCards) => deck.cards));
 
   return (
     <Stack align="center">

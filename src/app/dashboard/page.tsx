@@ -5,6 +5,7 @@ import { Grid, GridCol, ScrollArea } from '@mantine/core';
 import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { DeckList } from '@/components/DeckList/DeckList';
 import { auth } from '@/lib/betterAuth/auth';
+import { DeckWithCards } from '@/lib/prisma/types';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLog } from '../api/database/sessions/queries';
@@ -16,7 +17,7 @@ export default async function Page() {
     headers: await headers(),
   })) as any;
 
-  const decks = await getDecks(session?.user.id);
+  const decks: DeckWithCards[] = await getDecks(session?.user.id);
   const cards = await getCardsByUserId(session.user.id);
   const sessionLog = await getSessionLog(session?.user?.id, dayjs().startOf('day').toDate());
 

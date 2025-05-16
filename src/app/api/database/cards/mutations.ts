@@ -3,14 +3,11 @@
 
 import dayjs from '@/lib/dayjs';
 import { revalidatePath } from 'next/cache';
-import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Card } from '@prisma/client';
-import { auth } from '@/lib/betterAuth/auth';
 import { deckPath } from '@/lib/paths';
 import { setCookieByKey } from '../../cookies';
 import prisma from '../../prisma';
-import { upsertSessionLog } from '../sessions/mutations';
 
 export const upsertCard = async (
   deckId: string,
@@ -47,10 +44,6 @@ export const upsertCard = async (
 };
 
 export const updateCardLevel = async (id: string, level: number, isCorrect: boolean) => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
   const newLevel = isCorrect ? (level === 5 ? 5 : level + 1) : level === 1 ? 1 : level - 1;
 
   const timeIntervals: any = {
@@ -74,10 +67,6 @@ export const updateCardLevel = async (id: string, level: number, isCorrect: bool
         },
       },
     });
-
-    if (session) {
-      await upsertSessionLog(session?.user.id, 50);
-    }
 
     revalidatePath(deckPath(result.deckId));
 

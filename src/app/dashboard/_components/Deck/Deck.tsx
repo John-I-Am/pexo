@@ -116,6 +116,12 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
         <Group justify="space-between">
           <Group>
             <Button
+              {...(!isPrebuilt
+                ? {
+                    component: Link as any,
+                    href: `/dashboard/decks/${id}` as const,
+                  }
+                : {})}
               onClick={
                 isPrebuilt
                   ? () => {
@@ -125,8 +131,6 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
                     }
                   : undefined
               }
-              component={isPrebuilt ? undefined : Link}
-              href={`/dashboard/decks/${id}`}
               size="xs"
               leftSection={<IconEye size="1.1rem" />}
             >

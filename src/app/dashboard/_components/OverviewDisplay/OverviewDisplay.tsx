@@ -3,7 +3,6 @@
 import dayjs from '@/lib/dayjs';
 import { useContext } from 'react';
 import Link from 'next/link';
-import { Deck } from '@prisma/client';
 import {
   IconChevronRight,
   IconSquareNumber0Filled,
@@ -17,9 +16,10 @@ import {
   IconSquareNumber8Filled,
   IconSquareNumber9Filled,
 } from '@tabler/icons-react';
-import { Button, Group, Paper, Text, Title, useMantineTheme } from '@mantine/core';
+import { Button, Group, Paper, Text, Title } from '@mantine/core';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { studyPath } from '@/lib/paths';
+import { DeckWithCards } from '@/lib/prisma/types';
 import { filterCardsReviewedOnDate } from '@/utils/cards';
 import classes from './OverviewDisplay.module.css';
 
@@ -37,16 +37,15 @@ const digitIcons: any = {
 };
 
 type OverviewDisplayProps = {
-  decks: Deck[];
+  decks: DeckWithCards[];
   goal: number;
 };
 
 export const OverviewDisplay = ({ decks, goal }: OverviewDisplayProps) => {
   const { activeDeckIds }: any = useContext(ActiveDeckContext);
-  const theme = useMantineTheme();
   const digits: string[] = goal.toString().split('');
   const cardsReviewed = filterCardsReviewedOnDate(
-    decks.flatMap((deck) => deck.cards),
+    decks.flatMap((deck: DeckWithCards) => deck.cards),
     dayjs().startOf('day').toDate()
   );
 

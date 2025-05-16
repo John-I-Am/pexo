@@ -1,9 +1,15 @@
-import { Deck } from '@prisma/client';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Card, Deck } from '@prisma/client';
 import { upsertCard } from '@/app/api/database/cards/mutations';
 import { createDeck } from '@/app/api/database/decks/mutations';
 import { NewCard } from '@/lib/prisma/types';
 
-export const cloneDeck = async (title, description, tags, cards) => {
+export const cloneDeck = async (
+  title: string,
+  description: string,
+  tags: string[],
+  cards: Card[]
+) => {
   const deck: Deck = await createDeck();
 
   const cardCreationPromises = cards.map((card: NewCard) =>
