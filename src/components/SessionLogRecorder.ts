@@ -23,7 +23,7 @@ export const SessionLogRecorder = () => {
     };
 
     setSessionLog();
-  }, []);
+  }, [session?.user.id]);
 
   return null;
 };

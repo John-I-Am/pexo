@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
 import { Button, Group, Loader, Modal, Paper, Pill, Stack, Text, TextInput } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { updateDeck } from '@/app/api/database/decks/mutations';
+import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import classes from './DeckEditor.module.css';
 
 export function DeckEditor({
@@ -22,6 +23,8 @@ export function DeckEditor({
 }) {
   const [pending, setPending] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
+
+  const { setActiveDeckIds }: any = useContext(ActiveDeckContext);
 
   const formTitle = useForm({
     initialValues: {
@@ -153,6 +156,7 @@ export function DeckEditor({
             Add Tag
           </Button>
           <Button
+            onClick={() => setActiveDeckIds([id])}
             component={Link}
             href="/dashboard/study"
             radius="md"

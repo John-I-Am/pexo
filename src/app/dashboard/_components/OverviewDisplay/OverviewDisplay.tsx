@@ -79,8 +79,8 @@ export const OverviewDisplay = ({ decks, goal }: OverviewDisplayProps) => {
             Complete {goal} cards
           </Text>
           <Text size="sm">
-            You have done {cardsReviewed.length} cards today. Complete {goal} cards in order to
-            achieve your goal.
+            You have done {cardsReviewed.length} cards today. Complete {goal - cardsReviewed.length}{' '}
+            cards in order to achieve your goal.
           </Text>
         </div>
       </Group>
