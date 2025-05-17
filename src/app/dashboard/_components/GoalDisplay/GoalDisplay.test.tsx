@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest';
-import { GoalDisplay } from './GoalDisplay';
 import { render, screen } from '@/test-utils';
+import { GoalDisplay } from './GoalDisplay';
 
 vi.mock('next/font/local', () => ({
   default: vi.fn(() => ({
