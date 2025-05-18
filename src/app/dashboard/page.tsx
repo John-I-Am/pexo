@@ -6,6 +6,7 @@ import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/Pro
 import { DeckList } from '@/components/DeckList/DeckList';
 import { auth } from '@/lib/betterAuth/auth';
 import { DeckWithCards } from '@/lib/prisma/types';
+import { getCookieByKey } from '../api/cookies';
 import { getCardsByUserId } from '../api/database/cards/queries';
 import { getDecks } from '../api/database/decks/queries';
 import { getSessionLog } from '../api/database/sessions/queries';
@@ -19,7 +20,11 @@ export default async function Page() {
 
   const decks: DeckWithCards[] = await getDecks(session?.user.id);
   const cards = await getCardsByUserId(session.user.id);
-  const sessionLog = await getSessionLog(session?.user?.id, dayjs().startOf('day').toDate());
+  let localDate: any = await getCookieByKey('localDate');
+  if (localDate === null) {
+    localDate = new Date();
+  }
+  const sessionLog = await getSessionLog(session?.user?.id, dayjs(localDate).toDate());
 
   return (
     <main>
