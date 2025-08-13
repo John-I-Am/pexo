@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import { PrismaClient } from '@prisma/client';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { magicLink } from 'better-auth/plugins';
+import Prisma from '@/app/api/prisma';
 import { mailOptions, transporter } from '../nodemailer/transporter';
 
-const prisma = new PrismaClient();
+const prisma = Prisma;
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'postgresql',
