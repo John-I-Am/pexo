@@ -6,6 +6,7 @@ import {
   createTheme,
   defaultVariantColorsResolver,
   Group,
+  Image,
   Paper,
   parseThemeColor,
   rem,
@@ -111,6 +112,11 @@ export const theme = createTheme({
         offsetScrollbars: true,
         type: 'always',
         h: '100%',
+      },
+    }),
+    Image: Image.extend({
+      defaultProps: {
+        radius: 'md',
       },
     }),
   },
