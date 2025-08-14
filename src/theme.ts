@@ -3,52 +3,28 @@
 import {
   ActionIcon,
   Button,
+  colorsTuple,
   createTheme,
-  defaultVariantColorsResolver,
   Group,
   Image,
   Paper,
-  parseThemeColor,
   rem,
   ScrollArea,
   Skeleton,
   Textarea,
   TextInput,
   Tooltip,
-  VariantColorsResolver,
 } from '@mantine/core';
 import { notoSans } from './fonts/Noto_Sans/NotoSans';
 
-const variantColorResolver: VariantColorsResolver = (input) => {
-  const defaultResolvedColors = defaultVariantColorsResolver(input);
-  const parsedColor = parseThemeColor({
-    color: input.color,
-    theme: input.theme,
-  });
-
-  if (parsedColor.isThemeColor && parsedColor.color === 'indigo') {
-    return {
-      ...defaultResolvedColors,
-      color: 'var(--mantine-color-black)',
-    };
-  }
-
-  return defaultResolvedColors;
-};
-
 export const theme = createTheme({
-  other: {
-    accentColor: 'indigo.4',
-    accentColorLighter: 'indigo.3',
-    accentColorLightest: 'indigo.1',
+  colors: {
+    'dark-navy': colorsTuple('#2c3143'),
   },
 
   black: '#2c3143',
-
-  primaryColor: 'dark',
-  primaryShade: { light: 6, dark: 9 },
-
-  variantColorResolver,
+  primaryColor: 'indigo',
+  primaryShade: { light: 5, dark: 9 },
 
   fontFamily: notoSans.style.fontFamily,
   headings: {
@@ -69,6 +45,7 @@ export const theme = createTheme({
     }),
     Button: Button.extend({
       defaultProps: {
+        color: 'dark-navy',
         radius: 'md',
         loaderProps: { type: 'dots' },
       },
