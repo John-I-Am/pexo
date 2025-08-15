@@ -7,6 +7,7 @@ import {
   createTheme,
   Group,
   Image,
+  Loader,
   Paper,
   rem,
   ScrollArea,
@@ -94,6 +95,11 @@ export const theme = createTheme({
     Image: Image.extend({
       defaultProps: {
         radius: 'md',
+      },
+    }),
+    Loader: Loader.extend({
+      defaultProps: {
+        type: 'dots',
       },
     }),
   },

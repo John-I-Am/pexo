@@ -3,14 +3,14 @@
 import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
-import { Button, Group, Loader, Modal, Paper, Pill, Stack, Text, TextInput } from '@mantine/core';
+import { Button, Group, Loader, Modal, Pill, Stack, Text, TextInput } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { updateDeck } from '@/app/api/database/decks/mutations';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import classes from './DeckEditor.module.css';
 
-export function DeckEditor({
+export const DeckEditor = ({
   id,
   title,
   tags = [],
@@ -20,7 +20,7 @@ export function DeckEditor({
   title: string;
   tags: string[];
   cardsLength: string;
-}) {
+}) => {
   const [pending, setPending] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -30,11 +30,6 @@ export function DeckEditor({
     initialValues: {
       title,
     },
-
-    //interferences with handleChangeTitle
-    // validate: {
-    //   title: hasLength({ min: 1, max: 12 }, 'Title must be 1-12 characters long'),
-    // },
   });
 
   const formTag = useForm({
@@ -47,7 +42,6 @@ export function DeckEditor({
     },
   });
 
-  // BUG: doesn't work where where is only one letter / validation interference
   const handleChangeTitle = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     formTitle.onSubmit(() => {
       setPending(true);
@@ -74,52 +68,60 @@ export function DeckEditor({
 
   return (
     <Stack>
-      <Modal opened={opened} onClose={close} title="Add tag">
+      <Modal opened={opened} onClose={close} withCloseButton={false} padding="0">
         <form onSubmit={formTag.onSubmit((values: any) => handleSubmitTag(values))}>
           <TextInput {...formTag.getInputProps('tag')} maxLength={12} minLength={1} />
+          <Button type="submit" fullWidth mt="md">
+            Add Tag
+          </Button>
         </form>
       </Modal>
 
-      <Stack align="center" gap={0}>
-        <form
-          className={classes['form-title']}
-          onSubmit={formTitle.onSubmit((values) =>
-            updateDeck(id, {
-              title: values.title,
-              tags: undefined,
-            })
-          )}
-        >
-          <TextInput
-            {...formTitle.getInputProps('title')}
-            classNames={{
-              input: classes.title,
-              section: classes.loader,
-            }}
-            onChange={handleChangeTitle}
-            variant="unstyled"
-            aria-label="Title"
-            size="sm"
-            maxLength={12}
-            minLength={1}
-            placeholder="title"
-            rightSection={
-              pending ? (
-                <Group wrap="nowrap">
-                  <Loader size={14} />
-                  <Text fz="sm" c="dimmed">
-                    Saving...
-                  </Text>
-                </Group>
-              ) : (
-                <span />
-              )
-            }
-          />
-        </form>
+      <Group>
+        <Stack gap={0} w="33%">
+          <form
+            className={classes['form-title']}
+            onSubmit={formTitle.onSubmit((values) =>
+              updateDeck(id, {
+                title: values.title,
+                tags: undefined,
+              })
+            )}
+          >
+            <TextInput
+              {...formTitle.getInputProps('title')}
+              classNames={{
+                input: classes.title,
+              }}
+              onChange={handleChangeTitle}
+              variant="unstyled"
+              aria-label="Title"
+              size="sm"
+              maxLength={12}
+              minLength={1}
+              placeholder="untitled"
+            />
+          </form>
 
-        <Text fz="sm">{cardsLength} Total cards</Text>
-      </Stack>
+          <Text fz="sm">{cardsLength} Total cards</Text>
+          <Stack gap="0" h={20}>
+            {pending && (
+              <>
+                <Text fz="xs" c="dimmed">
+                  Saving data...
+                </Text>
+                <Loader size="xs" />
+              </>
+            )}
+          </Stack>
+        </Stack>
+
+        <Text fz="sm" w="66%">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident eos fugiat id
+          necessitatibus magni ducimus molestias. Placeat, consequatur. Quisquam, quae magnam
+          perspiciatis excepturi iste sint itaque sunt laborum. Nihil?
+        </Text>
+      </Group>
 
       <Group pb="md" className={classes.tags}>
         {tags.map((t) => (
@@ -139,19 +141,8 @@ export function DeckEditor({
         ))}
       </Group>
 
-      <Group w="100%" justify="space-between" wrap="nowrap">
-        <Paper p="sm" radius="md" shadow="sm" className={classes.filler}>
-          <Text
-            size="xl"
-            fw={900}
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
-          >
-            You Got This! &#59;&#41;
-          </Text>
-        </Paper>
-
-        <Group wrap="nowrap">
+      <Group w="100%">
+        <Group>
           <Button radius="md" leftSection={<IconPlus size="1.1rem" />} onClick={open}>
             Add Tag
           </Button>
@@ -177,4 +168,4 @@ export function DeckEditor({
       </Group>
     </Stack>
   );
-}
+};

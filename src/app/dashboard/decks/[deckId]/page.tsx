@@ -1,8 +1,8 @@
 import { Stack } from '@mantine/core';
-import { CardTable } from '@/components/CardTable/CardTable';
-import { DeckEditor } from '@/components/DeckEditor/DeckEditor';
 import { getDeckById } from '@/app/api/database/decks/queries';
+import { CardTable } from '@/components/CardTable/CardTable';
 import { DeckWithCards } from '@/lib/prisma/types';
+import { DeckEditor } from './_components/DeckEditor/DeckEditor';
 
 type existingDeckPageProps = {
   params: Promise<{
