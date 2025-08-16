@@ -3,7 +3,6 @@
 import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Card } from '@prisma/client';
 import {
   IconEye,
   IconPhoto,
@@ -21,6 +20,7 @@ import {
   Paper,
   Stack,
   Text,
+  Tooltip,
   useMantineTheme,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
@@ -29,6 +29,7 @@ import { deleteDeck } from '@/app/api/database/decks/mutations';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import { CardTable } from '@/components/CardTable/CardTable';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
+import { Card } from '@/generated/prisma';
 import { deckPath } from '@/lib/paths';
 import { cloneDeck } from '@/utils/decks';
 import classes from './Deck.module.css';
@@ -88,30 +89,34 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
             ))}
           </Group>
           {!isPrebuilt && (
-            <ActionIcon
-              size="sm"
-              radius="sm"
-              variant={activeDeckIds.includes(id) ? 'filled' : 'outline'}
-              aria-label={activeDeckIds.includes(id) ? 'pin-deck' : 'unpin-deck'}
-              onClick={() =>
-                activeDeckIds.includes(id)
-                  ? setActiveDeckIds(activeDeckIds.filter((deckId: string) => deckId !== id))
-                  : setActiveDeckIds([...activeDeckIds, id])
-              }
-            >
-              {activeDeckIds.includes(id) ? (
-                <IconPinnedFilled />
-              ) : (
-                <IconPin className={classes.pin} />
-              )}
-            </ActionIcon>
+            <Tooltip label="Set Active">
+              <ActionIcon
+                size="sm"
+                radius="sm"
+                variant={activeDeckIds.includes(id) ? 'filled' : 'light'}
+                aria-label={activeDeckIds.includes(id) ? 'pin-deck' : 'unpin-deck'}
+                onClick={() =>
+                  activeDeckIds.includes(id)
+                    ? setActiveDeckIds(activeDeckIds.filter((deckId: string) => deckId !== id))
+                    : setActiveDeckIds([...activeDeckIds, id])
+                }
+              >
+                {activeDeckIds.includes(id) ? (
+                  <IconPinnedFilled />
+                ) : (
+                  <IconPin className={classes.pin} />
+                )}
+              </ActionIcon>
+            </Tooltip>
           )}
         </Group>
         <div>
           <Text size="lg" fw={500}>
             {title}
           </Text>
-          <Text size="sm">{description}</Text>
+          <Text truncate size="sm">
+            {description}
+          </Text>
         </div>
         <Group justify="space-between">
           <Group>

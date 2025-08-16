@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Deck as DeckType } from '@prisma/client';
 import { IconPlus, IconSearch, IconSortAZ } from '@tabler/icons-react';
 import { useFormStatus } from 'react-dom';
 import {
@@ -19,6 +18,7 @@ import {
 import { notifications } from '@mantine/notifications';
 import { createDeck } from '@/app/api/database/decks/mutations';
 import { Deck } from '@/app/dashboard/_components/Deck/Deck';
+import { Deck as DeckType } from '@/generated/prisma';
 import classes from './DeckList.module.css';
 
 interface SortableField {
@@ -132,7 +132,7 @@ export function DeckList({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
             <Deck
               key={d.id}
               title={d.title}
-              description="This is my placeholder text. Description Will go here"
+              description={d.description}
               id={d.id}
               cards={d.cards}
               tags={d.tags}
