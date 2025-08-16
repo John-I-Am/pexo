@@ -2,8 +2,8 @@
 
 import { useContext, useState } from 'react';
 import Link from 'next/link';
-import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
-import { Badge, Button, Group, Loader, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { IconHourglassEmpty, IconPlus, IconTags } from '@tabler/icons-react';
+import { Button, Group, Loader, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import { updateDeck } from '@/app/api/database/decks/mutations';
@@ -93,48 +93,40 @@ export const DeckEditor = ({ id, title, tags = [], cardsLength, description }: D
       </Stack>
 
       <Group>
-        {tags.map((t) => (
-          <Badge key={t}>{t}</Badge>
-        ))}
-      </Group>
+        <Button
+          radius="md"
+          leftSection={<IconTags size="1.1rem" />}
+          onClick={() =>
+            modals.openContextModal({
+              modal: 'tagsManager',
+              title: 'Tags',
+              innerProps: {
+                deckId: id,
+                tags,
+              },
+            })
+          }
+        >
+          Manage Tags
+        </Button>
+        <Button
+          onClick={() => setActiveDeckIds([id])}
+          component={Link}
+          href="/dashboard/study"
+          radius="md"
+          leftSection={<IconHourglassEmpty size="1.1rem" />}
+        >
+          Learn
+        </Button>
 
-      <Group w="100%">
-        <Group>
-          <Button
-            radius="md"
-            leftSection={<IconPlus size="1.1rem" />}
-            onClick={() =>
-              modals.openContextModal({
-                modal: 'tagsManager',
-                title: 'Tags',
-                innerProps: {
-                  deckId: id,
-                  tags,
-                },
-              })
-            }
-          >
-            Add Tag
-          </Button>
-          <Button
-            onClick={() => setActiveDeckIds([id])}
-            component={Link}
-            href="/dashboard/study"
-            radius="md"
-            leftSection={<IconHourglassEmpty size="1.1rem" />}
-          >
-            Learn
-          </Button>
-
-          <Button
-            component={Link}
-            href={`/dashboard/decks/${id}/card`}
-            radius="md"
-            leftSection={<IconPlus size="1.1rem" />}
-          >
-            New Card
-          </Button>
-        </Group>
+        <Button
+          component={Link}
+          href={`/dashboard/decks/${id}/card`}
+          radius="md"
+          leftSection={<IconPlus size="1.1rem" />}
+        >
+          New Card
+        </Button>
       </Group>
     </Stack>
   );

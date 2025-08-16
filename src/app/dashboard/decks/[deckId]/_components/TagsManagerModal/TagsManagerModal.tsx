@@ -1,5 +1,6 @@
 'use client';
 
+import { IconPlus } from '@tabler/icons-react';
 import { Button, Group, Pill, Stack, TextInput } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { ContextModalProps, modals } from '@mantine/modals';
@@ -58,7 +59,7 @@ export const TagsManagerModal = ({
     <Stack>
       <form onSubmit={form.onSubmit((values: any) => handleSubmitTag(values))}>
         <TextInput {...form.getInputProps('tag')} maxLength={12} minLength={1} />
-        <Button type="submit" fullWidth my="lg">
+        <Button type="submit" fullWidth my="lg" leftSection={<IconPlus size="1.1rem" />}>
           Add Tag
         </Button>
       </form>
