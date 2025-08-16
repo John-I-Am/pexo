@@ -3,7 +3,7 @@
 
 import dayjs from '@/lib/dayjs';
 import { revalidatePath } from 'next/cache';
-import { SessionLog } from '@prisma/client';
+import { SessionLog } from '@/generated/prisma';
 import prisma from '../../prisma';
 
 export const upsertSessionLog = async (

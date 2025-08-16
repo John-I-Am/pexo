@@ -4,7 +4,7 @@
 import dayjs from '@/lib/dayjs';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { Card } from '@prisma/client';
+import { Card } from '@/generated/prisma';
 import { deckPath } from '@/lib/paths';
 import { setCookieByKey } from '../../cookies';
 import prisma from '../../prisma';

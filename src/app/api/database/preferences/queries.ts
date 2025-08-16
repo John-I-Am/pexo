@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { UserPreference } from '@prisma/client';
+import { UserPreference } from '@/generated/prisma';
 import prisma from '../../prisma';
 
 export const getPreferenceByUserId = async (userId: string) => {

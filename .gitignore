@@ -87,8 +87,8 @@ web_modules/
 .next
 out
 
-# prisma generated client
-.prisma
+# lib generated files
+src/generated
 
 # Nuxt.js build / generate output
 .nuxt

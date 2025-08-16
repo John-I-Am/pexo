@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 'use server';
 
-import { UserPreference } from '@prisma/client';
+import { UserPreference } from '@/generated/prisma';
 import prisma from '../../prisma';
 
 export const createPreferences = async (userId: string) => {

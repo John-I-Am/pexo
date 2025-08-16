@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { notFound } from 'next/navigation';
-import { Card } from '@prisma/client';
+import { Card } from '@/generated/prisma';
 import prisma from '../../prisma';
 
 export const getCardsByUserId = async (userId: string): Promise<Card[]> => {

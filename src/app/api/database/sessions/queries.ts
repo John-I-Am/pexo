@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import dayjs from '@/lib/dayjs';
-import { SessionLog } from '@prisma/client';
+import { SessionLog } from '@/generated/prisma';
 import prisma from '../../prisma';
 
 export const getSessionLogs = async (userId: string) => {
