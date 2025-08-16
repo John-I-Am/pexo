@@ -5,8 +5,6 @@
   border: none;
 }
 
-.form-title {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+.form {
+  padding: var(--mantine-spacing-md);
 }

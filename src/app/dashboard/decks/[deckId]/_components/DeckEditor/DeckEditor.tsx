@@ -3,66 +3,61 @@
 import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
-import { Badge, Button, Group, Loader, Stack, Text, TextInput } from '@mantine/core';
+import { Badge, Button, Group, Loader, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
 import { updateDeck } from '@/app/api/database/decks/mutations';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import classes from './DeckEditor.module.css';
 
-export const DeckEditor = ({
-  id,
-  title,
-  tags = [],
-  cardsLength,
-}: {
+type DeckEditorProps = {
   id: string;
   title: string;
+  description: string;
   tags: string[];
   cardsLength: string;
-}) => {
+};
+
+export const DeckEditor = ({ id, title, tags = [], cardsLength, description }: DeckEditorProps) => {
   const [pending, setPending] = useState<boolean>(false);
 
   const { setActiveDeckIds }: any = useContext(ActiveDeckContext);
 
-  const formTitle = useForm({
+  const form = useForm({
     initialValues: {
       title,
+      description,
     },
   });
 
-  const handleChangeTitle = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-    formTitle.onSubmit(() => {
+  const handleOnSubmit = (field: 'title' | 'description', value: string) => {
+    const { title, description } = form.getValues();
+
+    form.setFieldValue(field, value);
+
+    form.onSubmit(() => {
       setPending(true);
       updateDeck(id, {
-        title: value === '' ? 'untitled' : value,
+        title: title === '' ? 'untitled' : title,
         tags: undefined,
+        description: description === '' ? 'nondescrit' : description,
       }).then(() => {
         setPending(false);
       });
     })();
-    formTitle.getInputProps('title').onChange(value);
   };
 
   return (
     <Stack>
-      <Group>
-        <Stack gap={0} w="33%">
-          <form
-            className={classes['form-title']}
-            onSubmit={formTitle.onSubmit((values) =>
-              updateDeck(id, {
-                title: values.title,
-                tags: undefined,
-              })
-            )}
-          >
+      <form className={classes.form}>
+        <Group justify="space-between" w="100%">
+          <Stack>
             <TextInput
-              {...formTitle.getInputProps('title')}
+              {...form.getInputProps('title')}
               classNames={{
                 input: classes.title,
               }}
-              onChange={handleChangeTitle}
+              onChange={({ target }) => handleOnSubmit('title', target.value)}
               variant="unstyled"
               aria-label="Title"
               size="sm"
@@ -70,27 +65,33 @@ export const DeckEditor = ({
               minLength={1}
               placeholder="untitled"
             />
-          </form>
-
-          <Text fz="sm">{cardsLength} Total cards</Text>
-          <Stack gap="0" h={20}>
-            {pending && (
-              <>
-                <Text fz="xs" c="dimmed">
-                  Saving data...
-                </Text>
-                <Loader size="xs" />
-              </>
-            )}
+            <Text fz="sm">{cardsLength} Total cards</Text>
           </Stack>
-        </Stack>
 
-        <Text fz="sm" w="66%">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident eos fugiat id
-          necessitatibus magni ducimus molestias. Placeat, consequatur. Quisquam, quae magnam
-          perspiciatis excepturi iste sint itaque sunt laborum. Nihil?
-        </Text>
-      </Group>
+          <Textarea
+            {...form.getInputProps('description')}
+            onChange={({ target }) => handleOnSubmit('description', target.value)}
+            variant="unstyled"
+            aria-label="Description"
+            size="sm"
+            maxLength={255}
+            placeholder="About..."
+            w="100%"
+            autosize
+          />
+        </Group>
+      </form>
+
+      <Stack gap="0" h={20}>
+        {pending && (
+          <>
+            <Text fz="xs" c="dimmed">
+              Saving data...
+            </Text>
+            <Loader size="xs" />
+          </>
+        )}
+      </Stack>
 
       <Group>
         {tags.map((t) => (

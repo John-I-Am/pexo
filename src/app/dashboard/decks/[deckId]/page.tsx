@@ -19,6 +19,7 @@ export default async function Page({ params }: existingDeckPageProps) {
         id={deck.id}
         title={deck.title}
         tags={deck.tags}
+        description={deck.description}
         cardsLength={deck.cards.length as any}
       />
       <CardTable cards={deck.cards} editable />

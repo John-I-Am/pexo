@@ -30,7 +30,7 @@ export const createDeck = async (): Promise<Deck> => {
 
 export const updateDeck = async (
   id: string,
-  data: { title: string | undefined; tags: string[] | undefined }
+  data: { title: string | undefined; tags: string[] | undefined; description: string | undefined }
 ) => {
   try {
     await prisma.deck.update({

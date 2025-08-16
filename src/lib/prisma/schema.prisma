@@ -81,12 +81,13 @@ model UserPreference {
 }
 
 model Deck {
-  id       String   @id @default(cuid())
-  authorId String
-  author   User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  title    String   @default("untitled")
-  cards    Card[]
-  tags     String[]
+  id          String   @id @default(cuid())
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  title       String   @default("untitled")
+  cards       Card[]
+  tags        String[]
+  description String   @default("") @db.VarChar(255)
 
   @@map("decks")
 }
