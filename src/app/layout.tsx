@@ -8,6 +8,7 @@ import { Notifications } from '@mantine/notifications';
 import { GoalSlider } from '../components/GoalSlider/GoalSlider';
 import { theme } from '../theme';
 import { ActiveDeckProvider } from './contexts/ActiveDeckProvider';
+import { TagsManagerModal } from './dashboard/decks/[deckId]/_components/TagsManagerModal/TagsManagerModal';
 
 export const metadata = {
   title: 'Pexo',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: any }) {
             <ModalsProvider
               modals={{
                 goalSliderModal: GoalSlider,
+                tagsManager: TagsManagerModal,
               }}
               modalProps={{
                 radius: 'md',

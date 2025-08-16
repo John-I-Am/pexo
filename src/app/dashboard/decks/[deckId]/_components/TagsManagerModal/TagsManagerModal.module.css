@@ -1,0 +1,6 @@
+.tag {
+  background-color: var(--mantine-primary-color-filled);
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+}

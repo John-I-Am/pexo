@@ -10,20 +10,3 @@
   flex-direction: row;
   flex-wrap: nowrap;
 }
-
-.tags {
-  padding-left: var(--mantine-spacing-sm);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 100%;
-  overflow: scroll;
-  scrollbar-width: none;
-}
-
-.tag {
-  background-color: light-dark(var(--mantine-color-blue-light), #263341);
-  color: light-dark(var(--mantine-color-blue-5), var(--mantine-color-blue-3));
-  text-transform: uppercase;
-  font-weight: 700;
-}

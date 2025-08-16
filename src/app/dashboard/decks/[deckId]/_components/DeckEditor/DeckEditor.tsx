@@ -3,9 +3,9 @@
 import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { IconHourglassEmpty, IconPlus } from '@tabler/icons-react';
-import { Button, Group, Loader, Modal, Pill, Stack, Text, TextInput } from '@mantine/core';
-import { hasLength, useForm } from '@mantine/form';
-import { useDisclosure } from '@mantine/hooks';
+import { Badge, Button, Group, Loader, Stack, Text, TextInput } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { modals } from '@mantine/modals';
 import { updateDeck } from '@/app/api/database/decks/mutations';
 import { ActiveDeckContext } from '@/app/contexts/ActiveDeckProvider';
 import classes from './DeckEditor.module.css';
@@ -22,23 +22,12 @@ export const DeckEditor = ({
   cardsLength: string;
 }) => {
   const [pending, setPending] = useState<boolean>(false);
-  const [opened, { open, close }] = useDisclosure(false);
 
   const { setActiveDeckIds }: any = useContext(ActiveDeckContext);
 
   const formTitle = useForm({
     initialValues: {
       title,
-    },
-  });
-
-  const formTag = useForm({
-    initialValues: {
-      tag: '',
-    },
-
-    validate: {
-      tag: hasLength({ min: 1, max: 12 }, 'Tag must be 1-12 characters long'),
     },
   });
 
@@ -55,28 +44,8 @@ export const DeckEditor = ({
     formTitle.getInputProps('title').onChange(value);
   };
 
-  const handleSubmitTag = ({ tag }: { tag: string }) => {
-    if (!tags.includes(tag)) {
-      updateDeck(id, {
-        title: undefined,
-        tags: [...tags, tag],
-      });
-    }
-    formTag.reset();
-    close();
-  };
-
   return (
     <Stack>
-      <Modal opened={opened} onClose={close} withCloseButton={false} padding="0">
-        <form onSubmit={formTag.onSubmit((values: any) => handleSubmitTag(values))}>
-          <TextInput {...formTag.getInputProps('tag')} maxLength={12} minLength={1} />
-          <Button type="submit" fullWidth mt="md">
-            Add Tag
-          </Button>
-        </form>
-      </Modal>
-
       <Group>
         <Stack gap={0} w="33%">
           <form
@@ -123,27 +92,28 @@ export const DeckEditor = ({
         </Text>
       </Group>
 
-      <Group pb="md" className={classes.tags}>
+      <Group>
         {tags.map((t) => (
-          <Pill
-            key={t}
-            className={classes.tag}
-            withRemoveButton
-            onRemove={() =>
-              updateDeck(id, {
-                title: undefined,
-                tags: tags.filter((tag) => tag !== t),
-              })
-            }
-          >
-            {t}
-          </Pill>
+          <Badge key={t}>{t}</Badge>
         ))}
       </Group>
 
       <Group w="100%">
         <Group>
-          <Button radius="md" leftSection={<IconPlus size="1.1rem" />} onClick={open}>
+          <Button
+            radius="md"
+            leftSection={<IconPlus size="1.1rem" />}
+            onClick={() =>
+              modals.openContextModal({
+                modal: 'tagsManager',
+                title: 'Tags',
+                innerProps: {
+                  deckId: id,
+                  tags,
+                },
+              })
+            }
+          >
             Add Tag
           </Button>
           <Button
