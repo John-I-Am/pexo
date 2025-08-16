@@ -31,16 +31,15 @@ export const DeckEditor = ({ id, title, tags = [], cardsLength, description }: D
   });
 
   const handleOnSubmit = (field: 'title' | 'description', value: string) => {
-    const { title, description } = form.getValues();
-
     form.setFieldValue(field, value);
 
-    form.onSubmit(() => {
+    const { title, description } = form.getValues();
+
+    form.onSubmit(async () => {
       setPending(true);
-      updateDeck(id, {
-        title: title === '' ? 'untitled' : title,
-        tags: undefined,
-        description: description === '' ? 'nondescrit' : description,
+      await updateDeck(id, {
+        title,
+        description,
       }).then(() => {
         setPending(false);
       });
@@ -49,7 +48,7 @@ export const DeckEditor = ({ id, title, tags = [], cardsLength, description }: D
 
   return (
     <Stack>
-      <form className={classes.form}>
+      <form onSubmit={(event) => event.preventDefault()} className={classes.form}>
         <Group justify="space-between" w="100%">
           <Stack>
             <TextInput
@@ -77,7 +76,7 @@ export const DeckEditor = ({ id, title, tags = [], cardsLength, description }: D
             maxLength={255}
             placeholder="About..."
             w="100%"
-            autosize
+            rows={5}
           />
         </Group>
       </form>
