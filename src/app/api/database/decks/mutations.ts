@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import { Deck } from '@/generated/prisma';
 import { auth } from '@/lib/betterAuth/auth';
+import { DeckUpdate } from '@/lib/prisma/types';
 import prisma from '../../prisma';
 
 export const createDeck = async (): Promise<Deck> => {
@@ -28,10 +29,7 @@ export const createDeck = async (): Promise<Deck> => {
   }
 };
 
-export const updateDeck = async (
-  id: string,
-  data: { title: string | undefined; tags: string[] | undefined; description: string | undefined }
-) => {
+export const updateDeck = async (id: string, data: DeckUpdate) => {
   try {
     await prisma.deck.update({
       where: {
