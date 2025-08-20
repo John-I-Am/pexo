@@ -10,6 +10,7 @@ import {
   rem,
   SimpleGrid,
   Stack,
+  Text,
   TextInput,
   Tooltip,
 } from '@mantine/core';
@@ -17,6 +18,7 @@ import { setCookieByKey } from '@/app/api/cookies';
 import { createDeck } from '@/app/api/database/decks/mutations';
 import { Deck } from '@/app/dashboard/_components/Deck/Deck';
 import { Deck as DeckType } from '@/generated/prisma';
+import classes from './DeckList.module.css';
 
 interface SortableField {
   title: string;
@@ -42,6 +44,21 @@ export const DeckList = ({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
     const result: any = await createDeck();
     setCookieByKey('notification', 'Deck Created');
     router.push(`/dashboard/decks/${result.id}`);
+  };
+
+  const placeholder = () => {
+    return (
+      <Button className={classes.placeholder} onClick={handleCreate} disabled={pending}>
+        <Text
+          size="xl"
+          fw={700}
+          variant="gradient"
+          gradient={{ from: 'pink', to: 'indigo', deg: 90 }}
+        >
+          Create Your First Deck!
+        </Text>
+      </Button>
+    );
   };
 
   function filterData(data: SortableField[], search: string) {
@@ -113,6 +130,7 @@ export const DeckList = ({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
         </Tooltip>
       </Group>
       <SimpleGrid cols={{ base: 2, sm: 2, lg: 3, xl: 3 }}>
+        {decks.length === 0 && placeholder()}
         {sortedData?.map((d: any) => (
           <Deck
             key={d.id}
