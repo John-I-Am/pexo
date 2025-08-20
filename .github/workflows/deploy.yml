@@ -1,0 +1,14 @@
+name: deploy
+run-name: ${{ github.actor }} predeployment tests
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: cd src/lib/prisma && npx prisma generate
+      - run: npm test
