@@ -1,18 +1,16 @@
-import { FeaturesGrid } from '@/app/_components/FeaturesGrid/FeaturesGrid';
-import { Faq } from '@/app/_components/Faq/Faq';
-import { Header } from './_components/Header/Header';
-import { StatsBanner } from './_components/StatsBanner/StatsBanner';
-import { HeroHeader } from './_components/HeroHeader/HeroHeader';
 import { Stack } from '@mantine/core';
+import { Faq } from '@/app/_components/Faq/Faq';
+import { FeaturesGrid } from '@/app/_components/FeaturesGrid/FeaturesGrid';
 import { Demo } from './_components/Demo/Demo';
-import { Pricing } from './_components/Pricing/Pricing';
 import { Footer } from './_components/Footer/Footer';
+import { Header } from './_components/Header/Header';
+import { HeroHeader } from './_components/HeroHeader/HeroHeader';
+import { Pricing } from './_components/Pricing/Pricing';
 
-export default function HomePage() {
+const Page = () => {
   return (
-    <Stack gap="xl">
+    <Stack gap={100}>
       <Header />
-      <StatsBanner />
       <HeroHeader />
       <FeaturesGrid />
       <Demo />
@@ -21,4 +19,6 @@ export default function HomePage() {
       <Footer />
     </Stack>
   );
-}
+};
+
+export default Page;

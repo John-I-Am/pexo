@@ -1,7 +1,7 @@
 'use client';
 
-import { Title, Accordion, ThemeIcon, rem, Stack } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
+import { Accordion, rem, Stack, ThemeIcon, Title } from '@mantine/core';
 import classes from './Faq.module.css';
 
 const data = [
@@ -21,16 +21,15 @@ const data = [
   {
     value: 'Where do I enter my password?',
     description:
-      'We do not require you to create a password! Just enter your email and an account will automagically be created for you!',
+      'We have a no password system! Just enter your email and a magic-link will be sent to your address to grant you access.',
   },
   {
-    value: 'Is it ready for longterm learning?',
-    description:
-      'No! Your data may be deleted unprompted. Things break hard and fast during development!',
+    value: 'Is it ready for long-term learning?',
+    description: 'No! Your data may be deleted unprompted. ',
   },
 ];
 
-export function Faq() {
+export const Faq = () => {
   const items: any = data.map((item) => (
     <Accordion.Item key={item.value} value={item.value}>
       <Accordion.Control>{item.value}</Accordion.Control>
@@ -39,7 +38,7 @@ export function Faq() {
   ));
 
   return (
-    <Stack p="xl">
+    <Stack p="xl" id="faq">
       <Title order={2} ta="center" className={classes.title}>
         Frequently Asked Questions
       </Title>
@@ -58,4 +57,4 @@ export function Faq() {
       </Accordion>
     </Stack>
   );
-}
+};

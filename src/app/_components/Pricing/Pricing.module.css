@@ -1,9 +1,14 @@
 .container {
   padding: var(--mantine-spacing-xl);
   border-radius: var(--mantine-radius-md);
-  background: var(--mantine-color-blue-9)
+  background: var(--mantine-primary-color-filled);
 }
 
-.item {
-  color: white;
+.price {
+  font-size: calc(var(--mantine-font-size-lg) * 3);
+  font-weight: var(--mantine-h1-font-weight);
+}
+
+.monthly {
+  font-size: var(--mantine-font-size-md);
 }

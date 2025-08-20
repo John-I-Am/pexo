@@ -1,5 +1,14 @@
 .nav {
+  color: var(--mantine-color-dark-navy);
+  font-weight: 500;
   @mixin hover {
-    color: orange
+    color: var(--mantine-primary-color-filled-hover);
+  }
+}
+
+.login {
+  background-color: var(--mantine-primary-color-filled);
+  @mixin hover {
+    background-color: var(--mantine-primary-color-filled-hover);
   }
 }

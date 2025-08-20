@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconCrown } from '@tabler/icons-react';
 import { Button, Group, List, Stack, Text, ThemeIcon, Title } from '@mantine/core';
 import { loginPath } from '@/lib/paths';
 import classes from './Pricing.module.css';
@@ -12,11 +12,11 @@ const data = [
     price: 'Free',
     items: [
       {
-        name: 'Unlimited Cards',
+        name: 'Unlimited cards',
         checked: true,
       },
       {
-        name: 'Unlimited Decks',
+        name: 'Limited decks',
         checked: true,
       },
       {
@@ -37,14 +37,14 @@ const data = [
   },
   {
     title: 'Premium',
-    price: '$4.99 NZD /month',
+    price: '$4.99',
     items: [
       {
-        name: 'Unlimited Cards',
+        name: 'Unlimited cards',
         checked: true,
       },
       {
-        name: 'Unlimited Decks',
+        name: 'Unlimited decks',
         checked: true,
       },
       {
@@ -65,16 +65,16 @@ const data = [
   },
 ];
 
-export function Pricing() {
+export const Pricing = () => {
   const plans = data.map((plan) => (
     <Stack key={plan.title} className={classes.container}>
-      <Title order={2} c="dimmed" tt="uppercase">
+      <Title order={2} tt="uppercase" c="black" fw="bold">
         {plan.title}
       </Title>
-      <Text size="xl" c="white">
-        {plan.price}
+      <Text size="xl" c="white" className={classes.price}>
+        {plan.price} {plan.price !== 'Free' && <span className={classes.monthly}>NZD /month</span>}
       </Text>
-      <List classNames={classes} spacing="md" size="sm" center>
+      <List spacing="md" size="sm" py="md" center>
         {plan.items.map((item) => (
           <List.Item
             key={plan.title + item.name}
@@ -84,25 +84,33 @@ export function Pricing() {
               </ThemeIcon>
             }
           >
-            {item.name}
+            <Text fw="500">{item.name}</Text>
           </List.Item>
         ))}
       </List>
-      <Button bg="orange.9" component={Link} href={plan.link}>
+      <Button
+        color={plan.title === 'Premium' ? 'red.6' : undefined}
+        size="md"
+        component={Link}
+        href={plan.link}
+      >
         {plan.buttonLabel}
       </Button>
     </Stack>
   ));
 
   return (
-    <Stack>
-      <Title size="xl" fw="600" order={2} ta="center">
+    <Stack id="pricing">
+      <Title size="3rem" fw="600" order={2} ta="center">
         Simple Pricing
+        <IconCrown />
       </Title>
-      <Text size="sm" ta="center" px="xl" py="md">
+      <Text ta="center" px="xl" py="md">
         Start with our free plan and upgrade when you need more. No hidden fees.
       </Text>
-      <Group justify="center">{plans}</Group>
+      <Group justify="center" wrap="wrap" gap="xl">
+        {plans}
+      </Group>
     </Stack>
   );
-}
+};

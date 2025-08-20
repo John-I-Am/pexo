@@ -1,12 +1,10 @@
 .feature {
   justify-items: center;
   text-align: center;
-  padding: var(--mantine-spacing-sm);
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+  padding: var(--mantine-spacing-md);
+  transition: transform 0.3s ease;
+
   @mixin hover {
-    transform: translateY(-10px) scale(1.05); 
-    box-shadow: var(--mantine-shadow-md);
+    transform: translateY(-2px) scale(1.05);
   }
 }

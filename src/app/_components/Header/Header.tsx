@@ -1,33 +1,33 @@
 import Link from 'next/link';
-import { Button, Group, Text } from '@mantine/core';
+import { Anchor, Button, Group } from '@mantine/core';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 import { Logo } from '@/components/Logo/Logo';
 import { loginPath } from '@/lib/paths';
 import classes from './Header.module.css';
 
-export function Header() {
+export const Header = () => {
   return (
-    <Group p="md" wrap="nowrap" justify="space-between">
+    <Group p="md" justify="space-between">
       <Group gap="xl">
         <Logo />
         <Group ml="xl" gap="md" visibleFrom="sm">
-          <Text className={classes.nav} size="sm" fw={900}>
+          <Anchor href="#demo" underline="never" className={classes.nav}>
             Demo
-          </Text>
-          <Text className={classes.nav} size="sm" fw={900}>
-            How it works
-          </Text>
-          <Text className={classes.nav} size="sm" fw={900}>
+          </Anchor>
+          <Anchor href="#pricing" underline="never" className={classes.nav}>
             Pricing
-          </Text>
+          </Anchor>
+          <Anchor href="#faq" underline="never" className={classes.nav}>
+            FAQ
+          </Anchor>
         </Group>
       </Group>
       <Group>
         <ColorSchemeToggle />
-        <Button component={Link} href={loginPath()}>
+        <Button className={classes.login} component={Link} href={loginPath()}>
           Log In
         </Button>
       </Group>
     </Group>
   );
-}
+};
