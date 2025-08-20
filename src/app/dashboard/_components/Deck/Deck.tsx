@@ -78,7 +78,7 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
 
   return (
     <Paper>
-      <Stack gap="lg">
+      <Stack gap="xl" justify="space-between" h="100%">
         <Group justify="space-between">
           <IconPhoto size="32" />
           <Group className={classes.tags}>
@@ -110,14 +110,14 @@ export const Deck = ({ id, title, description, cards, tags, isPrebuilt }: DeckPr
             </Tooltip>
           )}
         </Group>
-        <div>
+        <Stack>
           <Text size="lg" fw={500}>
             {title}
           </Text>
-          <Text truncate size="sm">
+          <Text lineClamp={3} size="sm">
             {description}
           </Text>
-        </div>
+        </Stack>
         <Group justify="space-between">
           <Group>
             <Button
