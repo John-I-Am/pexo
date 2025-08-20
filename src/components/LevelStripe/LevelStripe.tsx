@@ -1,5 +1,5 @@
-import { Group } from '@mantine/core';
 import cx from 'clsx';
+import { Group } from '@mantine/core';
 import classes from './LevelStripe.module.css';
 
 export function LevelStripe({ level }: { level: number }) {

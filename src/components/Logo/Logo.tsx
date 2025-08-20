@@ -1,5 +1,5 @@
-import { Group, Title, Text } from '@mantine/core';
 import { IconPig } from '@tabler/icons-react';
+import { Group, Text, Title } from '@mantine/core';
 
 export function Logo() {
   return (

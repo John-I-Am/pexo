@@ -1,8 +1,8 @@
 'use client';
 
-import { TextInput, rem } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { IconSearch } from '@tabler/icons-react';
+import { rem, TextInput } from '@mantine/core';
 
 export function Searchbar() {
   const searchParams = useSearchParams();

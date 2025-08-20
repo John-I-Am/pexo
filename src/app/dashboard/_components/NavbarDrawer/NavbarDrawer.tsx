@@ -1,11 +1,10 @@
 'use client';
 
-import { useDisclosure } from '@mantine/hooks';
-import { ActionIcon, Drawer, rem } from '@mantine/core';
 import { IconMenu2 } from '@tabler/icons-react';
 import cx from 'clsx';
+import { ActionIcon, Drawer, rem } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Navbar } from '../Navbar/Navbar';
-
 import classes from './NavbarDrawer.module.css';
 
 export function NavbarDrawer({ user }: any) {

@@ -1,8 +1,8 @@
 'use client';
 
-import { useMantineColorScheme, useComputedColorScheme, Switch } from '@mantine/core';
-import { IconSun, IconMoonStars } from '@tabler/icons-react';
 import { useState } from 'react';
+import { IconMoonStars, IconSun } from '@tabler/icons-react';
+import { Switch, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 
 export function ColorSchemeToggle() {
   const { setColorScheme } = useMantineColorScheme();

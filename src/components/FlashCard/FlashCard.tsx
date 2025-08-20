@@ -1,10 +1,10 @@
 'use client';
 
-import { Group, Text, Container } from '@mantine/core';
-import cx from 'clsx';
 import { useEffect, useState } from 'react';
-import classes from './FlashCard.module.css';
+import cx from 'clsx';
+import { Container, Group, Text } from '@mantine/core';
 import { Levelbar } from '../Levelbar/Levelbar';
+import classes from './FlashCard.module.css';
 
 export function FlashCard({
   id,

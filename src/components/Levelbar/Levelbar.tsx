@@ -1,8 +1,8 @@
 import { Group, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { InfoLevels } from '../InfoLevels/InfoLevels';
-import classes from './Levelbar.module.css';
 import { LevelStripe } from '../LevelStripe/LevelStripe';
+import classes from './Levelbar.module.css';
 
 export function Levelbar({ level, reviewCount }: { level: number; reviewCount: number }) {
   const handleClick = (event: React.MouseEvent) => {
