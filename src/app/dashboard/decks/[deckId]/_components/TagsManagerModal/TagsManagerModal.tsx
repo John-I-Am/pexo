@@ -18,7 +18,7 @@ export const TagsManagerModal = ({
     },
 
     validate: {
-      tag: (value) =>
+      tag: (value: string) =>
         (innerProps.tags.includes(value) ? 'Tag already exists' : null) ||
         hasLength({ min: 1, max: 12 }, 'Tag must be 1-12 characters long')(value),
     },

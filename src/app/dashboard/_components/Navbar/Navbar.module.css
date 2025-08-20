@@ -42,7 +42,7 @@
     margin: 0;
   }
 
-  /* Readjust label due to above code*/
+  /* Readjust label due to above code */
   div {
     padding-left: var(--mantine-spacing-md);
   }

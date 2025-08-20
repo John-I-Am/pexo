@@ -1,7 +1,7 @@
 'use client';
 
-import { Card } from '@prisma/client';
 import { Progress, Stack, Text, useMantineTheme } from '@mantine/core';
+import { Card } from '@/generated/prisma';
 import { filterCardsDue } from '@/utils/cards';
 import classes from './ProgressBar.module.css';
 

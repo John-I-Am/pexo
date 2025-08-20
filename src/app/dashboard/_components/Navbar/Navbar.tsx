@@ -59,7 +59,7 @@ export function Navbar({ user, isDrawer }: { user: string; isDrawer: boolean }) 
   const { hovered, ref } = useHover();
   const [compact, setCompact] = useState<boolean>(true);
 
-  const { activeDeckIds, setActiveDeckIds }: any = useContext(ActiveDeckContext);
+  const { setActiveDeckIds }: any = useContext(ActiveDeckContext);
 
   const links = navItems.map((item: any) => (
     <NavLink

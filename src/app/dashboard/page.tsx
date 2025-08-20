@@ -1,9 +1,9 @@
 import dayjs from '@/lib/dayjs';
 import { headers } from 'next/headers';
-import { SessionLog } from '@prisma/client';
 import { Grid, GridCol, ScrollArea } from '@mantine/core';
 import { ProgressDisplay } from '@/app/dashboard/_components/ProgressDisplay/ProgressDisplay';
 import { DeckList } from '@/components/DeckList/DeckList';
+import { SessionLog } from '@/generated/prisma';
 import { auth } from '@/lib/betterAuth/auth';
 import { DeckWithCards } from '@/lib/prisma/types';
 import { getCookieByKey } from '../api/cookies';

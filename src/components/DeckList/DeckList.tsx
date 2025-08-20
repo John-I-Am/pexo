@@ -19,7 +19,6 @@ import { notifications } from '@mantine/notifications';
 import { createDeck } from '@/app/api/database/decks/mutations';
 import { Deck } from '@/app/dashboard/_components/Deck/Deck';
 import { Deck as DeckType } from '@/generated/prisma';
-import classes from './DeckList.module.css';
 
 interface SortableField {
   title: string;
@@ -103,7 +102,7 @@ export function DeckList({ decks, isPrebuilt }: { decks: DeckType[]; isPrebuilt:
 
   return (
     <Stack>
-      <Group className={classes.test}>
+      <Group>
         <form action={() => handleCreate()}>
           <FormButton />
         </form>

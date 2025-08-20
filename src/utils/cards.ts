@@ -1,5 +1,5 @@
 import dayjs from '@/lib/dayjs';
-import { Card } from '@prisma/client';
+import { Card } from '@/generated/prisma';
 
 export const filterCardsReviewedOnDate = (cards: Card[], date: Date): Card[] => {
   const targetDate = dayjs(date).startOf('day'); // Normalize input date (start of the day)

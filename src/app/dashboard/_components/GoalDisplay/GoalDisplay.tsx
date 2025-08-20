@@ -1,10 +1,10 @@
 'use client';
 
 import dayjs from '@/lib/dayjs';
-import { Card, SessionLog } from '@prisma/client';
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { Calendar } from '@/components/Calendar/Calendar';
+import { Card, SessionLog } from '@/generated/prisma';
 import { filterCardsReviewedOnDate } from '@/utils/cards';
 
 type GoalDisplayProps = {

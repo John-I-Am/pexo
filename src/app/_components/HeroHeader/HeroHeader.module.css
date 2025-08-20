@@ -2,7 +2,7 @@
   font-size: rem(100px);
   font-weight: 600;
   text-align: center;
-  animation: fadeInFromLeft 1s ease-in-out;
+  animation: 'fade-in-from-left' 1s ease-in-out;
 }
 
 .stat {
@@ -14,25 +14,27 @@
   text-transform: capitalize;
   font-weight: 600;
   font-size: clamp(1rem, 2rem, 3rem);
-  animation: fadeInFromRight 1s ease-in-out;
+  animation: 'fade-in-from-right' 1s ease-in-out;
 }
 
-@keyframes fadeInFromLeft {
+@keyframes fade-in-from-left {
   0% {
     opacity: 0;
     transform: translateX(-100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-@keyframes fadeInFromRight {
+@keyframes fade-in-from-right {
   0% {
     opacity: 0%;
     transform: translateX(100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);

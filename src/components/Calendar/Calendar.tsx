@@ -2,10 +2,10 @@
 
 import dayjs from '@/lib/dayjs';
 import { OpUnitType } from 'dayjs';
-import { Card } from '@prisma/client';
 import cx from 'clsx';
 import { Stack, Text } from '@mantine/core';
 import { Calendar as CalendarComponent, DatePickerProps } from '@mantine/dates';
+import { Card } from '@/generated/prisma';
 import { filterCardsReviewedOnDate } from '@/utils/cards';
 import classes from './Calendar.module.css';
 

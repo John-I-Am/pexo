@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { Card } from '@prisma/client';
 import { IconEdit, IconSquareRoundedPlus, IconTrash } from '@tabler/icons-react';
 import { Button, Group, Paper, Stack, Textarea, TextInput } from '@mantine/core';
 import { isNotEmpty, useForm } from '@mantine/form';
 import { deleteCard, upsertCard } from '@/app/api/database/cards/mutations';
 import { getWord } from '@/app/api/database/dictionary/queries';
+import { Card } from '@/generated/prisma';
 
 type CardFormProps = {
   deckId: string;
