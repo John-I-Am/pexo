@@ -1,11 +1,14 @@
 import { Stack, Title } from '@mantine/core';
-import { FormName } from '@/components/FormName/FormName';
+import { Setting } from './_components/setting/Setting';
 
-export default function Page() {
+const Page = () => {
   return (
-    <Stack>
+    <Stack h="100%">
       <Title order={2}>My Account</Title>
-      <FormName />
+      <Setting />
+      <Setting />
     </Stack>
   );
-}
+};
+
+export default Page;
