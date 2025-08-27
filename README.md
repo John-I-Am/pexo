@@ -1,6 +1,6 @@
 ## Initialization
 
-- npx db push
+- npx db pushh
 
 ## Environment Variables
 
