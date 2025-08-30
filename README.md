@@ -1,6 +1,6 @@
-## Initialization
+## Getting Started
 
-- npx db pushh
+npm install; cd src/lib/prisma && npx prisma generate; npm run build;
 
 ## Environment Variables
 
